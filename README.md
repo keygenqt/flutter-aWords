@@ -7,7 +7,7 @@ Leave notes and paper cards at home and learn a foreign language anywhere with a
 
 1. Flutter - web, aurora (android, ios).
 2. Dictionaries - stardict
-3. API - authorization, registration, statistics, share access to cards and statistics (for control by teachers, parents)
+3. API - authorization, registration, statistics, share access to cards and statistics.
 4. The ability to create your own list with the words.
 5. Sharing your lists with others both privately and publicly.
 6. Modes: pictures, native-words, words to learn, by description.
