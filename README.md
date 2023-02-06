@@ -11,7 +11,7 @@ Leave notes and paper cards at home and learn a foreign language anywhere with a
 4. The ability to create your own list with the words.
 5. Sharing your lists with others both privately and publicly.
 6. Modes: pictures, native-words, words to learn, by description.
-7. The user's progress through the lists can be share by users.
+7. The user's progress can be share to users.
 8. Children's mode - cute text etc ))
 
 ### License
