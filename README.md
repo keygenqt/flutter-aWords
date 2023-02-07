@@ -22,6 +22,9 @@ Leave notes and paper cards at home and learn a foreign language anywhere with a
 
 ![preview_1.gif](data%2Fgif%2Fpreview_1.gif)
 
+
+#### It's not native, it's web flutter + qml webview.
+
 ### License
 
 ```
