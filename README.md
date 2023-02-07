@@ -2,7 +2,7 @@ aWords
 ---
 
 <p>
-    <img alt="icon" src="data/machine-learning.png" width="100px"/>
+    <img alt="icon" src="data/icon.png" width="100px"/>
 </p>
 
 Leave notes and paper cards at home and learn a foreign language anywhere with aWords.
