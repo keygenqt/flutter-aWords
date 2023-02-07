@@ -1,0 +1,13 @@
+[Desktop Entry]
+Type=Application
+X-Nemo-Application-Type=silica-qt5
+Icon=com.keygenqt.aWords
+Exec=/usr/bin/com.keygenqt.aWords
+Name=aWords
+Name[ru]=aWords
+
+[X-Application]
+Permissions=Internet;WebView
+OrganizationName=com.keygenqt
+ApplicationName=aWords
+ExecDBus=/usr/bin/com.keygenqt.aWords

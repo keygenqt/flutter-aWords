@@ -1,2 +1,5 @@
-/.idea/
+# IntelliJ related
+.idea/
+
+# Mkdocs build
 /flutter-aWords/
