@@ -37,6 +37,9 @@ markdown_extensions:
   - pymdownx.emoji:
       emoji_index: !!python/name:materialx.emoji.twemoji
       emoji_generator: !!python/name:materialx.emoji.to_svg
+      options:
+        custom_icons:
+          - docs/overrides/.icons
 
 # Customization
 extra:
@@ -62,7 +65,7 @@ theme:
   language: 'en'
   favicon: images/favicon.ico
   icon:
-    logo: material/web
+    logo: custom/icon
   features:
     - content.action.edit
     - content.code.annotate
