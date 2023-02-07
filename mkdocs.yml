@@ -3,7 +3,7 @@ site_name: aWords
 # Repository
 repo_name: 'keygenqt/flutter-aWords'
 repo_url: 'https://github.com/keygenqt/flutter-aWords'
-site_dir: 'pages'
+site_dir: 'flutter-aWords'
 
 # Navigation
 nav:
@@ -53,7 +53,7 @@ extra:
 
 # Custom CSS
 extra_css:
-  - /pages/custom.css
+  - /flutter-aWords/custom.css
 
 # Configuration
 theme:
@@ -62,7 +62,7 @@ theme:
   language: 'en'
   favicon: images/favicon.ico
   icon:
-    logo: material/basket
+    logo: images/favicon.ico
   features:
     - content.action.edit
     - content.code.annotate
