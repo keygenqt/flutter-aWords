@@ -42,9 +42,9 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="34"/>
-        <source>aWords</source>
-        <translation>aWords</translation>
+        <location filename="../qml/pages/MainPage.qml" line="45"/>
+        <source>Clear counter</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

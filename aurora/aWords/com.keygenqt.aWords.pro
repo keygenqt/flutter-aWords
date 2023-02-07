@@ -29,6 +29,7 @@ SOURCES += \
 HEADERS += \
 
 DISTFILES += \
+    qml/pages/FlutterWebView.qml \
     rpm/com.keygenqt.aWords.spec \
     AUTHORS.md \
     CODE_OF_CONDUCT.md \
