@@ -20,7 +20,7 @@ Leave notes and paper cards at home and learn a foreign language anywhere with a
 
 ### Preview Now
 
-![my_gif.gif](data%2Fgif%2Fmy_gif.gif)
+![preview_1.gif](data%2Fgif%2Fpreview_1.gif)
 
 ### License
 
