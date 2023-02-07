@@ -7,6 +7,10 @@ hide:
 aWords
 ---
 
+<div>
+    <img alt="icon" src="data/machine-learning.png" style="width: 100px;"/>
+</div>
+
 Leave notes and paper cards at home and learn a foreign language anywhere with aWords.
 
 ### Plan
