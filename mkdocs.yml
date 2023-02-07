@@ -62,7 +62,7 @@ theme:
   language: 'en'
   favicon: images/favicon.ico
   icon:
-    logo: images/favicon.ico
+    logo: material/web
   features:
     - content.action.edit
     - content.code.annotate
