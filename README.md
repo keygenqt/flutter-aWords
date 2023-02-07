@@ -18,6 +18,10 @@ Leave notes and paper cards at home and learn a foreign language anywhere with a
 7. The user's progress can be share to users.
 8. Children's mode - cute text etc...
 
+### Preview Now
+
+<video src='data/mp4/demo_now1.mp4' width=350/>
+
 ### License
 
 ```

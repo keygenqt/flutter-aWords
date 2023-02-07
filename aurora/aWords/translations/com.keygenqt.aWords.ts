@@ -4,22 +4,22 @@
 <context>
     <name>AboutPage</name>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="57"/>
+        <location filename="../qml/pages/AboutPage.qml" line="38"/>
         <source>About Application</source>
         <translation>About Application</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="67"/>
+        <location filename="../qml/pages/AboutPage.qml" line="48"/>
         <source>#descriptionText</source>
         <translation>&lt;p&gt;Leave notes and paper cards at home and learn a foreign language anywhere with aWords.&lt;/p&gt;</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="72"/>
+        <location filename="../qml/pages/AboutPage.qml" line="53"/>
         <source>3-Clause BSD License</source>
         <translation>3-Clause BSD License</translation>
     </message>
     <message>
-        <location filename="../qml/pages/AboutPage.qml" line="82"/>
+        <location filename="../qml/pages/AboutPage.qml" line="63"/>
         <source>#licenseText</source>
         <translation>&lt;p&gt;&lt;i&gt;Copyright (C) 2022 com.keygenqt&lt;/i&gt;&lt;/p&gt;
 &lt;p&gt;Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:&lt;/p&gt;
@@ -34,7 +34,7 @@
 <context>
     <name>DefaultCoverPage</name>
     <message>
-        <location filename="../qml/cover/DefaultCoverPage.qml" line="46"/>
+        <location filename="../qml/cover/DefaultCoverPage.qml" line="27"/>
         <source>aWords</source>
         <translation>aWords</translation>
     </message>
@@ -42,7 +42,7 @@
 <context>
     <name>MainPage</name>
     <message>
-        <location filename="../qml/pages/MainPage.qml" line="47"/>
+        <location filename="../qml/pages/MainPage.qml" line="34"/>
         <source>aWords</source>
         <translation>aWords</translation>
     </message>

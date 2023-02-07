@@ -1,6 +1,14 @@
+import 'dart:async';
+import 'dart:html';
+import 'dart:js' as JS;
+
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/flutter_web_plugins.dart';
+
+Timer? timer;
 
 void main() {
+  setUrlStrategy(PathUrlStrategy());
   runApp(const MyApp());
 }
 
@@ -35,15 +43,20 @@ class _MyHomePageState extends State<MyHomePage> {
   void _incrementCounter() {
     setState(() {
       _counter++;
+      var event = CustomEvent('framescript:action', detail: {'count': _counter});
+      document.dispatchEvent(event);
     });
   }
 
   @override
   Widget build(BuildContext context) {
+
+    JS.context['incrementCounter'] = () {
+      _incrementCounter();
+      return _counter;
+    };
+
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -59,7 +72,10 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {
+          timer?.cancel();
+          timer = Timer(const Duration(milliseconds: 50), _incrementCounter);
+        },
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),
