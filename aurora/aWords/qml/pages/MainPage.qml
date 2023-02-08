@@ -25,37 +25,8 @@ Page {
     objectName: "mainPage"
     allowedOrientations: Orientation.Portrait
 
-    property int counter: 0
-
-    SilicaFlickable {
+    FlutterWebView {
         width: parent.width
         height: parent.height
-
-        PullDownMenu {
-            id: pullDownMenu
-            topMargin: Theme.paddingLarge
-            bottomMargin: Theme.paddingLarge
-
-            MenuItem {
-                text: "Increment Counter ("+idMain.counter+")"
-                onClicked: idFlutterWebView.incrementCounter()
-            }
-
-            MenuItem {
-                text: qsTr("Clear counter")
-                onClicked: idFlutterWebView.clearCounter()
-            }
-        }
-
-        FlutterWebView {
-            id: idFlutterWebView
-            width: parent.width - Theme.horizontalPageMargin * 2
-            height: parent.height - Theme.horizontalPageMargin * 2
-            anchors.horizontalCenter: parent.horizontalCenter
-            anchors.verticalCenter: parent.verticalCenter
-            bgColor: Theme.highlightDimmerColor
-            textColor: Theme.highlightColor
-            onCounterChanged: idMain.counter = idFlutterWebView.counter
-        }
     }
 }

@@ -18,50 +18,251 @@
 
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import Sailfish.Silica.private 1.0 as SilicaPrivate
+import Sailfish.WebView 1.0
+import Sailfish.WebView.Controls 1.0
+import Sailfish.WebView.Popups 1.0
+import Sailfish.WebView.Pickers 1.0
 
-Page {
-    objectName: "aboutPage"
-    allowedOrientations: Orientation.All
+RawWebView {
+    id: webview
 
-    SilicaFlickable {
-        objectName: "flickable"
-        anchors.fill: parent
-        contentHeight: layout.height + Theme.paddingLarge
+    property alias downloadsEnabled: popupOpener.downloadsEnabled
+    property Page webViewPage: {
+        var containerPage = _findParentWithProperty(webview, '__sailfish_webviewpage')
+        if (!containerPage) containerPage = _findParentWithProperty(webview, '__silica_page')
+        return containerPage
+    }
+    property bool canShowSelectionMarkers: true
+    property real _indicatorVerticalOffset
 
-        Column {
-            id: layout
-            objectName: "layout"
-            width: parent.width
+    readonly property bool textSelectionActive: textSelectionController && textSelectionController.active
+    property Item textSelectionController: null
+    readonly property int _pageOrientation: webViewPage ? webViewPage.orientation : Orientation.None
+    readonly property bool _appActive: Qt.application.state === Qt.ApplicationActive
 
-            PageHeader {
-                objectName: "pageHeader"
-                title: qsTr("About Application")
+    property alias popupProvider: popupOpener.popupProvider
+
+    signal aboutToOpenPopup(var topic, var data)
+    signal linkClicked(string url)
+
+    function _findParentWithProperty(item, propertyName) {
+        var parentItem = item.parent
+        while (parentItem) {
+            if (parentItem.hasOwnProperty(propertyName)) {
+                return parentItem
             }
+            parentItem = parentItem.parent
+        }
+        return null
+    }
 
-            Label {
-                objectName: "descriptionText"
-                anchors { left: parent.left; right: parent.right; margins: Theme.horizontalPageMargin }
-                color: palette.highlightColor
-                font.pixelSize: Theme.fontSizeSmall
-                textFormat: Text.RichText
-                wrapMode: Text.WordWrap
-                text: qsTr("#descriptionText")
+    function _hasWebViewPage() {
+        return (webview.webViewPage != null && webview.webViewPage != undefined)
+    }
+
+    function clearSelection() {
+        if (textSelectionActive) {
+            textSelectionController.clearSelection()
+        }
+    }
+
+    active: !webViewPage
+            || _appActive && (webViewPage.status === PageStatus.Active)
+            || _appActive && (webViewPage.status === PageStatus.Deactivating)
+    _acceptTouchEvents: !textSelectionActive
+
+    viewportHeight: webViewPage ? height : undefined
+
+    orientation: {
+        switch (_pageOrientation) {
+        case Orientation.Portrait:
+            return Qt.PortraitOrientation
+        case Orientation.Landscape:
+            return Qt.LandscapeOrientation
+        case Orientation.PortraitInverted:
+            return Qt.InvertedPortraitOrientation
+        case Orientation.LandscapeInverted:
+            return Qt.InvertedLandscapeOrientation
+        default:
+            return Qt.PrimaryOrientation
+        }
+    }
+
+    onOrientationChanged: {
+        if (visible) {
+            orientationDelayOverlay.opacity = 1
+        }
+    }
+
+    onContentOrientationChanged: {
+        orientationFadeOut.restart()
+    }
+
+    onRecvAsyncMessage: {
+        if (pickerOpener.message(message, data) || popupOpener.message(message, data)) {
+            return
+        }
+
+        switch(message) {
+            case "embed:linkclicked": {
+                webview.linkClicked(data.uri)
+                break
             }
-
-            SectionHeader {
-                objectName: "licenseHeader"
-                text: qsTr("3-Clause BSD License")
+            case "Content:SelectionRange": {
+                if (textSelectionController === null) {
+                    textSelectionController = textSelectionControllerComponent.createObject(
+                                webview, {"contentItem" : webview})
+                }
+                textSelectionController.selectionRangeUpdated(data)
+                break
             }
+            case "Content:SelectionSwap": {
+                if (textSelectionController) {
+                    textSelectionController.swap()
+                }
 
-            Label {
-                objectName: "licenseText"
-                anchors { left: parent.left; right: parent.right; margins: Theme.horizontalPageMargin }
-                color: palette.highlightColor
-                font.pixelSize: Theme.fontSizeSmall
-                textFormat: Text.RichText
-                wrapMode: Text.WordWrap
-                text: qsTr("#licenseText")
+                break
+            }
+            default: {
+                break
             }
         }
+    }
+    onRecvSyncMessage: {
+        // sender expects that this handler will update `response` argument
+        switch (message) {
+        case "Content:SelectionCopied": {
+            if (data.succeeded && textSelectionController) {
+                textSelectionController.showNotification()
+            }
+            response.message = {"": ""}
+            break
+        }
+        }
+    }
+
+    Component {
+        id: textSelectionControllerComponent
+
+        TextSelectionController {
+            opacity: canShowSelectionMarkers ? 1.0 : 0.0
+            contentWidth: Math.max(webview.contentWidth, webview.width)
+            contentHeight: Math.max(webview.contentHeight, webview.height)
+            anchors {
+                fill: parent
+            }
+
+            Behavior on opacity { FadeAnimator {} }
+        }
+    }
+
+    PickerOpener {
+        id: pickerOpener
+
+        property QtObject pageStackOwner: webview._findParentWithProperty(webview, "pageStack")
+
+        pageStack: pageStackOwner ? pageStackOwner.pageStack : undefined
+        contentItem: webview
+    }
+
+    PopupOpener {
+        id: popupOpener
+
+        pageStack: pickerOpener.pageStack
+        parentItem: webview.webViewPage || webview
+        contentItem: webview
+        downloadsEnabled: false
+
+        onAboutToOpenPopup: webview.aboutToOpenPopup(topic, data)
+        onAboutToOpenContextMenu: {
+            if (Qt.inputMethod.visible) {
+                webview.parent.focus = true
+            }
+
+            if (data.types.indexOf("content-text") !== -1) {
+                // we want to select some content text
+                webview.sendAsyncMessage("Browser:SelectionStart", {"xPos": data.xPos, "yPos": data.yPos})
+            }
+        }
+    }
+
+    Rectangle {
+        id: orientationDelayOverlay
+
+        width: webview.width
+        height: webview.height
+
+        opacity: 0
+        color: webview.backgroundColor
+
+        NumberAnimation on opacity {
+            id: orientationFadeOut
+
+            running: false
+            duration: 200
+            easing.type: Easing.InOutQuad
+
+            to: 0
+        }
+    }
+
+    Timer {
+        id: orientationDelayFailsafe
+        running: !orientationFadeOut.running && orientationDelayOverlay.opacity === 1
+        onTriggered: {
+            orientationFadeOut.start()
+        }
+        interval: 1000
+    }
+
+    BusyIndicator {
+        id: busySpinner
+        x: (webview.viewportWidth - width) / 2
+        y: webview._indicatorVerticalOffset
+           + ((webview.viewportHeight - webview._indicatorVerticalOffset - height) / 2)
+        running: true
+        visible: webview.loading
+        size: BusyIndicatorSize.Large
+    }
+
+    SilicaPrivate.VirtualKeyboardObserver {
+        id: virtualKeyboardObserver
+
+        readonly property QtObject appWindow: webview._findParentWithProperty(webview, "__silica_applicationwindow_instance")
+
+        active: webview.enabled
+        transpose: appWindow ? appWindow._transpose : false
+        onImSizeChanged: {
+            if (imSize > 0 && opened) {
+                webview.virtualKeyboardMargin = marginRequired(virtualKeyboardObserver.imSize)
+            }
+        }
+
+        orientation: webview._pageOrientation
+
+        onOpenedChanged: {
+            if (opened) {
+                webview.virtualKeyboardMargin = marginRequired(virtualKeyboardObserver.panelSize)
+            }
+        }
+        onClosedChanged: {
+            if (closed) {
+                webview.virtualKeyboardMargin = 0
+            }
+        }
+
+        function marginRequired(panelSize) {
+            var ypos = appWindow ? appWindow.mapFromItem(null, 0, webview.y).y : 0
+            return panelSize + ypos + webview.height - Screen.height
+        }
+    }
+
+    Component.onCompleted: {
+        webview.addMessageListener("embed:linkclicked")
+        webview.addMessageListener("Content:ContextMenu")
+        webview.addMessageListener("Content:SelectionRange")
+        webview.addMessageListener("Content:SelectionCopied")
+        webview.addMessageListener("Content:SelectionSwap")
     }
 }

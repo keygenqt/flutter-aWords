@@ -6,35 +6,14 @@ import Sailfish.WebEngine 1.0
 
 Rectangle {
     id: idMain
-    layer.enabled: true
-    layer.effect: OpacityMask {
-        maskSource: Item {
-            width: idMain.width
-            height: idMain.height
-            Rectangle {
-                anchors.fill: parent
-                radius: Theme.paddingMedium
-            }
-        }
-    }
-    color: 'white'
+    color: 'transparent'
 
-    property int counter: 0
-    property color bgColor: '#ffffff'
-    property color textColor: '#000000'
-
-    function incrementCounter() {
-        webview.runJavaScript("incrementCounter()")
-    }
-
-    function clearCounter() {
-        webview.runJavaScript("clearCounter()")
-    }
+    property color bgColor: Theme.highlightDimmerColor
+    property color textColor: Theme.highlightColor
 
     Rectangle {
         anchors.fill: parent
-        color: bgColor
-        opacity: 0.5
+        color: 'transparent'
 
         BusyIndicator {
             size: BusyIndicatorSize.Medium
@@ -47,6 +26,7 @@ Rectangle {
         id: webview
         anchors.fill: parent
         url: Qt.resolvedUrl("../flutter/index.html")
+        opacity: 0.0
 
         property bool initialized: false
 
@@ -55,7 +35,7 @@ Rectangle {
                 id: animation
                 properties: "opacity";
                 easing.type: Easing.InOutQuad;
-                duration: 0
+                duration: 300
                 onRunningChanged: {
                     if (!animation.running) {
                         console.log('end')
@@ -77,9 +57,6 @@ Rectangle {
                     webview.initialized = true
                     webview.runJavaScript("setColor('"+idMain.bgColor+"', '"+idMain.textColor+"')")
                 }
-                else if (data.action === 'counter') {
-                    idMain.counter = data.data.counter
-                }
                 else if (data.action === 'setColor') {
                     animation.duration = 300
                     webview.opacity = 1.0
@@ -94,7 +71,7 @@ Rectangle {
             WebEngineSettings.setPreference("security.disable_cors_checks",
                                             true,
                                             WebEngineSettings.BoolPref)
-            // disable strict origin policy
+            // https://admx.help/?Category=FrontMotion&Policy=FrontMotion.Policies.Firefox::SECURITY_FILEURI_STRICT_ORIGIN_POLICY
             WebEngineSettings.setPreference("security.fileuri.strict_origin_policy",
                                                          false,
                                                          WebEngineSettings.BoolPref)
