@@ -18,7 +18,7 @@ Leave notes and paper cards at home and learn a foreign language anywhere with a
 7. The user's progress can be share to users.
 8. Children's mode - cute text, etc...
 
-### Preview Now
+### Demo
 
 ![preview_1.gif](data%2Fgif%2Fpreview_1.gif)
 
