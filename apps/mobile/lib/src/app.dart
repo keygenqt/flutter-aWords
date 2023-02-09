@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'routing.dart';
 import 'screens/navigator.dart';
 import 'dart:async';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 Timer? timer;
 
@@ -44,6 +45,7 @@ class _AppState extends State<App> {
             });
       });
     };
+
     _send('init');
 
     /// Configure the parser with all of the app's allowed path templates.
@@ -88,15 +90,6 @@ class _AppState extends State<App> {
           // https://github.com/flutter/flutter/issues/82053
           theme: ThemeData(
             colorScheme: _colorScheme,
-            pageTransitionsTheme: const PageTransitionsTheme(
-              builders: {
-                TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-                TargetPlatform.iOS: CupertinoPageTransitionsBuilder(),
-                TargetPlatform.linux: FadeUpwardsPageTransitionsBuilder(),
-                TargetPlatform.macOS: CupertinoPageTransitionsBuilder(),
-                TargetPlatform.windows: FadeUpwardsPageTransitionsBuilder(),
-              },
-            ),
           ),
         ),
       );

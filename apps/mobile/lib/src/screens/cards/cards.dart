@@ -26,7 +26,7 @@ class CardsScreen extends StatelessWidget {
         ),
         body: Center(
           child: Text(
-            'CardsScreen',
+            'CardsScreen1',
             style: Theme.of(context).textTheme.headlineMedium,
           ),
         ),
