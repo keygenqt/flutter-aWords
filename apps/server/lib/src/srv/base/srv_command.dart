@@ -1,9 +1,9 @@
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:server_awords/src/web/web.dart';
+import 'package:server_awords/src/srv/app.dart';
 
-class WebCommand extends Command<int> {
-  WebCommand({
+class SRVCommand extends Command<int> {
+  SRVCommand({
     required Logger logger,
   }) : _logger = logger {
     argParser
@@ -21,10 +21,10 @@ class WebCommand extends Command<int> {
   }
 
   @override
-  String get description => 'Starting the aWards website.';
+  String get description => 'Starting the aWards flutter website.';
 
   @override
-  String get name => 'web';
+  String get name => 'srv';
 
   final Logger _logger;
 

@@ -1,10 +1,10 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
-import 'package:server_awords/src/api/api.dart';
-import 'package:server_awords/src/cli/cli.dart';
-import 'package:server_awords/src/common/common.dart';
-import 'package:server_awords/src/web/web.dart';
+import 'package:server_awords/src/api/base/export.dart';
+import 'package:server_awords/src/cli/base/export.dart';
+import 'package:server_awords/src/srv/base/export.dart';
+import 'package:server_awords/src/utils/constants/export.dart';
 
 const executableName = 'aWords';
 const packageName = 'server_awords';
@@ -31,7 +31,7 @@ class ServerCommandRunner extends CommandRunner<int> {
     // Add sub commands
     addCommand(APICommand(logger: _logger));
     addCommand(CLICommand(logger: _logger));
-    addCommand(WebCommand(logger: _logger));
+    addCommand(SRVCommand(logger: _logger));
   }
 
   @override
@@ -86,7 +86,7 @@ class ServerCommandRunner extends CommandRunner<int> {
     }
     final int? exitCode;
     if (topLevelResults['version'] == true) {
-      _logger.info('Version server aWords: $packageVersion');
+      _logger.info('Version server aWords: ${AppConstants.appVersion}');
       exitCode = ExitCode.success.code;
     } else {
       exitCode = await super.runCommand(topLevelResults);

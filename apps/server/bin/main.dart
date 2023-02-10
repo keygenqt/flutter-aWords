@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:server_awords/src/common/base/command_runner.dart';
+import 'package:server_awords/runner.dart';
 
 Future<void> main(List<String> args) async {
   await _flushThenExit(await ServerCommandRunner().run(args));
