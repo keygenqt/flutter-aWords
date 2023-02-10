@@ -2,10 +2,10 @@ import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/src/cli/app.dart';
 
+import '../../../di.dart';
+
 class CLICommand extends Command<int> {
-  CLICommand({
-    required Logger logger,
-  }) : _logger = logger {
+  CLICommand() {
     argParser
       ..addFlag(
         'backup',
@@ -21,11 +21,6 @@ class CLICommand extends Command<int> {
         'cleaner',
         help: 'Cleaner files without relations in db.',
         negatable: false,
-      )
-      ..addFlag(
-        'debug',
-        help: 'Get more information on the process.',
-        negatable: false,
       );
   }
 
@@ -36,16 +31,13 @@ class CLICommand extends Command<int> {
   @override
   String get name => 'cli';
 
-  final Logger _logger;
+  Logger get _logger => getIt<Logger>();
 
   @override
   Future<int> run() async {
-    final app = AppCLI(
-      logger: _logger,
-      debug: argResults?['debug'].toString() == 'true',
-    );
+    final app = AppCLI();
     if (argResults?['backup'].toString() == 'true') {
-      app.runBackup();
+      await app.runBackup();
     } else if (argResults?['backup-db'].toString() == 'true') {
       app.runBackupDB();
     } else if (argResults?['cleaner'].toString() == 'true') {

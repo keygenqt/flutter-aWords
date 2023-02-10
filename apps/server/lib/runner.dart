@@ -1,6 +1,7 @@
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
+import 'package:server_awords/di.dart';
 import 'package:server_awords/src/api/base/export.dart';
 import 'package:server_awords/src/cli/base/export.dart';
 import 'package:server_awords/src/srv/base/export.dart';
@@ -11,10 +12,7 @@ const packageName = 'server_awords';
 const description = 'aWards server application.';
 
 class ServerCommandRunner extends CommandRunner<int> {
-  ServerCommandRunner({
-    Logger? logger,
-  })  : _logger = logger ?? Logger(),
-        super(executableName, description) {
+  ServerCommandRunner() : super(executableName, description) {
     // Add root options and flags
     argParser
       ..addFlag(
@@ -29,15 +27,15 @@ class ServerCommandRunner extends CommandRunner<int> {
       );
 
     // Add sub commands
-    addCommand(APICommand(logger: _logger));
-    addCommand(CLICommand(logger: _logger));
-    addCommand(SRVCommand(logger: _logger));
+    addCommand(APICommand());
+    addCommand(CLICommand());
+    addCommand(SRVCommand());
   }
 
   @override
   void printUsage() => _logger.info(usage);
 
-  final Logger _logger;
+  Logger get _logger => getIt<Logger>();
 
   @override
   Future<int> run(Iterable<String> args) async {

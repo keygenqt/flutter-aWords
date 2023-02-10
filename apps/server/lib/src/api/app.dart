@@ -1,19 +1,12 @@
 import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
+import 'package:server_awords/di.dart';
 
 class AppServer {
-  AppServer({
-    required Logger logger,
-    required bool debug,
-  }) : _logger = logger {
-    logger.level = debug ? Level.debug : Level.info;
-  }
-
-  final Logger _logger;
+  Logger get _logger => getIt<Logger>();
 
   Future<void> run() async {
-
     _logger.info('Start server...');
 
     const port = 3010;

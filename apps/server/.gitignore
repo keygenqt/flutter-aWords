@@ -6,6 +6,9 @@
 build/
 pubspec.lock
 /.metadata
+/.flutter-plugins
+/.flutter-plugins-dependencies
+*.g.dart
 
 # Files generated during tests
 .test_coverage.dart
@@ -14,3 +17,6 @@ coverage/
 
 # Android studio and IntelliJ
 .idea
+
+# Other
+/db.sqlite

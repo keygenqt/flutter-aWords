@@ -1,17 +1,14 @@
 import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
+import 'package:server_awords/di.dart';
 
 class WebServer {
-  WebServer(this.path, {
-    required Logger logger,
-    required bool debug,
-  }) : _logger = logger {
-    logger.level = debug ? Level.debug : Level.info;
-  }
+  WebServer(this.path);
 
   final String path;
-  final Logger _logger;
+
+  Logger get _logger => getIt<Logger>();
 
   String getContentType(String path) {
     if (path.contains('.html')) {

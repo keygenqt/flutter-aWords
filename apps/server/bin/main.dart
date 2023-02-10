@@ -1,8 +1,10 @@
 import 'dart:io';
 
+import 'package:server_awords/di.dart';
 import 'package:server_awords/runner.dart';
 
 Future<void> main(List<String> args) async {
+  setupDI();
   await _flushThenExit(await ServerCommandRunner().run(args));
 }
 
