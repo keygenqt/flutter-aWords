@@ -8,15 +8,15 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:path/path.dart' as p;
 import 'package:server_awords/di.dart';
 import 'package:server_awords/src/utils/db/base/migrate.dart';
-import 'package:server_awords/src/utils/db/export.dart';
 import 'package:server_awords/src/utils/db/migrations/export.dart';
+import 'package:server_awords/src/utils/db/models/export.dart';
 
 part 'database.g.dart';
 
 // On Linux you need to install sqlite3
 // Example on Ubuntu: `sudo apt install libsqlite3-dev`
 
-@DriftDatabase(tables: [Categories])
+@DriftDatabase(tables: [Users])
 class MyDatabase extends _$MyDatabase {
   MyDatabase()
       : super(
@@ -34,13 +34,14 @@ class MyDatabase extends _$MyDatabase {
   Logger get _logger => getIt<Logger>();
 
   @override
-  int get schemaVersion => 2;
+  int get schemaVersion => 2; // first version 1!
 
   @override
   MigrationStrategy get migration {
     return MigrationStrategy(
       onCreate: (Migrator m) async {
         await m.createAll();
+        await Migrate_0_1().onInit(this);
       },
       onUpgrade: (Migrator m, int from, int to) async {
         _logger.delayed('Migration: ${from}_$to');

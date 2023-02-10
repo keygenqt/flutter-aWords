@@ -8,6 +8,8 @@ final getIt = GetIt.instance;
 void setupDI() {
   final db = MyDatabase();
   getIt
+    // logger app level insert in runner.dart
     ..registerSingleton<Logger>(Logger())
-    ..registerSingleton<CategoriesService>(CategoriesService(db));
+    // init service db
+    ..registerSingleton<UsersService>(UsersService(db));
 }

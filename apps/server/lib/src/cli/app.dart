@@ -1,25 +1,22 @@
 import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/di.dart';
-import 'package:server_awords/src/utils/db/export.dart';
+import 'package:server_awords/src/utils/db/models/export.dart';
 import 'package:server_awords/src/utils/db/services/export.dart';
+import 'package:server_awords/src/utils/extension/string.dart';
 
 class AppCLI {
-
   Logger get _logger => getIt<Logger>();
-  CategoriesService get _service => getIt<CategoriesService>();
+
+  UsersService get _service => getIt<UsersService>();
 
   Future<void> runBackup() async {
-
     // create list models
-    final insert = <CategoryModel>[
-      CategoryModel.create(
-        title: 'Category one',
-        description: 'description',
+    final insert = <UserModel>[
+      UserModel.create(
+        name: 'New user',
+        email: 'new@gmail.com',
+        password: '12345678'.asMD5(),
       ),
-      CategoryModel.create(
-        title: 'Category second',
-        description: 'description',
-      )
     ];
 
     // insert data
@@ -31,11 +28,8 @@ class AppCLI {
     // show result
     _logger.info('Models: $list');
 
-    // update model
-    list[0] = list[0].clone(title: 'UPDATE TITLE');
-
     // update data
-    await _service.update(list);
+    await _service.update([list[0].clone(name: 'UPDATE NAME')]);
 
     // read data
     final listAfterUpdate = await _service.getAll();

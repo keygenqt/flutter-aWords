@@ -11,6 +11,9 @@ class Migrate_1_2 implements Migrate {
     int from,
     int to,
   ) async {
-    await m.addColumn(d.categories, d.categories.title);
+    // @todo
+    // Not the best way to use migrations, it's worth removing the field and
+    // the application will not build
+    await m.addColumn(d.users, d.users.name);
   }
 }
