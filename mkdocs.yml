@@ -15,6 +15,10 @@ nav:
   - API:
       - Overview:
           - api/index.md
+      - Methods:
+        - Errors: api/methods/common_errors.md
+      - Libraries: api/libraries.md
+      - Dokka: /flutter-aWords/server_doc/api/
   - Flutter:
       - Overview:
           - flutter/index.md
