@@ -24,7 +24,7 @@ class Routes {
         await HomeRoute().run(request);
       }
     } catch (e) {
-      request.response.write('Error!');
+      request.response.write(e.toString());
       await request.response.close();
     }
   }
