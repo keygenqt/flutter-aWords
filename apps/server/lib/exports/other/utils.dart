@@ -1,4 +1,4 @@
 /// Helpers for application
 library;
 
-export '../../src/utils/api_helper.dart';
+export 'package:server_awords/src/utils/api_helper.dart';

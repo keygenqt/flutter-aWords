@@ -14,6 +14,7 @@ jobs:
         with:
           python-version: 3.x
 
+      #### Server app
       - name: Server app pub get
         working-directory: ./apps/server
         run: dart pub get
@@ -31,6 +32,7 @@ jobs:
         run: |
           mv doc ../../docs/server_doc
 
+      #### MkDocs
       - name: Install dependencies
         run: |
           python3 -m pip install --upgrade pip

@@ -1,7 +1,7 @@
 /// CLI application commands classes
 library;
 
-export '../../src/apps/api/command.dart';
-export '../../src/apps/cli/command.dart';
-export '../../src/apps/srv/command.dart';
-export '../../src/base/command_root.dart';
+export 'package:server_awords/src/apps/api/command.dart';
+export 'package:server_awords/src/apps/cli/command.dart';
+export 'package:server_awords/src/apps/srv/command.dart';
+export 'package:server_awords/src/base/command_root.dart';
