@@ -1,5 +1,6 @@
 import 'dart:io';
 
+/// Handling application errors
 class AppException implements Exception {
   AppException(this.code, this.message);
 

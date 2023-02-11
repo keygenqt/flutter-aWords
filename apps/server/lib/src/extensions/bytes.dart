@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 /// Extensions for [Uint8List]
-extension ExtUint8List on Uint8List {
+extension Uint8ListExt on Uint8List {
   /// Convert [Uint8List] to [String]
   String asString() {
     return String.fromCharCodes(this);

@@ -6,7 +6,7 @@ import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
 
 /// Route API REST for '/api/users'
-class RouteUsers implements Route {
+class UsersRoute implements Route {
   @override
   String path = '/api/users';
 

@@ -4,7 +4,7 @@ import 'dart:io';
 import 'package:server_awords/exports/other/utils.dart';
 
 /// Extensions for [HttpRequest]
-extension ExtRequest on HttpRequest {
+extension HttpRequestExt on HttpRequest {
   /// Write json with pretty output
   void writeJson(Object? object) => writeJsonWithCode(HttpStatus.ok, object);
 
