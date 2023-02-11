@@ -9,7 +9,7 @@ class APICommand extends Command<int> {
       ..addOption(
         'path',
         help: 'Set path to home page web site.',
-        defaultsTo: 'web',
+        defaultsTo: 'public',
       )
       ..addOption(
         'port',
