@@ -5,13 +5,16 @@ import 'package:server_awords/di.dart';
 import 'package:server_awords/src/api/base/export.dart';
 
 class AppServer {
+  AppServer(this.port);
+
+  final int port;
+
   Logger get _logger => getIt<Logger>();
 
   Future<void> run() async {
     _logger.info('Start server...');
 
     final route = Routes();
-    const port = 3010;
     final server = await HttpServer.bind(InternetAddress.loopbackIPv4, port);
 
     _logger.info('Server started: http://localhost:$port');

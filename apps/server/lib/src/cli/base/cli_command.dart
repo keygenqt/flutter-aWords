@@ -2,8 +2,6 @@ import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/src/cli/app.dart';
 
-import '../../../di.dart';
-
 class CLICommand extends Command<int> {
   CLICommand() {
     argParser
@@ -30,8 +28,6 @@ class CLICommand extends Command<int> {
 
   @override
   String get name => 'cli';
-
-  Logger get _logger => getIt<Logger>();
 
   @override
   Future<int> run() async {
