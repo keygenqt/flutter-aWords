@@ -9,9 +9,13 @@ mixin Route {
 }
 
 class Routes {
+  Routes(this.path);
+
   final _routes = <Route>[
     UsersRoute(),
   ];
+
+  final String path;
 
   Future<void> request(HttpRequest request) async {
     try {
@@ -21,7 +25,7 @@ class Routes {
             .first
             .run(request);
       } else {
-        await HomeRoute().run(request);
+        await HomeRoute(path).run(request);
       }
     } catch (e) {
       request.response.write(e.toString());

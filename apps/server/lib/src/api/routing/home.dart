@@ -1,16 +1,15 @@
 import 'dart:io';
 
-import 'package:server_awords/src/api/base/export.dart';
 import 'package:server_awords/src/utils/extension/export.dart';
 
-class HomeRoute implements Route {
-  @override
-  String path = '/';
+class HomeRoute {
+  HomeRoute(this.path);
 
-  @override
+  final String path;
+
   Future<void> run(HttpRequest request) async {
     if (request.uri.path.contains('.')) {
-      final data = File('web${request.uri.path}');
+      final data = File('$path${request.uri.path}');
       if (data.existsSync()) {
         final bites = await data.readAsBytes();
         request.response
@@ -23,11 +22,11 @@ class HomeRoute implements Route {
       if (request.uri.path == '/') {
         request.response
           ..headers.contentType = ContentType.html
-          ..write(File('web/index.html').readAsStringSync());
+          ..write(File('$path/index.html').readAsStringSync());
       } else {
         request.response
           ..headers.contentType = ContentType.html
-          ..write(File('web/error.html').readAsStringSync());
+          ..write(File('$path/error.html').readAsStringSync());
       }
       await request.response.close();
     }
