@@ -15,13 +15,25 @@ nav:
   - API:
       - Overview:
           - api/index.md
+      - Methods:
+          - Auth:
+              - Login: api/methods/common_errors.md
+              - Registration: api/methods/common_errors.md
+              - Logout: api/methods/common_errors.md
+          - Users:
+              - User Create: api/methods/common_errors.md
+              - User Update: api/methods/common_errors.md
+              - User Item: api/methods/common_errors.md
+              - User List: api/methods/common_errors.md
+          - Cards:
+              - Card Create: api/methods/common_errors.md
+              - Card Update: api/methods/common_errors.md
+              - Card Item: api/methods/common_errors.md
+              - Card List: api/methods/common_errors.md
+          - Common:
+              - Errors: api/methods/common_errors.md
       - Libraries: api/libraries.md
       - Dartdoc: /flutter-aWords/server_doc/api/
-      - Methods:
-          - Common:
-            - Errors1: api/methods/common_errors.md
-            - Errors2: api/methods/common_errors2.md
-            - Errors3: api/methods/common_errors3.md
   - Flutter:
       - Overview:
           - flutter/index.md
