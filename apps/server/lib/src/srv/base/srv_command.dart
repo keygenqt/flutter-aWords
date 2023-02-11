@@ -2,6 +2,7 @@ import 'package:args/command_runner.dart';
 import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/src/srv/app.dart';
 
+/// Sub command server runner for run static website
 class SRVCommand extends Command<int> {
   SRVCommand() {
     argParser.addOption(

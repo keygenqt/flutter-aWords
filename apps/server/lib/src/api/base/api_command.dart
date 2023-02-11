@@ -3,6 +3,7 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/di.dart';
 import 'package:server_awords/src/api/app.dart';
 
+/// Sub command CLI runner for API
 class APICommand extends Command<int> {
   APICommand() {
     argParser

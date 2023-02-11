@@ -16,6 +16,7 @@ part 'database.g.dart';
 // On Linux you need to install sqlite3
 // Example on Ubuntu: `sudo apt install libsqlite3-dev`
 
+/// Database connect with migrations
 @DriftDatabase(tables: [Users])
 class MyDatabase extends _$MyDatabase {
   MyDatabase()

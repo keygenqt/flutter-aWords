@@ -11,6 +11,7 @@ const executableName = 'aWords';
 const packageName = 'server_awords';
 const description = 'aWards server application.';
 
+/// Main CLI runner
 class ServerCommandRunner extends CommandRunner<int> {
   ServerCommandRunner() : super(executableName, description) {
     // Add root options and flags

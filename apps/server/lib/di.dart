@@ -5,6 +5,7 @@ import 'package:server_awords/src/utils/db/services/export.dart';
 
 final getIt = GetIt.instance;
 
+/// Initialization DI
 void setupDI() {
   final db = MyDatabase();
   getIt
