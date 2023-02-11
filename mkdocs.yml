@@ -19,9 +19,8 @@ nav:
       - Dartdoc: /flutter-aWords/server_doc/api/
       - Methods:
           - Errors1: api/methods/common_errors.md
-          - Errors2: api/methods/common_errors.md
-          - Errors3: api/methods/common_errors.md
-          - Errors4: api/methods/common_errors.md
+          - Errors2: api/methods/common_errors2.md
+          - Errors3: api/methods/common_errors3.md
   - Flutter:
       - Overview:
           - flutter/index.md
