@@ -6,12 +6,22 @@ on:
       - main
 jobs:
   deploy:
-    runs-on: macos-latest
+    runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
+      - uses: dart-lang/setup-dart@v1
       - uses: actions/setup-python@v2
         with:
           python-version: 3.x
+
+      - name: Gen server dart doc
+        working-directory: ./apps/server
+        run: dart doc
+
+      - name: Move doc server
+        working-directory: ./apps/server
+        run: |
+          mv doc ../../docs/server_doc
 
       - name: Install dependencies
         run: |
