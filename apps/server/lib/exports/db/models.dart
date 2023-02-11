@@ -1,4 +1,4 @@
 /// Models app drift database
 library;
 
-export 'package:server_awords/src/db/models/users.dart';
+export '../../src/db/models/users.dart';
