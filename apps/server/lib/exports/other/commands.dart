@@ -1,5 +1,5 @@
 /// CLI application commands classes
-library commands;
+library;
 
 export '../../src/apps/api/command.dart';
 export '../../src/apps/cli/command.dart';

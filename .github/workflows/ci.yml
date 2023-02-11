@@ -15,8 +15,7 @@ jobs:
           python-version: 3.x
 
       - name: Gen server dart doc
-        working-directory: ./apps/server
-        run: dart doc .
+        run: cd apps/server && dart doc .
 
       - name: Move doc server
         working-directory: ./apps/server

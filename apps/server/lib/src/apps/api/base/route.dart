@@ -13,8 +13,8 @@ class Routes {
   Routes(this.path);
 
   final _routes = <Route>[
-    LoginRoute(),
-    UsersRoute(),
+    RouteLogin(),
+    RouteUsers(),
   ];
 
   final String path;
@@ -27,7 +27,7 @@ class Routes {
             .first
             .run(request);
       } else {
-        await HomeRoute(path).run(request);
+        await RouteHome(path).run(request);
       }
     } catch (e) {
       if (e is AppException) {

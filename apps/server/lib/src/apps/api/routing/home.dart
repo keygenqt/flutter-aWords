@@ -2,8 +2,9 @@ import 'dart:io';
 
 import 'package:server_awords/exports/other/extensions.dart';
 
-class HomeRoute {
-  HomeRoute(this.path);
+/// Route API home html page
+class RouteHome {
+  RouteHome(this.path);
 
   final String path;
 
