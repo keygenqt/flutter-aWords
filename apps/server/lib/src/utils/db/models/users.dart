@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:json_annotation/json_annotation.dart';
+import 'package:json_annotation/json_annotation.dart' as Json;
 import 'package:server_awords/src/utils/db/base/database.dart';
 
 part 'users.g.dart';
@@ -12,7 +12,7 @@ class Users extends Table {
   TextColumn get password => text()();
 }
 
-@JsonSerializable()
+@Json.JsonSerializable()
 class UserModel {
   UserModel({
     required this.id,
@@ -33,6 +33,8 @@ class UserModel {
   final int? id;
   final String name;
   final String email;
+
+  @Json.JsonKey(includeToJson: false)
   final String password;
 
   bool get isNew => id == null;

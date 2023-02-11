@@ -1,0 +1,151 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: white;
+    font-family: 'Poppins', sans-serif;
+}
+
+body:after {
+    content: '';
+    background-color: #f7f7f7;
+    position: absolute;
+    top: -240px;
+    left: -200px;
+    height: 500px;
+    width: 500px;
+    border-radius: 50%;
+}
+
+body:before {
+    content: '';
+    background-color: #62b6f726;
+    position: absolute;
+    top: 55px;
+    right: 55px;
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+}
+
+.Body {
+    margin: 0 auto;
+    position: relative;
+    font-size: 0;
+    width: 100%;
+    height: calc(100% - 50px);
+    box-sizing: border-box;
+    max-width: 1200px;
+    padding: 30px;
+    z-index: 1;
+}
+
+.Center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.Body .Item1 {
+    display: inline-block;
+    height: 100%;
+    width: 50%;
+    position: relative;
+}
+
+.Body .Item2 {
+    display: inline-block;
+    height: 100%;
+    width: 50%;
+    text-align: center;
+    position: relative;
+}
+
+.Title {
+    font-size: 60px;
+    color: #3B739B;
+    text-transform: uppercase;
+}
+
+.Text {
+    font-size: 18px;
+    color: #4e4e4e;
+    margin-bottom: 33px;
+}
+
+.Line {
+    height: 5px;
+    width: 180px;
+    background-color: #62b6f7;
+    margin-bottom: 32px;
+    margin-top: 20px;
+}
+
+.Btn {
+    background-color: #62b6f7;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 18px;
+}
+
+.Circle1 {
+    height: 300px;
+    width: 300px;
+    background-color: #FBFBF9;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+
+.Circle1 img {
+    height: 230px;
+    width: 250px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+.Circle3 {
+    height: 20px;
+    width: 20px;
+    background-color: #62b6f7;
+    border-radius: 50%;
+    position: absolute;
+    right: -10px;
+    bottom: -5px;
+}
+
+.Footer {
+    height: 50px;
+    text-align: center;
+    background-color: #f7f7f7;
+}
+
+.Footer .Content {
+    width: 100%;
+    max-width: 1200px;
+    display: inline-block;
+    font-size: 14px;
+    text-align: left;
+    padding-top: 16px;
+    padding-left: 30px;
+    color: #3B739B;
+    box-sizing: border-box;
+}
+
+@media (max-width: 888px) {
+    .Body .Item1 {
+        width: 100%;
+    }
+    .Body .Item2 {
+        display: none;
+    }
+}

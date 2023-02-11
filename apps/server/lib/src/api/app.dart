@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/di.dart';
+import 'package:server_awords/src/api/base/export.dart';
 
 class AppServer {
   Logger get _logger => getIt<Logger>();
@@ -9,6 +10,7 @@ class AppServer {
   Future<void> run() async {
     _logger.info('Start server...');
 
+    final route = Routes();
     const port = 3010;
     final server = await HttpServer.bind(InternetAddress.loopbackIPv4, port);
 
@@ -16,12 +18,7 @@ class AppServer {
 
     await server.forEach((HttpRequest request) {
       _logger.detail('Request path: ${request.uri.path}');
-      if (request.uri.path.startsWith('/student')) {
-        request.response.write('Welcome student!');
-      } else {
-        request.response.write('Hello, world!');
-      }
-      request.response.close();
+      route.request(request);
     });
   }
 }

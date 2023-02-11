@@ -23,6 +23,9 @@ class WebServer {
     if (path.contains('.png')) {
       return 'image/png';
     }
+    if (path.contains('.css')) {
+      return 'text/css';
+    }
     if (path.contains('.ico')) {
       return 'image/vnd.microsoft.icon';
     }
