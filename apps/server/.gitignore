@@ -1,6 +1,6 @@
 # See https://www.dartlang.org/guides/libraries/private-files
 
-# Files and directories created by pub
+# Files and directories dart
 .dart_tool/
 .packages
 build/
@@ -9,6 +9,7 @@ pubspec.lock
 /.flutter-plugins
 /.flutter-plugins-dependencies
 *.g.dart
+/doc/
 
 # Files generated during tests
 .test_coverage.dart
