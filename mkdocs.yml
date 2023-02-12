@@ -4,6 +4,7 @@ site_name: aWords
 repo_name: 'keygenqt/flutter-aWords'
 repo_url: 'https://github.com/keygenqt/flutter-aWords'
 site_dir: 'flutter-aWords'
+site_url: 'https://keygenqt.github.io/flutter-aWords/'
 
 # Navigation
 nav:
