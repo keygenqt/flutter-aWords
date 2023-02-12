@@ -14,27 +14,27 @@ nav:
       - Aurora: mobile/index.md
   - Server:
       - Overview:
-          - api/index.md
+          - server/index.md
       - Methods:
           - Auth:
-              - Login: api/methods/common_errors.md
-              - Registration: api/methods/common_errors.md
-              - Logout: api/methods/common_errors.md
+              - Login: server/methods/common_errors.md
+              - Registration: server/methods/common_errors.md
+              - Logout: server/methods/common_errors.md
           - Users:
-              - User Create: api/methods/users_create.md
-              - User Update: api/methods/users_update.md
-              - User Delete: api/methods/users_delete.md
-              - User Item: api/methods/users_item.md
-              - User List: api/methods/users_list.md
+              - User Create: server/methods/users_create.md
+              - User Update: server/methods/users_update.md
+              - User Delete: server/methods/users_delete.md
+              - User Item: server/methods/users_item.md
+              - User List: server/methods/users_list.md
           - Cards:
-              - Card Create: api/methods/cards_create.md
-              - Card Update: api/methods/cards_update.md
-              - Card Delete: api/methods/cards_delete.md
-              - Card Item: api/methods/cards_item.md
-              - Card List: api/methods/cards_list.md
+              - Card Create: server/methods/cards_create.md
+              - Card Update: server/methods/cards_update.md
+              - Card Delete: server/methods/cards_delete.md
+              - Card Item: server/methods/cards_item.md
+              - Card List: server/methods/cards_list.md
           - Common:
-              - Errors: api/methods/common_errors.md
-      - Libraries: api/libraries.md
+              - Errors: server/methods/common_errors.md
+      - Libraries: server/libraries.md
       - Dartdoc: /flutter-aWords/server_doc/api/
       - Go to API: https://awords-api.keygenqt.com/
   - Web:
