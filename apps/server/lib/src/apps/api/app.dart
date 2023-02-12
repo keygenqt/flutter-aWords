@@ -5,6 +5,7 @@ import 'package:server_awords/exports/apps/api.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
 
+/// Main class app API for run [HttpServer]
 class AppServer {
   AppServer({
     required this.path,
