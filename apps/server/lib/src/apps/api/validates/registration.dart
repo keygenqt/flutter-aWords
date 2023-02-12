@@ -1,20 +1,19 @@
 import 'package:server_awords/exports/apps/api.dart';
-import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:validated/validated.dart' as validated;
 
-/// Validate [UserModel]
-void validateUser(Map<String, dynamic> json, {bool update = false}) {
+/// Validate login form
+void validateRegistration(Map<String, dynamic> json) {
   final errors = <Validate>[];
 
   // fields
   const fieldName = 'name';
   const fieldEmail = 'email';
   const fieldPwd = 'password';
+  const fieldUniqueKey = 'uniqueKey';
 
-  // validate name
-  if (!update && json[fieldName] == null ||
-      json[fieldName].toString().isEmpty) {
+  // validate uniqueKey
+  if (json[fieldName] == null || json[fieldName].toString().isEmpty) {
     errors.add(
       Validate(
         field: fieldName,
@@ -24,8 +23,7 @@ void validateUser(Map<String, dynamic> json, {bool update = false}) {
   }
 
   // validate email
-  if (!update && json[fieldEmail] == null ||
-      json[fieldEmail].toString().isEmpty) {
+  if (json[fieldEmail] == null || json[fieldEmail].toString().isEmpty) {
     errors.add(
       Validate(
         field: fieldEmail,
@@ -42,8 +40,7 @@ void validateUser(Map<String, dynamic> json, {bool update = false}) {
   }
 
   // validate password
-  if (!update && json[fieldPwd] == null ||
-      json[fieldPwd].toString().isEmpty) {
+  if (json[fieldPwd] == null || json[fieldPwd].toString().isEmpty) {
     errors.add(
       Validate(
         field: fieldPwd,
@@ -55,6 +52,16 @@ void validateUser(Map<String, dynamic> json, {bool update = false}) {
       Validate(
         field: fieldPwd,
         message: '${fieldPwd.capitalize()} min 8 max 16.',
+      ),
+    );
+  }
+
+  // validate uniqueKey
+  if (json[fieldUniqueKey] == null || json[fieldUniqueKey].toString().isEmpty) {
+    errors.add(
+      Validate(
+        field: fieldUniqueKey,
+        message: '${fieldUniqueKey.capitalize()} is required',
       ),
     );
   }

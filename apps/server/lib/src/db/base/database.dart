@@ -15,7 +15,7 @@ part 'database.g.dart';
 ///
 /// On Linux you need to install sqlite3
 /// Example on Ubuntu: `sudo apt install libsqlite3-dev`
-@DriftDatabase(tables: [Users])
+@DriftDatabase(tables: [Users, Tokens])
 class MyDatabase extends _$MyDatabase {
   MyDatabase()
       : super(

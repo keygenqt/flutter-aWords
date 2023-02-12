@@ -7,6 +7,7 @@ final getIt = GetIt.instance;
 
 /// Initialization application DI
 /// Services
+/// [TokensService]
 /// [UsersService]
 /// Other
 /// [Logger]
@@ -16,5 +17,6 @@ void setupDI() {
     // logger app level insert in runner.dart
     ..registerSingleton<Logger>(Logger())
     // init service db
+    ..registerSingleton<TokensService>(TokensService(db))
     ..registerSingleton<UsersService>(UsersService(db));
 }

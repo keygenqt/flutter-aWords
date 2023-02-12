@@ -1,6 +1,8 @@
+import 'package:drift/drift.dart';
 import 'package:server_awords/exports/apps/api.dart';
 import 'package:server_awords/exports/db/database.dart';
 import 'package:server_awords/exports/db/models.dart';
+import 'package:server_awords/exports/other/extensions.dart';
 
 /// Service for table 'users' model [UserModel]
 class UsersService {
@@ -13,13 +15,48 @@ class UsersService {
     return _db.select(_db.users).get();
   }
 
-  /// Get user by ID
-  Future<UserModel> getItem(int id) async {
-    return (_db.select(_db.users)..where((tbl) => tbl.id.equals(id)))
-        .getSingle();
+  /// Get user by email
+  Future<UserModel?> findByEmail({
+    required String email,
+  }) async {
+    try {
+      return await (_db.select(_db.users)
+            ..where((tbl) => tbl.email.equals(email)))
+          .getSingle();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Get user by email, password
+  Future<UserModel?> findByEmailPass({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      return await (_db.select(_db.users)
+            ..where(
+              (tbl) =>
+                  tbl.email.equals(email) &
+                  tbl.password.equals(password.asMD5()),
+            ))
+          .getSingle();
+    } catch (e) {
+      return null;
+    }
   }
 
   /// Get user by ID
+  Future<UserModel?> findById(int id) async {
+    try {
+      return await (_db.select(_db.users)..where((tbl) => tbl.id.equals(id)))
+          .getSingle();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Delete user by ID
   Future<void> deleteItem(int id) async {
     final count =
         await (_db.delete(_db.users)..where((tbl) => tbl.id.equals(id))).go();

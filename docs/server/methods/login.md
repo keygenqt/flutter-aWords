@@ -11,9 +11,10 @@ Response example
 
 ```json title="Response <span class='color-200'>200</span>"
 {
-    "id": 1,
-    "email": "user@gmail.com",
-    "token": "ODhzZHU4OXNmOGRmODlzOGRmOHM5ZHVmODlzOThkZjg5czk4ZGY4OXNkOWZzODlkZg=="
+  "userId": 6,
+  "token": "0db5275e-5442-46a5-9e72-82c7244c2266",
+  "uniqueKey": "54545",
+  "createAt": "2023-02-13T02:27:18.000"
 }
 ```
 

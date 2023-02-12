@@ -19,7 +19,10 @@ class AppServer {
   Logger get _logger => getIt<Logger>();
 
   final _routes = <Route>[
+    CardsRoute(),
     LoginRoute(),
+    LogoutRoute(),
+    RegistrationRoute(),
     UsersRoute(),
   ];
 

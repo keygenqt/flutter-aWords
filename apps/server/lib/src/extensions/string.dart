@@ -8,7 +8,7 @@ import 'package:server_awords/src/extensions/bytes.dart';
 extension ExtString on String {
   /// Capitalize string
   String capitalize() {
-    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+    return '${this[0].toUpperCase()}${substring(1)}';
   }
 
   /// Convert string to MD5

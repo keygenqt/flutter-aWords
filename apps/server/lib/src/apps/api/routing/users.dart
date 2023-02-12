@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/exports/apps/api.dart';
 import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/db/services.dart';
@@ -11,8 +10,6 @@ import 'package:server_awords/src/base/app_di.dart';
 class UsersRoute implements Route {
   @override
   String path = Routes.users.path;
-
-  Logger get _logger => getIt<Logger>();
 
   UsersService get _service => getIt<UsersService>();
 
@@ -30,12 +27,12 @@ class UsersRoute implements Route {
       Method(
         path: '$path/{id}',
         func: (request) async {
-          try {
-            // find model
-            request.writeJson(await _service.getItem(request.getID()));
-          } catch (e) {
-            throw AppException.notFound();
-          }
+          // find model
+          final model = await _service.findById(request.getID());
+          // exception if user not found
+          if (model == null) throw AppException.notFound();
+          // write data
+          request.writeJson(model);
         },
       ),
       // create item
@@ -55,7 +52,9 @@ class UsersRoute implements Route {
         path: '$path/{id}',
         func: (request) async {
           // find model
-          final model = await _service.getItem(request.getID());
+          final model = await _service.findById(request.getID());
+          // exception if user not found
+          if (model == null) throw AppException.notFound();
           // clone model with update params
           final update = model.clone(await request.getBody());
           // write data
