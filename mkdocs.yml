@@ -9,17 +9,17 @@ site_dir: 'flutter-aWords'
 nav:
   - Home:
       - index.md
-      - API: web/index.md
-      - Flutter: server/index.md
-      - Aurora: mobile/index.md
+      - Server: server/index.md
+      - Web: web/index.md
+      - Mobile: mobile/index.md
   - Server:
       - Overview:
           - server/index.md
       - Methods:
           - Auth:
-              - Login: server/methods/common_errors.md
-              - Registration: server/methods/common_errors.md
-              - Logout: server/methods/common_errors.md
+              - Login: server/methods/login.md
+              - Registration: server/methods/registration.md
+              - Logout: server/methods/logout.md
           - Users:
               - User Create: server/methods/users_create.md
               - User Update: server/methods/users_update.md
