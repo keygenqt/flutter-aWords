@@ -30,30 +30,47 @@ class AppServer {
 
     _logger.info('Server started: http://localhost:$port');
 
-    await server.forEach((HttpRequest request) {
+    await server.forEach((HttpRequest request) async {
       _logger.detail('Request path: ${request.uri.path}');
       try {
         if (request.uri.path.startsWith(apiPath)) {
-          _routes
+          // set default status code
+          request.response.statusCode = HttpStatus.badRequest;
+          // run routes method
+          await _routes
               .where((element) => request.uri.path.startsWith(element.path))
               .first
               .run(request);
+          // check if method not found
+          if (request.response.statusCode == HttpStatus.badRequest) {
+            throw AppException.badRequest();
+          }
+          // close
+          await request.response.close();
         } else {
-          HomeRoute(path).run(request);
+          await HomeRoute(path).run(request);
         }
       } catch (e) {
         if (e is AppException) {
-          request.writeJsonWithCode(e.code, {
-            'code': e.code,
-            'message': e.message,
-          });
+          if (e.validates == null) {
+            request.writeJsonWithCode(e.code, {
+              'code': e.code,
+              'message': e.message,
+            });
+          } else {
+            request.writeJsonWithCode(e.code, {
+              'code': e.code,
+              'message': e.message,
+              'validates': e.validates,
+            });
+          }
         } else {
           request.writeJsonWithCode(HttpStatus.internalServerError, {
             'code': HttpStatus.internalServerError,
             'message': e.toString(),
           });
         }
-        request.response.close();
+        await request.response.close();
       }
     });
   }

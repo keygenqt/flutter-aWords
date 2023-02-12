@@ -1,6 +1,8 @@
 import 'package:drift/drift.dart';
-import 'package:json_annotation/json_annotation.dart' as json;
+import 'package:json_annotation/json_annotation.dart' as json_annotation;
+import 'package:server_awords/exports/apps/api.dart';
 import 'package:server_awords/exports/db/database.dart';
+import 'package:server_awords/exports/other/extensions.dart';
 
 part 'users.g.dart';
 
@@ -17,7 +19,7 @@ class Users extends Table {
 }
 
 /// Model app table 'users'
-@json.JsonSerializable()
+@json_annotation.JsonSerializable()
 class UserModel {
   UserModel({
     required this.id,
@@ -26,8 +28,14 @@ class UserModel {
     required this.password,
   });
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  factory UserModel.fromJson(Map<String, dynamic> json) {
+    // check json
+    validateUser(json);
+    // pass to md5
+    json['password'] = json['password'].toString().asMD5();
+    // create class
+    return _$UserModelFromJson(json);
+  }
 
   UserModel.create({
     required this.name,
@@ -39,7 +47,7 @@ class UserModel {
   final String name;
   final String email;
 
-  @json.JsonKey(includeToJson: false)
+  @json_annotation.JsonKey(includeToJson: false)
   final String password;
 
   bool get isNew => id == null;
@@ -66,16 +74,15 @@ class UserModel {
     }
   }
 
-  UserModel clone({
-    String? name,
-    String? email,
-    String? password,
-  }) {
+  UserModel clone(Map<String, dynamic> json) {
+    // check json
+    validateUser(json, update: true);
+    // create new class
     return UserModel(
       id: id ?? 0,
-      name: name ?? this.name,
-      email: email ?? this.email,
-      password: password ?? this.password,
+      name: json['name']?.toString() ?? name,
+      email: json['email']?.toString() ?? email,
+      password: json['password']?.toString().asMD5() ?? password,
     );
   }
 }

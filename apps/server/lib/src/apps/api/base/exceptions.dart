@@ -1,8 +1,15 @@
 import 'dart:io';
 
+import 'package:server_awords/exports/apps/api.dart';
+
 /// Handling application errors
 class AppException implements Exception {
   AppException(this.code, this.message);
+
+  AppException.unprocessableEntity(
+    this.validates, [
+    this.message = 'Unprocessable Entity',
+  ]) : code = HttpStatus.unprocessableEntity;
 
   AppException.badRequest([this.message = 'Bad Request'])
       : code = HttpStatus.badRequest;
@@ -19,6 +26,7 @@ class AppException implements Exception {
   AppException.methodNotAllowed([this.message = 'Method Not Allowed'])
       : code = HttpStatus.methodNotAllowed;
 
+  List<Validate>? validates;
   String message;
   int code;
 }

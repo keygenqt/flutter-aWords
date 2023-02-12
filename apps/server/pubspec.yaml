@@ -17,6 +17,7 @@ dependencies:
   path: ^1.8.3
   json_annotation: ^4.8.0
   pointycastle: ^3.6.2
+  validated: ^2.0.0
 
 dev_dependencies:
   build_runner: ^2.3.3

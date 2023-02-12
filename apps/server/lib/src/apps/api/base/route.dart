@@ -21,3 +21,24 @@ enum Routes {
 
   final String path;
 }
+
+/// Enum methods
+enum Methods {
+  get,
+  post,
+  put,
+  delete;
+}
+
+/// API method
+class Method {
+  Method({
+    required this.path,
+    required this.func,
+    this.method = Methods.get,
+  });
+
+  final String path;
+  final Methods method;
+  final Future<void> Function(HttpRequest request) func;
+}

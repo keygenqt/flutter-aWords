@@ -31,7 +31,9 @@ class AppCLI {
     _logger.info('Models: $list');
 
     // update data
-    await _service.update([list[0].clone(name: 'UPDATE NAME')]);
+    await _service.update([list[0].clone({
+      'name': 'UPDATE NAME'
+    })]);
 
     // read data
     final listAfterUpdate = await _service.getAll();

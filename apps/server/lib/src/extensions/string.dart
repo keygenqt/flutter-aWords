@@ -6,6 +6,11 @@ import 'package:server_awords/src/extensions/bytes.dart';
 
 /// Extensions font [String]
 extension ExtString on String {
+  /// Capitalize string
+  String capitalize() {
+    return '${this[0].toUpperCase()}${substring(1).toLowerCase()}';
+  }
+
   /// Convert string to MD5
   String asMD5() {
     return MD5Digest().process(asUint8List()).asBase64();
