@@ -1,6 +1,7 @@
 import 'package:server_awords/src/version.dart';
 
-/// Global constants for app
-class AppConstants {
-  static const appVersion = packageVersion;
-}
+/// Constant version app
+const appVersion = packageVersion;
+
+/// Constant path api url
+const apiPath = '/api';

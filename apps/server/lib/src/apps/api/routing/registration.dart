@@ -5,19 +5,27 @@ import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
 
-/// Route API REST for [Routes.users]
-class UsersRoute implements Route {
+/// Route API REST for [Routes.registration]
+class LoginRoute implements Route {
   @override
-  String path = Routes.users.path;
+  String path = Routes.registration.path;
 
   UsersService get _service => getIt<UsersService>();
 
   @override
   Future<void> run(HttpRequest request) async {
-    // read data
-    final list = await _service.getAll();
-    // write data
-    request.writeJson(list);
+    switch (request.method) {
+      case 'POST':
+        {
+          // load body
+          final content = await request.getBody();
+          // write data
+          request.writeJson(content);
+        }
+        break;
+      default:
+        throw AppException.badRequest();
+    }
     // close
     await request.response.close();
   }

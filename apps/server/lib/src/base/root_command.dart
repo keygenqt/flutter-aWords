@@ -79,7 +79,7 @@ class RootCommand extends CommandRunner<int> {
     }
     final int? exitCode;
     if (topLevelResults['version'] == true) {
-      _logger.info('Version server aWords: ${AppConstants.appVersion}');
+      _logger.info('Version server aWords: $appVersion');
       exitCode = ExitCode.success.code;
     } else {
       exitCode = await super.runCommand(topLevelResults);

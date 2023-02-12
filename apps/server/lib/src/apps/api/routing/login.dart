@@ -5,10 +5,10 @@ import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
 
-/// Route API REST for '/api/login'
+/// Route API REST for [Routes.login]
 class LoginRoute implements Route {
   @override
-  String path = '/api/login';
+  String path = Routes.login.path;
 
   UsersService get _service => getIt<UsersService>();
 

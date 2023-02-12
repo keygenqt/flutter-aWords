@@ -4,6 +4,7 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/exports/apps/api.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
+import 'package:server_awords/src/exports/other/constants.dart';
 
 /// Main class app API for run [HttpServer]
 class AppServer {
@@ -32,9 +33,9 @@ class AppServer {
     await server.forEach((HttpRequest request) {
       _logger.detail('Request path: ${request.uri.path}');
       try {
-        if (request.uri.path.startsWith('/api')) {
+        if (request.uri.path.startsWith(apiPath)) {
           _routes
-              .where((element) => element.path == request.uri.path)
+              .where((element) => request.uri.path.startsWith(element.path))
               .first
               .run(request);
         } else {
