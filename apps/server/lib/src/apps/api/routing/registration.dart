@@ -31,7 +31,7 @@ class RegistrationRoute implements Route {
           final user = await _serviceUsers.findByEmail(
             email: body['email'].toString(),
           );
-          // exception if user not found
+          // exception if user found
           if (user != null) {
             throw AppException.unprocessableEntity([
               Validate(
