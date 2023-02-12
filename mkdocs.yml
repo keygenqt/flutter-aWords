@@ -12,7 +12,7 @@ nav:
       - API: web/index.md
       - Flutter: server/index.md
       - Aurora: mobile/index.md
-  - API:
+  - Server:
       - Overview:
           - api/index.md
       - Methods:
@@ -21,25 +21,38 @@ nav:
               - Registration: api/methods/common_errors.md
               - Logout: api/methods/common_errors.md
           - Users:
-              - User Create: api/methods/common_errors.md
-              - User Update: api/methods/common_errors.md
-              - User Item: api/methods/common_errors.md
-              - User List: api/methods/common_errors.md
+              - User Create: api/methods/users_create.md
+              - User Update: api/methods/users_update.md
+              - User Delete: api/methods/users_delete.md
+              - User Item: api/methods/users_item.md
+              - User List: api/methods/users_list.md
           - Cards:
-              - Card Create: api/methods/common_errors.md
-              - Card Update: api/methods/common_errors.md
-              - Card Item: api/methods/common_errors.md
-              - Card List: api/methods/common_errors.md
+              - Card Create: api/methods/cards_create.md
+              - Card Update: api/methods/cards_update.md
+              - Card Delete: api/methods/cards_delete.md
+              - Card Item: api/methods/cards_item.md
+              - Card List: api/methods/cards_list.md
           - Common:
               - Errors: api/methods/common_errors.md
       - Libraries: api/libraries.md
       - Dartdoc: /flutter-aWords/server_doc/api/
-  - Flutter:
+      - Go to API: https://awords-api.keygenqt.com/
+  - Web:
       - Overview:
-          - flutter/index.md
-  - Aurora:
+          - web/index.md
+      - Libraries: web/libraries.md
+      - Dartdoc: /flutter-aWords/web_doc/api/
+      - Go to API: https://awords.keygenqt.com/
+  - Mobile:
       - Overview:
-          - aurora/index.md
+          - mobile/index.md
+      - Applications:
+          - Android:
+              - About: mobile/android/about.md
+              - Libraries: mobile/android/libraries.md
+          - Aurora:
+              - About: mobile/aurora/about.md
+              - Libraries: mobile/aurora/libraries.md
 
 # Extensions
 markdown_extensions:
