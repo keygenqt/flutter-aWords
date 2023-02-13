@@ -1,5 +1,5 @@
 /// App API REST
-library;
+library api;
 
 export 'package:server_awords/src/apps/api/app.dart';
 export 'package:server_awords/src/apps/api/base/exceptions.dart';

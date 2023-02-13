@@ -1,5 +1,6 @@
 import 'package:settings_yaml/settings_yaml.dart';
 
+/// Read file yaml with configuration app
 class Configuration {
   Configuration()
       : data =

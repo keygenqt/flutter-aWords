@@ -2,6 +2,7 @@ import 'package:json_annotation/json_annotation.dart' as json_annotation;
 
 part 'validates.g.dart';
 
+/// Response class with errors validate
 @json_annotation.JsonSerializable()
 class Validate {
   Validate({

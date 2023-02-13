@@ -1,15 +1,13 @@
 User List
 ===================
 
-!!! info "Role Guest"
+!!! info "Roles Guest | User | Admin"
 
 Get a list of users
 
 ```shell title="Method <span class='color-method'>GET</span>"
 /api/users
 ```
-
-!!! info "Roles Guest | User | Admin"
 
 Response example
 
