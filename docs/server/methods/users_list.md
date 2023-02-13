@@ -1,6 +1,8 @@
 User List
 ===================
 
+!!! info "Role Guest"
+
 Get a list of users
 
 ```shell title="Method <span class='color-method'>GET</span>"
