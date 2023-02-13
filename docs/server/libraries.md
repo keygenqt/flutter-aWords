@@ -21,10 +21,12 @@ dependencies:
   # A set of high-level APIs over PointyCastle for two-way cryptography.
   encrypt: ^5.0.1
   # https://pub.dev/packages/get_it
-  # This is a simple Service Locator for Dart and Flutter projects with some additional goodies highly inspired by Splat.
+  # This is a simple Service Locator for Dart and Flutter projects with some additional goodies 
+  # highly inspired by Splat.
   get_it: ^7.2.0
   # https://pub.dev/packages/json_annotation
-  # Defines the annotations used by json_serializable to create code for JSON serialization and deserialization.
+  # Defines the annotations used by json_serializable to create code for JSON serialization 
+  # and deserialization.
   json_annotation: ^4.8.0
   # https://pub.dev/packages/mason_logger
   # A reusable logger used by the Mason CLI.
@@ -33,10 +35,12 @@ dependencies:
   # A comprehensive, cross-platform path manipulation library for Dart.
   path: ^1.8.3
   # https://pub.dev/packages/pointycastle
-  # A Dart library for encryption and decryption. In this release, most of the classes are ports of Bouncy Castle from Java to Dart.
+  # A Dart library for encryption and decryption. In this release, most of the classes are ports 
+  # of Bouncy Castle from Java to Dart.
   pointycastle: ^3.6.2
   # https://pub.dev/packages/pub_updater
-  # A Dart package which enables checking whether packages are up to date and supports updating them.
+  # A Dart package which enables checking whether packages are up to date and supports 
+  # updating them.
   pub_updater: ^0.2.4
   # https://pub.dev/packages/settings_yaml
   # Provide a very simple method to use yaml files for reading/writing an app's configuration.
@@ -47,16 +51,19 @@ dependencies:
 
 dev_dependencies:
   # https://pub.dev/packages/build_runner
-  # The build_runner package provides a concrete way of generating files using Dart code, outside of tools like pub.
+  # The build_runner package provides a concrete way of generating files using Dart code, 
+  # outside of tools like pub.
   build_runner: ^2.3.3
   # https://pub.dev/packages/build_verify
-  # Test utility to ensure generated Dart code within a package is up-to-date when using package:build.
+  # Test utility to ensure generated Dart code within a package is up-to-date when 
+  # using package:build.
   build_verify: ^3.0.0
   # https://pub.dev/packages/build_version
   # Include the version of your package in our source code.
   build_version: ^2.1.1
   # https://pub.dev/packages/drift_dev
-  # This library contains the generator that turns your Table classes from drift into database code.
+  # This library contains the generator that turns your Table classes from drift 
+  # into database code.
   drift_dev: ^2.5.2
   # https://pub.dev/packages/json_serializable
   # Provides Dart Build System builders for handling JSON.
