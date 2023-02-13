@@ -1,7 +1,7 @@
 Logout
 ===================
 
-!!! info "Roles User|Admin"
+!!! info "Roles User | Admin"
 
 Removing an authorization token from the server
 

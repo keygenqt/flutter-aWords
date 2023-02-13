@@ -7,7 +7,7 @@ Get a list of users
 /api/users
 ```
 
-!!! info "Roles Guest|User|Admin"
+!!! info "Roles Guest | User | Admin"
 
 Response example
 
