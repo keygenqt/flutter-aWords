@@ -19,17 +19,21 @@ class LogoutRoute implements Route {
       Method(
         role: [UserRole.user, UserRole.admin],
         method: Methods.delete,
-        path: '$path/{key}',
+        path: path,
         func: (request) async {
+          // get auth
+          final basic = request.headers.value('authorization').toString();
+          // get hash
+          final hash = basic.substring(6, basic.length);
           // invoke delete
           final count = await _serviceTokens.deleteByToken(
-            token: request.getString(),
+            token: hash,
           );
           // write data
           if (count == 0) {
             throw AppException.notFound();
           } else {
-            request.writeJson(SuccessResponse('User deleted successfully'));
+            request.writeJson(SuccessResponse('Token deleted successfully'));
           }
         },
       ),
