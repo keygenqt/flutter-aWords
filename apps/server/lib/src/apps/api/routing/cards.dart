@@ -8,5 +8,9 @@ class CardsRoute implements Route {
   String path = Routes.cards.path;
 
   @override
-  Future<void> run(HttpRequest request) async {}
+  Future<void> run(HttpRequest request) async {
+    // @todo
+    //  I will do this logic together with the application,
+    //  the analyst is on indefinite leave
+  }
 }
