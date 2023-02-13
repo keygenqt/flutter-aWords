@@ -29,7 +29,8 @@ class TokensService {
     try {
       return await (_db.select(_db.tokens)
             ..where(
-                (tbl) => tbl.uniqueKey.equals(key) & tbl.token.equals(hash)))
+              (tbl) => tbl.uniqueKey.equals(key) & tbl.token.equals(hash),
+            ))
           .getSingle();
     } catch (e) {
       return null;
