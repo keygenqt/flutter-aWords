@@ -1,5 +1,5 @@
 import 'package:drift/drift.dart';
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
 import 'package:server_awords/exports/db/database.dart';
 import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/other/extensions.dart';
@@ -29,7 +29,7 @@ class UsersService {
   }
 
   /// Get user by email, password
-  Future<UserModel?> findByEmailPass({
+  Future<UserModel?> findByEmailAndPass({
     required String email,
     required String password,
   }) async {
@@ -47,7 +47,9 @@ class UsersService {
   }
 
   /// Get user by ID
-  Future<UserModel?> findById(int id) async {
+  Future<UserModel?> findById({
+    required int id,
+  }) async {
     try {
       return await (_db.select(_db.users)..where((tbl) => tbl.id.equals(id)))
           .getSingle();
@@ -57,7 +59,9 @@ class UsersService {
   }
 
   /// Delete user by ID
-  Future<void> deleteItem(int id) async {
+  Future<void> deleteItem({
+    required int id,
+  }) async {
     final count =
         await (_db.delete(_db.users)..where((tbl) => tbl.id.equals(id))).go();
     if (count == 0) {

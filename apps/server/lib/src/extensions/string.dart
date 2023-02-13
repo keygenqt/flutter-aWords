@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -23,7 +24,7 @@ extension ExtString on String {
 
   /// Convert string to bites
   Uint8List asUint8List() {
-    return Uint8List.fromList(codeUnits);
+    return Uint8List.fromList(utf8.encode(this));
   }
 
   /// Convert string to [ContentType]

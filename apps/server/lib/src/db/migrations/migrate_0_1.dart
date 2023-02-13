@@ -1,4 +1,5 @@
 import 'package:server_awords/exports/db/database.dart';
+import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 
 // ignore_for_file: camel_case_types
@@ -25,10 +26,10 @@ class Migrate_0_1 {
     // insert values
     await d.customInsert('''
 INSERT INTO "$usersTable" ($usersColumns) VALUES
-  ("Оля", "best1@email.com", "${'12345678'.asMD5()}"),
-  ("Юля", "best2@email.com", "${'12345678'.asMD5()}"),
-  ("Муля", "best3@email.com", "${'12345678'.asMD5()}"),
-  ("Гуля", "best4@email.com", "${'12345678'.asMD5()}");
+  ("Оля", "best1@email.com", "${'12345678'.asMD5()}", ${UserRole.user.index}),
+  ("Юля", "best2@email.com", "${'12345678'.asMD5()}", ${UserRole.user.index}),
+  ("Муля", "best3@email.com", "${'12345678'.asMD5()}", ${UserRole.user.index}),
+  ("Гуля", "best4@email.com", "${'12345678'.asMD5()}", ${UserRole.user.index});
 ''');
   }
 }

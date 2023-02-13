@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
+import 'package:server_awords/exports/apps/api/validates.dart';
 import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
@@ -11,7 +12,7 @@ class UsersRoute implements Route {
   @override
   String path = Routes.users.path;
 
-  UsersService get _service => getIt<UsersService>();
+  UsersService get _serviceUsers => getIt<UsersService>();
 
   @override
   Future<void> run(HttpRequest request) async {
@@ -20,15 +21,18 @@ class UsersRoute implements Route {
       Method(
         path: path,
         func: (request) async {
-          request.writeJson(await _service.getAll());
+          request.writeJson(await _serviceUsers.getAll());
         },
       ),
       // get one item
       Method(
+        role: [UserRole.admin],
         path: '$path/{id}',
         func: (request) async {
           // find model
-          final model = await _service.findById(request.getID());
+          final model = await _serviceUsers.findById(
+            id: request.getInt(),
+          );
           // exception if user not found
           if (model == null) throw AppException.notFound();
           // write data
@@ -37,37 +41,52 @@ class UsersRoute implements Route {
       ),
       // create item
       Method(
+        role: [UserRole.admin],
         method: Methods.post,
         path: path,
         func: (request) async {
+          // get body
+          final body = await request.getBody();
+          // validate
+          validateUser(body);
           // create model
           final model = UserModel.fromJson(await request.getBody());
           // write data
-          request.writeJson((await _service.insert([model])).first);
+          request.writeJson((await _serviceUsers.insert([model])).first);
         },
       ),
       // update item
       Method(
+        role: [UserRole.admin],
         method: Methods.put,
         path: '$path/{id}',
         func: (request) async {
+          // get body
+          final body = await request.getBody();
+          // validate
+          validateUser(body);
           // find model
-          final model = await _service.findById(request.getID());
+          final model = await _serviceUsers.findById(
+            id: request.getInt(),
+          );
           // exception if user not found
           if (model == null) throw AppException.notFound();
           // clone model with update params
           final update = model.clone(await request.getBody());
           // write data
-          request.writeJson((await _service.update([update])).first);
+          request.writeJson((await _serviceUsers.update([update])).first);
         },
       ),
       // update item
       Method(
+        role: [UserRole.admin],
         method: Methods.delete,
         path: '$path/{id}',
         func: (request) async {
           // invoke delete
-          await _service.deleteItem(request.getID());
+          await _serviceUsers.deleteItem(
+            id: request.getInt(),
+          );
           // write data
           request.writeJson(SuccessResponse('User deleted successfully'));
         },

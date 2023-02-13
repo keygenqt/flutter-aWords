@@ -1,3 +1,4 @@
+import 'package:drift/drift.dart';
 import 'package:server_awords/exports/db/database.dart';
 import 'package:server_awords/exports/db/models.dart';
 
@@ -7,7 +8,7 @@ class TokensService {
 
   final MyDatabase _db;
 
-  /// Get user by ID
+  /// Get token by key
   Future<TokenModel?> findByKey({
     required String key,
   }) async {
@@ -20,11 +21,34 @@ class TokensService {
     }
   }
 
-  /// Delete token by ID
-  Future<void> deleteByKey({
+  /// Get token by key
+  Future<TokenModel?> findByKeyAndHash({
+    required String key,
+    required String hash,
+  }) async {
+    try {
+      return await (_db.select(_db.tokens)
+            ..where(
+                (tbl) => tbl.uniqueKey.equals(key) & tbl.token.equals(hash)))
+          .getSingle();
+    } catch (e) {
+      return null;
+    }
+  }
+
+  /// Delete token by uniqueKey
+  Future<int> deleteByKey({
     required String key,
   }) async {
-    await (_db.delete(_db.tokens)..where((tbl) => tbl.uniqueKey.equals(key)))
+    return (_db.delete(_db.tokens)..where((tbl) => tbl.uniqueKey.equals(key)))
+        .go();
+  }
+
+  /// Delete token by token
+  Future<int> deleteByToken({
+    required String token,
+  }) async {
+    return (_db.delete(_db.tokens)..where((tbl) => tbl.token.equals(token)))
         .go();
   }
 

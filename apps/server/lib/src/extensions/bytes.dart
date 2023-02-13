@@ -5,7 +5,7 @@ import 'dart:typed_data';
 extension Uint8ListExt on Uint8List {
   /// Convert [Uint8List] to [String]
   String asString() {
-    return String.fromCharCodes(this);
+    return const Utf8Decoder().convert(this);
   }
 
   /// Convert [Uint8List] to Base64 string

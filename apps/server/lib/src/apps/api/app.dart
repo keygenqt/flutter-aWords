@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
+import 'package:server_awords/exports/apps/api/routing.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
 import 'package:server_awords/src/exports/other/constants.dart';

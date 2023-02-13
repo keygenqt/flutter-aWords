@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/src/exports/other/constants.dart';
 
 /// Interface Route classes
@@ -36,8 +37,10 @@ class Method {
     required this.path,
     required this.func,
     this.method = Methods.get,
-  });
+    List<UserRole>? role,
+  }) : role = role ?? [UserRole.guest];
 
+  final List<UserRole> role;
   final String path;
   final Methods method;
   final Future<void> Function(HttpRequest request) func;

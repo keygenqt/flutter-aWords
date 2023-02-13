@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:drift/drift.dart';
 import 'package:json_annotation/json_annotation.dart' as json_annotation;
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:json_annotation/json_annotation.dart';
 import 'package:server_awords/exports/db/database.dart';
 import 'package:server_awords/exports/other/extensions.dart';
+import 'package:server_awords/exports/other/utils.dart';
 
 part 'users.g.dart';
 
@@ -16,7 +19,12 @@ class Users extends Table {
   TextColumn get email => text()();
 
   TextColumn get password => text()();
+
+  IntColumn get role => intEnum<UserRole>()();
 }
+
+/// Roles for [UserModel]. Allows you to share the availability of features
+enum UserRole { guest, user, admin }
 
 /// Model app table 'users'
 @json_annotation.JsonSerializable()
@@ -26,11 +34,12 @@ class UserModel {
     required this.name,
     required this.email,
     required this.password,
+    required this.role,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
-    // check json
-    validateUser(json);
+    // set default role
+    json['role'] = json['role'] ?? UserRole.user.name;
     // pass to md5
     json['password'] = json['password'].toString().asMD5();
     // create class
@@ -41,11 +50,13 @@ class UserModel {
     required this.name,
     required this.email,
     required this.password,
+    this.role = UserRole.user,
   }) : id = null;
 
   final int? id;
   final String name;
   final String email;
+  final UserRole role;
 
   @json_annotation.JsonKey(includeToJson: false)
   final String password;
@@ -63,6 +74,7 @@ class UserModel {
         name: name,
         email: email,
         password: password,
+        role: role,
       );
     } else {
       return UsersCompanion(
@@ -70,19 +82,23 @@ class UserModel {
         name: Value(name),
         email: Value(email),
         password: Value(password),
+        role: Value(role),
       );
     }
   }
 
-  UserModel clone(Map<String, dynamic> json) {
-    // check json
-    validateUser(json, update: true);
-    // create new class
-    return UserModel(
-      id: id ?? 0,
-      name: json['name']?.toString() ?? name,
-      email: json['email']?.toString() ?? email,
-      password: json['password']?.toString().asMD5() ?? password,
-    );
+  UserModel clone(Map<String, dynamic> json) => UserModel(
+        id: id ?? 0,
+        name: json['name']?.toString() ?? name,
+        email: json['email']?.toString() ?? email,
+        password: json['password']?.toString().asMD5() ?? password,
+        role: json['role'] == null ||
+                int.tryParse(json['role'].toString()) == null
+            ? role
+            : UserRole.values[int.parse(json['role'].toString())],
+      );
+
+  String generateToken() {
+    return Crypto.encrypt(const JsonEncoder().convert(this));
   }
 }

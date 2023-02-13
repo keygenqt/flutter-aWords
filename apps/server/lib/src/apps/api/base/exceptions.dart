@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
 
 /// Handling application errors
 class AppException implements Exception {

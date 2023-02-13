@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
 
 /// Route API REST for [Routes.cards]
 class CardsRoute implements Route {

@@ -1,7 +1,8 @@
 import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
+import 'package:server_awords/exports/apps/api/validates.dart';
 import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
@@ -31,7 +32,7 @@ class LoginRoute implements Route {
           // validate
           validateLogin(body);
           // find user
-          final user = await _serviceUsers.findByEmailPass(
+          final user = await _serviceUsers.findByEmailAndPass(
             email: body['email'].toString(),
             password: body['password'].toString(),
           );
@@ -52,7 +53,7 @@ class LoginRoute implements Route {
           final auth = await _serviceTokens.insert([
             TokenModel.create(
               userId: user.id!,
-              token: const Uuid().v4(),
+              token: user.generateToken(),
               uniqueKey: body['uniqueKey'].toString(),
               createAt: DateTime.now(),
             ),

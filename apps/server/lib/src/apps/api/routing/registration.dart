@@ -1,11 +1,11 @@
 import 'dart:io';
 
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
+import 'package:server_awords/exports/apps/api/validates.dart';
 import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
-import 'package:uuid/uuid.dart';
 
 /// Route API REST for [Routes.registration]
 class RegistrationRoute implements Route {
@@ -51,7 +51,7 @@ class RegistrationRoute implements Route {
           final auth = await _serviceTokens.insert([
             TokenModel.create(
               userId: model.id!,
-              token: const Uuid().v4(),
+              token: model.generateToken(),
               uniqueKey: body['uniqueKey'].toString(),
               createAt: DateTime.now(),
             ),

@@ -21,3 +21,4 @@ coverage/
 
 # Other
 /db.sqlite
+/configuration.yaml

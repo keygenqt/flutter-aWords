@@ -2,7 +2,9 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:mason_logger/mason_logger.dart';
-import 'package:server_awords/exports/apps/api.dart';
+import 'package:server_awords/exports/apps/api/app.dart';
+import 'package:server_awords/exports/db/models.dart';
+import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/utils.dart';
 import 'package:server_awords/src/base/app_di.dart';
 
@@ -10,6 +12,11 @@ import 'package:server_awords/src/base/app_di.dart';
 extension HttpRequestExt on HttpRequest {
   // logger for output
   Logger get _logger => getIt<Logger>();
+
+  // services
+  TokensService get _serviceTokens => getIt<TokensService>();
+
+  UsersService get _serviceUsers => getIt<UsersService>();
 
   /// Write json with pretty output
   void writeJson(Object? object) => writeJsonWithCode(HttpStatus.ok, object);
@@ -28,17 +35,31 @@ extension HttpRequestExt on HttpRequest {
   Future<Map<String, dynamic>> getBody() async =>
       Uri.splitQueryString(await utf8.decodeStream(this));
 
-  /// Get request id
-  int getID() => int.tryParse(uri.pathSegments.last) == null
+  /// Get request int value
+  int getInt() => int.tryParse(uri.pathSegments.last) == null
       ? 0
       : int.parse(uri.pathSegments.last);
 
-  /// Parse routes
+  /// Get request string value
+  String getString() =>
+      RegExp(r'^[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+$')
+              .hasMatch(uri.pathSegments.last)
+          ? uri.pathSegments.last
+          : throw AppException.notFound();
+
+  /// Finding an Appropriate Method with Authorization Check
   Future<bool> route(Method method) async {
     // get mod path request
     final uriPath = uri.path
         .split('/')
-        .map((e) => e.replaceFirst(RegExp(r'\d+'), '___'))
+        .map(
+          (e) => e.replaceFirst(
+            // 2b03f6be-c963-4493-8203-7928e195cc12 || 12
+            RegExp(
+                r'()([a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+)|(\d+)'),
+            '___',
+          ),
+        )
         .join('/');
 
     // get mod path api
@@ -48,10 +69,57 @@ extension HttpRequestExt on HttpRequest {
         .join('/');
 
     if (this.method == method.method.name.toUpperCase() && uriPath == apiPath) {
+      // check access
+      if (!method.role.contains(UserRole.guest)) {
+        await _checkMethodAuth(method);
+      }
+      // run method
       await method.func(this);
       return true;
     } else {
       return false;
+    }
+  }
+
+  /// Auth check
+  Future<void> _checkMethodAuth(Method method) async {
+    UserModel? model;
+    // get auth
+    final basic = headers.value('authorization')?.toString();
+    // get key device
+    final uniqueKey = headers.value('uniquekey')?.toString();
+    // check value
+    if (uniqueKey == null ||
+        basic == null ||
+        basic.substring(0, 5) != 'Basic') {
+      throw AppException.unauthorized();
+    }
+    // get hash
+    final hash = basic.substring(6, basic.length);
+    // check db
+    final token = await _serviceTokens.findByKeyAndHash(
+      key: uniqueKey,
+      hash: hash,
+    );
+    // if not found, there may be an expired check here
+    if (token == null) {
+      throw AppException.unauthorized();
+    }
+    try {
+      // decrypt
+      final json = jsonDecode(Crypto.decrypt(hash));
+      // get model from json
+      final obj = UserModel.fromJson(json as Map<String, dynamic>);
+      // get model user from db
+      model = await _serviceUsers.findById(
+        id: obj.id!,
+      );
+    } catch (e) {
+      throw AppException.unauthorized();
+    }
+    // check role
+    if (!method.role.contains(model?.role)) {
+      throw AppException.forbidden();
     }
   }
 }

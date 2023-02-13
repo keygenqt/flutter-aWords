@@ -24,7 +24,6 @@ class RootCommand extends CommandRunner<int> {
     // Add sub commands
     addCommand(APICommand());
     addCommand(CLICommand());
-    addCommand(SRVCommand());
   }
 
   @override
