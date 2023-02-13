@@ -50,7 +50,7 @@ class UsersRoute implements Route {
           // validate
           validateUser(body);
           // create model
-          final model = UserModel.fromJson(await request.getBody());
+          final model = UserModel.fromJson(body);
           // write data
           request.writeJson((await _serviceUsers.insert([model])).first);
         },
@@ -72,7 +72,7 @@ class UsersRoute implements Route {
           // exception if user not found
           if (model == null) throw AppException.notFound();
           // clone model with update params
-          final update = model.clone(await request.getBody());
+          final update = model.clone(await body);
           // write data
           request.writeJson((await _serviceUsers.update([update])).first);
         },
@@ -84,11 +84,15 @@ class UsersRoute implements Route {
         path: '$path/{id}',
         func: (request) async {
           // invoke delete
-          await _serviceUsers.deleteItem(
+          final count = await _serviceUsers.deleteItem(
             id: request.getInt(),
           );
           // write data
-          request.writeJson(SuccessResponse('User deleted successfully'));
+          if (count == 0) {
+            throw AppException.notFound();
+          } else {
+            request.writeJson(SuccessResponse('User deleted successfully'));
+          }
         },
       ),
     ]) {

@@ -7,6 +7,8 @@ Get a list of users
 /api/users
 ```
 
+!!! info "Roles Guest|User|Admin"
+
 Response example
 
 ```json title="Response <span class='color-200'>200</span>"

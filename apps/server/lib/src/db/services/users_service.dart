@@ -1,5 +1,4 @@
 import 'package:drift/drift.dart';
-import 'package:server_awords/exports/apps/api/app.dart';
 import 'package:server_awords/exports/db/database.dart';
 import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/other/extensions.dart';
@@ -59,14 +58,10 @@ class UsersService {
   }
 
   /// Delete user by ID
-  Future<void> deleteItem({
+  Future<int> deleteItem({
     required int id,
   }) async {
-    final count =
-        await (_db.delete(_db.users)..where((tbl) => tbl.id.equals(id))).go();
-    if (count == 0) {
-      throw AppException.notFound();
-    }
+    return (_db.delete(_db.users)..where((tbl) => tbl.id.equals(id))).go();
   }
 
   /// Insert list users

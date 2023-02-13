@@ -1,7 +1,7 @@
 Login
 ===================
 
-!!! quote "Role Guest"
+!!! info "Role Guest"
 
 User authorization method
 

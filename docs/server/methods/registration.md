@@ -1,6 +1,8 @@
 Registration
 ===================
 
+!!! info "Role Guest"
+
 User registration method
 
 ```shell title="Method <span class='color-method'>POST</span>"

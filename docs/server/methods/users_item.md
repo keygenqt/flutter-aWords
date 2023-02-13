@@ -1,6 +1,8 @@
 User Item
 ===================
 
+!!! info "Role Admin"
+
 Get user details
 
 ```shell title="Method <span class='color-method'>GET</span>"

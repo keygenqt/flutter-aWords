@@ -1,6 +1,8 @@
 Logout
 ===================
 
+!!! info "Roles User|Admin"
+
 Removing an authorization token from the server
 
 ```shell title="Method <span class='color-method'>DELETE</span>"
