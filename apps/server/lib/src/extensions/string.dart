@@ -5,7 +5,7 @@ import 'dart:typed_data';
 import 'package:pointycastle/digests/md5.dart';
 import 'package:server_awords/src/extensions/bytes.dart';
 
-/// Extensions font [String]
+/// Extensions for [String]
 extension ExtString on String {
   /// Capitalize string
   String capitalize() {
