@@ -5,8 +5,8 @@ import 'package:website/widget/blocks/header.dart';
 import 'package:website/widget/containers/page.dart';
 import 'package:website/widget/containers/page_item.dart';
 
-class AppLayout extends StatefulWidget {
-  const AppLayout({
+class EmptyLayout extends StatefulWidget {
+  const EmptyLayout({
     super.key,
     required this.page,
   });
@@ -14,22 +14,16 @@ class AppLayout extends StatefulWidget {
   final Widget page;
 
   @override
-  State<AppLayout> createState() => _AppLayoutState();
+  State<EmptyLayout> createState() => _AppLayoutState();
 }
 
-class _AppLayoutState extends State<AppLayout> {
+class _AppLayoutState extends State<EmptyLayout> {
   @override
   Widget build(BuildContext context) {
     return PageWidget(
-      color: AppColors.backgroundAppLayoutColor,
+      color: AppColors.backgroundEmptyLayoutColor,
       spacing: 20,
       body: widget.page,
-      header: const PageItemWidget(
-        child: HeaderWidget(),
-      ),
-      footer: const PageItemWidget(
-        child: FooterWidget(),
-      ),
     );
   }
 }

@@ -7,8 +7,12 @@ extension ExtGlobalKey on GlobalKey {
     if (currentContext == null) {
       return null;
     }
-    final renderBoxRed = currentContext!.findRenderObject() as RenderBox;
-    final sizeRed = renderBoxRed.size;
-    return sizeRed.height;
+    try {
+      final renderBoxRed = currentContext!.findRenderObject() as RenderBox;
+      final sizeRed = renderBoxRed.size;
+      return sizeRed.height;
+    } catch (e) {
+      return 0;
+    }
   }
 }

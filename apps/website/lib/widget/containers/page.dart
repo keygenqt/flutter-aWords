@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:website/extensions/keys_ext.dart';
 
-import '../../utils/colors.dart';
-
 class PageWidget extends StatefulWidget {
   const PageWidget({
     super.key,
-    required this.header,
+    this.header,
     required this.body,
-    required this.footer,
+    this.footer,
+    this.color = Colors.white,
     this.spacing = 0,
   });
 
-  final Widget header;
+  final Color color;
+  final Widget? header;
   final Widget body;
-  final Widget footer;
+  final Widget? footer;
   final double spacing;
 
   @override
@@ -51,36 +51,52 @@ class _PageWidgetState extends State<PageWidget> {
 
   double _getBodyHeight() {
     final height = MediaQuery.of(context).size.height -
-        (widget.spacing * 2) -
-        (_header.getHeight() ?? _hH) -
-        (_footer.getHeight() ?? _fH);
+        (widget.spacing *
+            ((widget.header == null ? 0 : 1) +
+                (widget.footer == null ? 0 : 1))) -
+        (widget.header == null ? 0 : _header.getHeight() ?? _hH) -
+        (widget.footer == null ? 0 : _footer.getHeight() ?? _fH);
     return height >= 0.0 ? height : 0;
   }
 
   @override
   Widget build(BuildContext context) {
+    final list = <Widget>[];
+
+    if (widget.header != null) {
+      list.addAll([
+        Container(
+          key: _header,
+          child: widget.header,
+        ),
+        SizedBox(height: widget.spacing),
+      ]);
+    }
+
+    list.add(
+      Container(
+        constraints: BoxConstraints(minHeight: _getBodyHeight()),
+        width: double.infinity,
+        child: widget.body,
+      ),
+    );
+
+    if (widget.footer != null) {
+      list.addAll([
+        SizedBox(height: widget.spacing),
+        Container(
+          key: _footer,
+          child: widget.footer,
+        )
+      ]);
+    }
+
     return Scaffold(
-      backgroundColor: AppColors.backgroundColor,
+      backgroundColor: widget.color,
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              key: _header,
-              child: widget.header,
-            ),
-            SizedBox(height: widget.spacing),
-            Container(
-              constraints: BoxConstraints(minHeight: _getBodyHeight()),
-              width: double.infinity,
-              child: widget.body,
-            ),
-            SizedBox(height: widget.spacing),
-            Container(
-              key: _footer,
-              child: widget.footer,
-            )
-          ],
+          children: list,
         ),
       ),
     );
