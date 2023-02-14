@@ -13,6 +13,7 @@ dependencies:
   google_fonts: ^4.0.3
   cupertino_icons: ^1.0.2
   url_strategy: ^0.2.0
+  regex_router: ^2.0.2
 
 dev_dependencies:
   flutter_test:

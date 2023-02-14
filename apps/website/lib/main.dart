@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:regex_router/regex_router.dart';
 import 'package:url_strategy/url_strategy.dart';
 import 'package:website/pages/errors/error404.dart';
 import 'package:website/pages/home/home.dart';
@@ -18,47 +19,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  final router = RegexRouter.create({
+    "/": (context, _) => const AppLayout(page: HomePage()),
+    "^.*\$": (context, _) => const AppLayout(page: Error404Page()),
+  });
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'aWords',
       theme: ThemeData(),
-      initialRoute: '/',
-      routes: {
-        '/': (context) => const AppLayout(page: HomePage()),
-      },
-      onUnknownRoute: (settings) {
-        return MaterialPageRoute(
-            builder: (_) => const AppLayout(page: Error404Page()));
-      },
+      initialRoute: "/",
+      onGenerateRoute: router.generateRoute,
     );
   }
 }
-
-// class _MyAppState extends State<MyApp> {
-//
-//   String? _selectedItem;
-//   String? _selectedRoute;
-//   bool show404 = false;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return MaterialApp(
-//         title: 'aWords',
-//         theme: ThemeData(),
-//         home: Navigator(
-//           pages: const [
-//             MaterialPage(
-//               key: ValueKey('ItemListScreen'),
-//               child: AppLayout(page: HomePage()),
-//             ),
-//             MaterialPage(
-//               key: ValueKey('Error404Page'),
-//               child: AppLayout(page: Error404Page()),
-//             ),
-//           ],
-//           onPopPage: (route, result) => route.didPop(result),
-//         ),
-//     );
-//   }
-// }
