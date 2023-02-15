@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-
-import '../../widget/containers/page_item.dart';
+import 'package:lottie/lottie.dart';
+import 'package:website/widgets/containers/page_item.dart';
 
 class Error404Page extends StatefulWidget {
   const Error404Page({
@@ -17,21 +16,10 @@ class _Error404PageState extends State<Error404Page> {
   Widget build(BuildContext context) {
     return PageItemWidget(
       child: Center(
-        child: Column(
-          children: [
-            Text(
-              '404',
-              style: GoogleFonts.ubuntu(
-                fontSize: 30,
-              ),
-            ),
-            Text(
-              'Page not found',
-              style: GoogleFonts.ubuntu(
-                fontSize: 30,
-              ),
-            ),
-          ],
+        child: Lottie.asset(
+          'lottie/404_not_found.json',
+          height: 330,
+          fit: BoxFit.fill,
         ),
       ),
     );

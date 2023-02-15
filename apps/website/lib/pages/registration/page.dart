@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../widget/blocks/box_shadow.dart';
-import '../../widget/containers/page_item.dart';
+import 'package:website/widgets/blocks/box_shadow.dart';
+import 'package:website/widgets/containers/page_item.dart';
 
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({
