@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:website/theme/colors.dart';
+import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
-
-import '../../theme/radius.dart';
 
 class FooterWidget extends StatefulWidget {
   const FooterWidget({
