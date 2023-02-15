@@ -55,7 +55,6 @@ class _FooterWidgetState extends State<FooterWidget> {
                                   Icons.telegram,
                                   color: Colors.white,
                                 ),
-                                tooltip: 'Telegram',
                                 onPressed: () {},
                               ),
                             ),
@@ -69,7 +68,6 @@ class _FooterWidgetState extends State<FooterWidget> {
                                   Icons.email,
                                   color: Colors.white,
                                 ),
-                                tooltip: 'Email',
                                 onPressed: () {},
                               ),
                             ),
@@ -103,171 +101,30 @@ class _FooterWidgetState extends State<FooterWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              AppLocalizations.of(context)!
-                                  .footer_title_features,
+                              AppLocalizations.of(context)!.footer_title_features,
                               style: Theme.of(context).textTheme.titleSmall,
                             ),
                             const SizedBox(height: 20),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 7),
-                                  child: Icon(
-                                    Icons.translate,
-                                    color: Colors.blueGrey,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Flexible(
-                                    child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Material(
-                                      color: Colors.white,
-                                      child: InkWell(
-                                        borderRadius: AppRadius.small,
-                                        onTap: () => {},
-                                        child: ClipRRect(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 7, horizontal: 10),
-                                            child: Text(
-                                              AppLocalizations.of(context)!
-                                                  .footer_title_create_card,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge!
-                                                  .copyWith(
-                                                      color: AppColors.primary),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .footer_create_card,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                              ],
+                            featureItem(
+                              icon: Icons.translate,
+                              title: AppLocalizations.of(context)!.footer_title_create_card,
+                              text: AppLocalizations.of(context)!.footer_create_card,
+                              onTap: () => Navigator.of(context).pushNamed('/add/card')
                             ),
                             const SizedBox(height: 10),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 7),
-                                  child: Icon(
-                                    Icons.bar_chart,
-                                    color: Colors.blueGrey,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Flexible(
-                                    child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Material(
-                                      color: Colors.white,
-                                      child: InkWell(
-                                        borderRadius: AppRadius.small,
-                                        onTap: () => {},
-                                        child: ClipRRect(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                vertical: 7, horizontal: 10),
-                                            child: Text(
-                                              AppLocalizations.of(context)!
-                                                  .footer_title_stats_card,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge!
-                                                  .copyWith(
-                                                      color: AppColors.primary),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .footer_stats_card,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                              ],
+                            featureItem(
+                              icon: Icons.bar_chart,
+                              title: AppLocalizations.of(context)!.footer_title_stats_card,
+                              text: AppLocalizations.of(context)!.footer_stats_card,
+                              onTap: () => Navigator.of(context).pushNamed('/stats')
                             ),
                             const SizedBox(height: 10),
-                            Row(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.only(top: 7),
-                                  child: Icon(
-                                    Icons.group,
-                                    color: Colors.blueGrey,
-                                  ),
-                                ),
-                                const SizedBox(width: 15),
-                                Flexible(
-                                    child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Material(
-                                      color: Colors.white,
-                                      child: InkWell(
-                                        borderRadius: AppRadius.small,
-                                        onTap: () => {},
-                                        child: ClipRRect(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                              vertical: 7,
-                                              horizontal: 10,
-                                            ),
-                                            child: Text(
-                                              AppLocalizations.of(context)!
-                                                  .footer_title_friends,
-                                              style: Theme.of(context)
-                                                  .textTheme
-                                                  .bodyLarge!
-                                                  .copyWith(
-                                                      color: AppColors.primary),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    const SizedBox(height: 5),
-                                    Padding(
-                                      padding: const EdgeInsets.only(left: 10),
-                                      child: Text(
-                                        AppLocalizations.of(context)!
-                                            .footer_friends,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodySmall,
-                                      ),
-                                    ),
-                                  ],
-                                )),
-                              ],
-                            ),
+                            featureItem(
+                              icon: Icons.group,
+                              title: AppLocalizations.of(context)!.footer_title_friends,
+                              text: AppLocalizations.of(context)!.footer_friends,
+                              onTap: () => Navigator.of(context).pushNamed('/friends')
+                            )
                           ],
                         ),
                       ),
@@ -284,8 +141,7 @@ class _FooterWidgetState extends State<FooterWidget> {
               children: [
                 Flexible(
                   child: Text(
-                    AppLocalizations.of(context)!
-                        .copyright(DateTime.now().year),
+                    AppLocalizations.of(context)!.copyright(DateTime.now().year),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),
@@ -293,6 +149,60 @@ class _FooterWidgetState extends State<FooterWidget> {
             ),
           ),
         )
+      ],
+    );
+  }
+
+  Widget featureItem({
+    required IconData icon,
+    required String title,
+    required String text,
+    required GestureTapCallback onTap
+  }) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(top: 7),
+          child: Icon(
+            icon,
+            color: Colors.blueGrey,
+          ),
+        ),
+        const SizedBox(width: 15),
+        Flexible(
+            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Material(
+              color: Colors.white,
+              child: InkWell(
+                borderRadius: AppRadius.small,
+                onTap: onTap,
+                child: ClipRRect(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 7,
+                      horizontal: 10,
+                    ),
+                    child: Text(
+                      title,
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColors.primary),
+                    ),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 5),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: Text(
+                text,
+                style: Theme.of(context).textTheme.bodySmall,
+              ),
+            ),
+          ],
+        )),
       ],
     );
   }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:website/theme/colors.dart';
 import 'package:website/widgets/buttons/button_image.dart';
 
 class HeaderWidget extends StatefulWidget {
@@ -44,23 +43,8 @@ class _HeaderWidgetState extends State<HeaderWidget> {
               color: widget.color,
               child: IconButton(
                 icon: const Icon(Icons.login),
-                tooltip: 'Login user',
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/login');
-                },
-              ),
-            ),
-          ),
-          const SizedBox(width: 5),
-          ClipOval(
-            child: Material(
-              color: widget.color,
-              child: IconButton(
-                icon: const Icon(Icons.error_outline),
-                tooltip: 'To 404',
-                onPressed: () {
-                  Navigator.of(context).pushNamed('/dsaasdfsdf');
-                },
+                tooltip: 'Sign In',
+                onPressed: () => Navigator.of(context).pushNamed('/login'),
               ),
             ),
           ),

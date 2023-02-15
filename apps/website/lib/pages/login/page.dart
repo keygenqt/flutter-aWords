@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:website/widgets/blocks/box_shadow.dart';
 import 'package:website/widgets/containers/page_item.dart';
+
+import '../../theme/radius.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({
@@ -17,12 +18,17 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return PageItemWidget(
       maxWidth: 500,
-      child: BoxShadowWidget(
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: AppRadius.large,
+        ),
+        padding: const EdgeInsets.all(30),
         child: Center(
           child: Column(
             children: [
               Text(
-                'Login',
+                'Authorization will be here',
                 style: GoogleFonts.ubuntu(
                   fontSize: 30,
                 ),

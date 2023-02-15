@@ -29,12 +29,14 @@ class MyApp extends StatelessWidget {
               locale: locale,
             ));
           case '/login':
-            return _routeWithAnimation(settings, const EmptyLayout(
+            return _routeWithAnimation(settings, const AppLayout(
+              type: AppLayoutType.gray,
               page: LoginPage(),
               locale: locale,
             ));
           case '/registration':
-            return _routeWithAnimation(settings, const EmptyLayout(
+            return _routeWithAnimation(settings, const AppLayout(
+              type: AppLayoutType.gray,
               page: RegistrationPage(),
               locale: locale,
             ));

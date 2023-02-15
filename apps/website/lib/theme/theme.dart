@@ -4,6 +4,19 @@ import 'package:website/theme/colors.dart';
 
 final appTheme = ThemeData(
   textTheme: TextTheme(
+    headlineLarge: GoogleFonts.ubuntu(
+      fontSize: 60,
+      color: AppColors.fontPrimary,
+    ),
+    headlineMedium: GoogleFonts.ubuntu(
+      fontSize: 46,
+      color: AppColors.fontPrimary,
+    ),
+    headlineSmall: GoogleFonts.ubuntu(
+      fontSize: 36,
+      color: AppColors.fontPrimary,
+      fontWeight: FontWeight.bold,
+    ),
     titleLarge: GoogleFonts.ubuntu(
       fontSize: 36,
       color: AppColors.fontPrimary,

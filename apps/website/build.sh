@@ -12,3 +12,5 @@ flutter pub get
 flutter gen-l10n
 # flutter run build_runner build
 flutter build web
+## fix flutter assets folder
+mv build/web/assets/assets/* build/web/assets
