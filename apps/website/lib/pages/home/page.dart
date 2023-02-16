@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:website/pages/home/widgets/steps.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:website/pages/home/model.dart';
 import 'package:website/pages/home/widgets/help.dart';
 import 'package:website/pages/home/widgets/main.dart';
 import 'package:website/pages/home/widgets/registration.dart';
+import 'package:website/pages/home/widgets/steps.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({
@@ -16,15 +18,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Wrap(
-      spacing: 20,
-      runSpacing: 20,
-      children: const [
-        HomeMainWidget(),
-        HomeStepsWidget(),
-        HomeRegistrationWidget(),
-        HomeHelpWidget(),
-      ],
+    return ScopedModel<HomeModel>(
+      model: HomeModel(),
+      child: ScopedModelDescendant<HomeModel>(builder: (context, child, model) {
+        return Wrap(
+          spacing: 20,
+          runSpacing: 20,
+          children: const [
+            HomeMainWidget(),
+            HomeStepsWidget(),
+            // @todo
+            // HomeRegistrationWidget(),
+            // HomeHelpWidget(),
+          ],
+        );
+      }),
     );
   }
 }

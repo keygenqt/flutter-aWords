@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
@@ -15,7 +16,6 @@ class HomeMainWidget extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20, bottom: 30, left: 30, right: 30),
         child: PageItemWidget(
           child: Row(
-            // crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Visibility(
                 visible: MediaQuery.of(context).size.width > 800,
@@ -44,12 +44,12 @@ class HomeMainWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'WELCOME TO AWORDS',
+                          AppLocalizations.of(context)!.home_main_welcome.toUpperCase(),
                           style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: AppColors.secondary),
                         ),
                         const SizedBox(height: 20),
                         Text(
-                          'We will help you learn foreign words once and for all',
+                          AppLocalizations.of(context)!.home_main_title,
                           style: Theme.of(context).textTheme.headlineLarge!.copyWith(
                                 color: AppColors.primary,
                                 fontSize: MediaQuery.of(context).size.width < 1180 ? 40 : 60,
@@ -57,7 +57,7 @@ class HomeMainWidget extends StatelessWidget {
                         ),
                         const SizedBox(height: 30),
                         Text(
-                          'Let\'s learn words together. It\'s easy! You simply create a flashcard with words and iterate in one of several available modes.',
+                          AppLocalizations.of(context)!.home_main_text,
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 30),
@@ -74,7 +74,7 @@ class HomeMainWidget extends StatelessWidget {
                                   horizontal: 14,
                                 ),
                                 child: Text(
-                                  'Registration',
+                                  AppLocalizations.of(context)!.home_main_btn,
                                   style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white),
                                 ),
                               ),

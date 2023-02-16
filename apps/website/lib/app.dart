@@ -1,53 +1,59 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:website/layouts/app_layout.dart';
-import 'package:website/layouts/empty_layout.dart';
+import 'package:website/model.dart';
 import 'package:website/pages/errors/page.dart';
 import 'package:website/pages/home/page.dart';
 import 'package:website/pages/login/page.dart';
 import 'package:website/pages/registration/page.dart';
 import 'package:website/theme/theme.dart';
 
-const locale = Locale('en');
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
-      title: 'aWords',
-      theme: appTheme,
-      initialRoute: "/",
-      onGenerateRoute: (settings) {
-        switch (settings.name) {
-          case '/':
-            return _routeWithAnimation(settings, const AppLayout(
-              page: HomePage(),
-              locale: locale,
-            ));
-          case '/login':
-            return _routeWithAnimation(settings, const AppLayout(
-              type: AppLayoutType.gray,
-              page: LoginPage(),
-              locale: locale,
-            ));
-          case '/registration':
-            return _routeWithAnimation(settings, const AppLayout(
-              type: AppLayoutType.gray,
-              page: RegistrationPage(),
-              locale: locale,
-            ));
-          default:
-            return _routeWithAnimation(settings, const AppLayout(
-              type: AppLayoutType.gray,
-              page: Error404Page(),
-              locale: locale,
-            ));
-        }
-      },
+    return ScopedModel<AppModel>(
+      model: AppModel(),
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        title: 'aWords',
+        theme: appTheme,
+        initialRoute: "/",
+        onGenerateRoute: (settings) {
+          switch (settings.name) {
+            case '/':
+              return _routeWithAnimation(
+                  settings,
+                  const AppLayout(
+                    page: HomePage(),
+                  ));
+            case '/login':
+              return _routeWithAnimation(
+                  settings,
+                  const AppLayout(
+                    type: AppLayoutType.gray,
+                    page: LoginPage(),
+                  ));
+            case '/registration':
+              return _routeWithAnimation(
+                  settings,
+                  const AppLayout(
+                    type: AppLayoutType.gray,
+                    page: RegistrationPage(),
+                  ));
+            default:
+              return _routeWithAnimation(
+                  settings,
+                  const AppLayout(
+                    type: AppLayoutType.gray,
+                    page: Error404Page(),
+                  ));
+          }
+        },
+      ),
     );
   }
 

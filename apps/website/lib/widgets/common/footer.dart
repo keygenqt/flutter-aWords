@@ -41,7 +41,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                       ),
                       const SizedBox(height: 24),
                       Text(
-                        AppLocalizations.of(context)!.footer_desc,
+                        AppLocalizations.of(context)!.common_footer_desc,
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
                       const SizedBox(height: 24),
@@ -101,28 +101,28 @@ class _FooterWidgetState extends State<FooterWidget> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              AppLocalizations.of(context)!.footer_title_features,
+                              AppLocalizations.of(context)!.common_footer_title_features,
                               style: Theme.of(context).textTheme.titleSmall,
                             ),
                             const SizedBox(height: 20),
                             featureItem(
-                              icon: Icons.translate,
-                              title: AppLocalizations.of(context)!.footer_title_create_card,
-                              text: AppLocalizations.of(context)!.footer_create_card,
+                              icon: Icons.style,
+                              title: AppLocalizations.of(context)!.common_footer_title_create_card,
+                              text: AppLocalizations.of(context)!.common_footer_create_card,
                               onTap: () => Navigator.of(context).pushNamed('/add/card')
                             ),
                             const SizedBox(height: 10),
                             featureItem(
                               icon: Icons.bar_chart,
-                              title: AppLocalizations.of(context)!.footer_title_stats_card,
-                              text: AppLocalizations.of(context)!.footer_stats_card,
+                              title: AppLocalizations.of(context)!.common_footer_title_stats_card,
+                              text: AppLocalizations.of(context)!.common_footer_stats_card,
                               onTap: () => Navigator.of(context).pushNamed('/stats')
                             ),
                             const SizedBox(height: 10),
                             featureItem(
-                              icon: Icons.group,
-                              title: AppLocalizations.of(context)!.footer_title_friends,
-                              text: AppLocalizations.of(context)!.footer_friends,
+                              icon: Icons.face_retouching_natural,
+                              title: AppLocalizations.of(context)!.common_footer_title_friends,
+                              text: AppLocalizations.of(context)!.common_footer_friends,
                               onTap: () => Navigator.of(context).pushNamed('/friends')
                             )
                           ],
@@ -141,7 +141,7 @@ class _FooterWidgetState extends State<FooterWidget> {
               children: [
                 Flexible(
                   child: Text(
-                    AppLocalizations.of(context)!.copyright(DateTime.now().year),
+                    AppLocalizations.of(context)!.common_copyright(DateTime.now().year),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                 ),

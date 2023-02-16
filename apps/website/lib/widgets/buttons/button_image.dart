@@ -22,7 +22,7 @@ class ButtonImageWidget extends StatelessWidget {
         onTap: onTap,
         child: ClipRRect(
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
+            padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 9),
             child: image,
           ),
         ),
