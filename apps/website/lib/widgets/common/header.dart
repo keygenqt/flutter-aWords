@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:website/model.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/utils/locale.dart';
-
-import '../../theme/radius.dart';
+import 'package:website/theme/radius.dart';
 
 class HeaderWidget extends StatefulWidget {
   const HeaderWidget({

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:website/pages/home/model.dart';
+import 'package:website/pages/home/widgets/applications.dart';
 import 'package:website/pages/home/widgets/help.dart';
 import 'package:website/pages/home/widgets/main.dart';
-import 'package:website/pages/home/widgets/registration.dart';
 import 'package:website/pages/home/widgets/steps.dart';
 
 class HomePage extends StatefulWidget {
@@ -27,9 +27,8 @@ class _HomePageState extends State<HomePage> {
           children: const [
             HomeMainWidget(),
             HomeStepsWidget(),
-            // @todo
-            // HomeRegistrationWidget(),
-            // HomeHelpWidget(),
+            HomeApplicationsWidget(),
+            HomeHelpWidget(),
           ],
         );
       }),
