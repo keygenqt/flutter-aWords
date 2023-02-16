@@ -18,7 +18,7 @@ final appTheme = ThemeData(
       fontWeight: FontWeight.bold,
     ),
     titleLarge: GoogleFonts.ubuntu(
-      fontSize: 36,
+      fontSize: 30,
       color: AppColors.fontPrimary,
     ),
     titleMedium: GoogleFonts.ubuntu(

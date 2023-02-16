@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:website/pages/home/widgets/approach.dart';
+import 'package:website/pages/home/widgets/steps.dart';
 import 'package:website/pages/home/widgets/help.dart';
 import 'package:website/pages/home/widgets/main.dart';
 import 'package:website/pages/home/widgets/registration.dart';
@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> {
       runSpacing: 20,
       children: const [
         HomeMainWidget(),
-        HomeApproachWidget(),
+        HomeStepsWidget(),
         HomeRegistrationWidget(),
         HomeHelpWidget(),
       ],

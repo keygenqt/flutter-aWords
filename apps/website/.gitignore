@@ -44,3 +44,13 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+
+# Localization
+# HOCON
+# https://github.com/lightbend/config/blob/main/HOCON.md
+# Plugin IDEA
+# https://plugins.jetbrains.com/plugin/10481-hocon
+# Use
+# npm install -g @pushcorn/hocon-parser
+# parse-hocon package.conf > package.json
+*.arb
