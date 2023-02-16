@@ -1,9 +1,10 @@
+import 'dart:js' as js;
+
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
-import 'dart:js' as js;
 
 class HomeApplicationsWidget extends StatelessWidget {
   const HomeApplicationsWidget({super.key});
@@ -69,7 +70,7 @@ class HomeApplicationsWidget extends StatelessWidget {
                               color: Colors.white,
                               child: InkWell(
                                 borderRadius:
-                                MediaQuery.of(context).size.width < 400 ? AppRadius.extraLarge : AppRadius.small,
+                                    MediaQuery.of(context).size.width < 400 ? AppRadius.extraLarge : AppRadius.small,
                                 onTap: () {
                                   js.context.callMethod('open', ['https://www.android.com/']);
                                 },
