@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
+import 'package:website/theme/colors.dart';
+import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
-
-import '../../theme/colors.dart';
-import '../../theme/radius.dart';
 
 class Error404Page extends StatefulWidget {
   const Error404Page({
@@ -28,7 +28,8 @@ class _Error404PageState extends State<Error404Page> {
             ),
             const SizedBox(height: 20),
             Text(
-              'Looks like we can\'t find the page you\'re looking for.',
+              AppLocalizations.of(context)!.common_404_error,
+              textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
             const SizedBox(height: 30),
@@ -50,7 +51,7 @@ class _Error404PageState extends State<Error404Page> {
                       horizontal: 10,
                     ),
                     child: Text(
-                      'To Home',
+                      AppLocalizations.of(context)!.common_404_error_btn,
                       style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white),
                     ),
                   ),
