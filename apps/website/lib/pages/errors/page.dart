@@ -23,10 +23,9 @@ class _Error404PageState extends State<Error404Page> {
           children: [
             Lottie.asset(
               'lottie/404_not_found.json',
-              height: 330,
-              fit: BoxFit.fill,
+              width: 260,
+              fit: BoxFit.contain,
             ),
-            const SizedBox(height: 20),
             Text(
               AppLocalizations.of(context)!.common_404_error,
               textAlign: TextAlign.center,
