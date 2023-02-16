@@ -14,7 +14,7 @@ flutter pub get
 flutter gen-l10n
 
 ## build web
-flutter build web
+flutter build web --web-renderer canvaskit
 
 ## fix flutter assets folder
 mv build/web/assets/assets/* build/web/assets
