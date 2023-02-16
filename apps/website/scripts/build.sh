@@ -1,12 +1,5 @@
 #!/bin/sh
 
-## open root dir
-cd ../../
-## update git
-git pull
-## cd back
-cd apps/website || exit
-
 ## flutter
 flutter clean
 flutter pub get
