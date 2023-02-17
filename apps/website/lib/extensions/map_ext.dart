@@ -15,6 +15,14 @@ extension ExtParse on Map<String, dynamic>? {
     if (<T>[] is List<String>) {
       return this![key].toString() as T;
     }
+    // DateTime
+    if (<T>[] is List<DateTime>) {
+      if (this![key] is DateTime) {
+        return this![key] as T;
+      } else if (this![key] is String) {
+        return DateTime.parse(this![key].toString()) as T;
+      }
+    }
     // [UserRole]
     if (<T>[] is List<UserRole>) {
       if (this![key] is UserRole) {

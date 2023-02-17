@@ -2,8 +2,8 @@ import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
+import 'package:website/http/services/users_service.dart';
 import 'package:website/models/user.dart';
-import 'package:website/services/users_service.dart';
 
 /// Demo ViewModel
 class HomeModel extends Model {
