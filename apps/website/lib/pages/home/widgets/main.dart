@@ -68,11 +68,7 @@ class HomeMainWidget extends StatelessWidget {
                           borderRadius: AppRadius.small,
                           child: InkWell(
                             borderRadius: AppRadius.small,
-                            // @todo
-                            // onTap: () => Navigator.of(context).pushNamed('/registration'),
-                            onTap: () {
-                              HomeModel.of(context).getList();
-                            },
+                            onTap: () => Navigator.of(context).pushNamed('/registration'),
                             child: ClipRRect(
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(

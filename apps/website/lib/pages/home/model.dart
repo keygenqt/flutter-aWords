@@ -5,12 +5,18 @@ import 'package:website/extensions/error_ext.dart';
 import 'package:website/models/user.dart';
 import 'package:website/services/users_service.dart';
 
+/// Demo ViewModel
 class HomeModel extends Model {
   /// Get [ScopedModel]
   static HomeModel of(BuildContext context) => ScopedModel.of<HomeModel>(context);
 
   /// Get service users
   final UsersService service = getIt<UsersService>();
+
+  /// Error response
+  bool _loading = false;
+
+  bool get loading => _loading;
 
   /// Error response
   String? _error;
@@ -24,11 +30,14 @@ class HomeModel extends Model {
 
   /// Get users
   Future<void> getList() async {
+    _loading = true;
+    notifyListeners();
     try {
       _users = await service.getList();
-      notifyListeners();
     } catch (e) {
       _error = e.getMessage();
     }
+    _loading = false;
+    notifyListeners();
   }
 }
