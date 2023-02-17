@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:website/base/app_di.dart';
 import 'package:website/pages/home/model.dart';
 import 'package:website/pages/home/widgets/applications.dart';
 import 'package:website/pages/home/widgets/help.dart';
@@ -19,7 +20,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return ScopedModel<HomeModel>(
-      model: HomeModel(),
+      model: getIt<HomeModel>(),
       child: ScopedModelDescendant<HomeModel>(builder: (context, child, model) {
         return Wrap(
           spacing: 20,

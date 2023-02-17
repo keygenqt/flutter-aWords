@@ -13,6 +13,9 @@ flutter pub get
 ## gen localization run
 flutter gen-l10n
 
+## gen by annotation
+flutter pub run build_runner build --delete-conflicting-outputs
+
 ## build web
 flutter build web --web-renderer canvaskit
 

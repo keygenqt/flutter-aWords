@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:website/base/app_di.dart';
 import 'package:website/layouts/app_layout.dart';
 import 'package:website/model.dart';
 import 'package:website/pages/errors/page.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScopedModel<AppModel>(
-      model: AppModel(),
+      model: getIt<AppModel>(),
       child: MaterialApp(
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,

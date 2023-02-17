@@ -33,6 +33,7 @@ migrate_working_dir/
 /build/
 /pubspec.lock
 /.metadata
+*.g.dart
 
 # Symbolication related
 app.*.symbols

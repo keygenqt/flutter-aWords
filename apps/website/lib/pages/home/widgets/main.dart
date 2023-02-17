@@ -5,6 +5,8 @@ import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
+import '../model.dart';
+
 class HomeMainWidget extends StatelessWidget {
   const HomeMainWidget({super.key});
 
@@ -66,7 +68,11 @@ class HomeMainWidget extends StatelessWidget {
                           borderRadius: AppRadius.small,
                           child: InkWell(
                             borderRadius: AppRadius.small,
-                            onTap: () => Navigator.of(context).pushNamed('/registration'),
+                            // @todo
+                            // onTap: () => Navigator.of(context).pushNamed('/registration'),
+                            onTap: () {
+                              HomeModel.of(context).getList();
+                            },
                             child: ClipRRect(
                               child: Padding(
                                 padding: const EdgeInsets.symmetric(
