@@ -17,7 +17,7 @@ flutter gen-l10n
 flutter pub run build_runner build --delete-conflicting-outputs
 
 ## build web
-flutter build web --web-renderer canvaskit
+flutter build web --release --web-renderer canvaskit -t lib/main.release.dart
 
 ## fix flutter assets folder
 mv build/web/assets/assets/* build/web/assets

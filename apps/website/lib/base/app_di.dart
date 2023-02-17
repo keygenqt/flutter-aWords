@@ -9,8 +9,10 @@ import 'package:website/pages/login/model.dart';
 final getIt = GetIt.instance;
 
 /// Initialization application DI
-void setupDI() {
-  final dio = configureDio();
+void setupDI(bool isRelease) {
+  final dio = configureDio(
+    url: isRelease ? 'https://awords.keygenqt.com/' : 'https://awords-api.keygenqt.com/'
+  );
   getIt
     // other
     ..registerSingleton<AppModel>(AppModel())

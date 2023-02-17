@@ -4,7 +4,7 @@ import 'package:website/app.dart';
 import 'package:website/base/app_di.dart';
 
 void main() {
-  setupDI(false);
+  setupDI(true);
   setPathUrlStrategy();
   runApp(const MyApp());
 }
