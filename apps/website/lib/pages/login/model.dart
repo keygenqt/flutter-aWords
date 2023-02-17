@@ -19,10 +19,15 @@ class LoginModel extends Model {
 
   bool get loading => _loading;
 
-  /// Error response
-  String? _error;
+  /// Error response common form
+  Map<String, String> _error = {};
 
-  String? get error => _error;
+  Map<String, String> get error => _error;
+
+  /// Success response
+  bool _success = false;
+
+  bool get success => _success;
 
   /// Users response
   AuthResponse? _auth;
@@ -30,27 +35,35 @@ class LoginModel extends Model {
   AuthResponse? get auth => _auth;
 
   /// Get users
-  Future<void> login({
+  Future<bool> login({
     required String email,
     required String password,
   }) async {
+    _error = {};
     _loading = true;
+    _success = false;
     notifyListeners();
     try {
       // for animation
-      await Future.delayed(const Duration(seconds: 5));
+      await Future.delayed(const Duration(seconds: 1));
       // execute request
       _auth = await service.login(AuthRequest(
         email: email,
         password: password,
         uniqueKey: 'uniqueKey',
       ));
-      print(_auth);
+      _success = true;
     } catch (e) {
-      _error = e.getMessage();
-      print(_error);
+      _error = e.getErrors();
     }
     _loading = false;
+    notifyListeners();
+    return _success;
+  }
+
+  /// Clear error field change
+  void clear(field) {
+    _error.remove(field);
     notifyListeners();
   }
 }

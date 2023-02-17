@@ -3,6 +3,35 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:website/theme/colors.dart';
 
 final appTheme = ThemeData(
+  /// Cursor color
+  textSelectionTheme: const TextSelectionThemeData(
+    cursorColor: AppColors.primary, //thereby
+  ),
+  /// [TextFormField]
+  inputDecorationTheme: const InputDecorationTheme(
+    fillColor: AppColors.backgroundLightSecondary,
+    focusedBorder: UnderlineInputBorder(
+      borderSide: BorderSide(color: AppColors.primary),
+    ),
+  ),
+
+  /// [ElevatedButton]
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ElevatedButton.styleFrom(
+      backgroundColor: AppColors.primary,
+      minimumSize: const Size.fromHeight(50),
+    ),
+  ),
+
+  /// [OutlinedButton]
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+      foregroundColor: MaterialStateProperty.all<Color>(AppColors.secondary),
+      side: MaterialStateProperty.all(const BorderSide(color: AppColors.secondary)),
+    ),
+  ),
+
+  /// [Text]
   textTheme: TextTheme(
     headlineLarge: GoogleFonts.ubuntu(
       fontSize: 60,
