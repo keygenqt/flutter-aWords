@@ -1,5 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:validated/validated.dart' as validated;
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
 import 'package:website/http/request/auth_request.dart';
@@ -22,7 +23,7 @@ class LoginModel extends Model {
   /// Error response common form
   Map<String, String> _error = {};
 
-  Map<String, String> get error => _error;
+  String? get errorCommon => _error['form'];
 
   /// Success response
   bool _success = false;
@@ -61,9 +62,29 @@ class LoginModel extends Model {
     return _success;
   }
 
-  /// Clear error field change
-  void clear(field) {
-    _error.remove(field);
-    notifyListeners();
+  /// Validate email change
+  String? validateEmail(value) {
+    // validate client
+    if (value == null || value.isEmpty) {
+      return 'Please enter email';
+    } else if (!validated.isEmail(value)) {
+      return 'Email is not match';
+    }
+    // validate from server
+    final server = _error['email'];
+    _error.remove('email');
+    return server;
+  }
+
+  /// Validate password change
+  String? validatePassword(value) {
+    // validate client
+    if (value == null || value.isEmpty) {
+      return 'Please enter password';
+    }
+    // validate from server
+    final server = _error['password'];
+    _error.remove('password');
+    return server;
   }
 }

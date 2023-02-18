@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:validated/validated.dart' as validated;
-
-import '../model.dart';
+import 'package:website/pages/login/model.dart';
+import 'package:website/widgets/buttons/button_form_loading.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class LoginFormWidget extends StatefulWidget {
   const LoginFormWidget({super.key, required this.model});
@@ -44,23 +44,9 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             controller: email,
             style: Theme.of(context).textTheme.bodyMedium,
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-              filled: true,
-              hintText: 'Email',
-            ),
-            onChanged: (value) {
-              widget.model.clear('email');
-              _emailKey.currentState!.validate();
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter email';
-              }
-              if (!validated.isEmail(value)) {
-                return 'Email is not match';
-              }
-              return widget.model.error['email'];
-            },
+            decoration: InputDecoration(filled: true, hintText: AppLocalizations.of(context)!.login_field_email),
+            onChanged: (_) => _emailKey.currentState!.validate(),
+            validator: widget.model.validateEmail,
           ),
           const SizedBox(height: 20),
           TextFormField(
@@ -70,66 +56,31 @@ class _LoginFormWidgetState extends State<LoginFormWidget> {
             obscureText: true,
             style: Theme.of(context).textTheme.bodyMedium,
             keyboardType: TextInputType.visiblePassword,
-            decoration: const InputDecoration(
-              filled: true,
-              hintText: 'Password',
-            ),
-            onChanged: (value) {
-              widget.model.clear('password');
-              _passwordKey.currentState!.validate();
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter password';
-              }
-              return widget.model.error['password'];
-            },
+            decoration: InputDecoration(filled: true, hintText: AppLocalizations.of(context)!.login_field_passw),
+            onChanged: (_) => _passwordKey.currentState!.validate(),
+            validator: widget.model.validatePassword,
           ),
           const SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: widget.model.loading
-                ? null
-                : () async {
-                    if (_formKey.currentState!.validate()) {
-                      // (email: 'best1@email.com', password: '12345678')
-                      // send
-                      final success = await widget.model.login(
-                        email: _emailKey.currentState!.value,
-                        password: _passwordKey.currentState!.value,
-                      );
-                      // check result
-                      if (success) {
-                        email.text = '';
-                        password.text = '';
-                      } else {
-                        _emailKey.currentState!.validate();
-                        _passwordKey.currentState!.validate();
-                      }
-                    }
-                  },
-            child: widget.model.loading
-                ? const SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: CircularProgressIndicator(
-                      color: Colors.white,
-                      strokeWidth: 2,
-                    ),
-                  )
-                : Text(
-                    'Submit',
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(color: Colors.white),
-                  ),
-          ),
-          const SizedBox(height: 20),
-          Container(
-            alignment: Alignment.centerRight,
-            child: OutlinedButton(
-              onPressed: () {
-                debugPrint('Registration');
-              },
-              child: const Text('Registration'),
-            ),
+          ButtonFormLoadingWidget(
+            loading: widget.model.loading,
+            text: AppLocalizations.of(context)!.login_field_btn_submit,
+            onTap: () async {
+              if (_formKey.currentState!.validate()) {
+                // send
+                final success = await widget.model.login(
+                  email: _emailKey.currentState!.value,
+                  password: _passwordKey.currentState!.value,
+                );
+                // check result
+                if (success) {
+                  email.text = '';
+                  password.text = '';
+                } else {
+                  _emailKey.currentState!.validate();
+                  _passwordKey.currentState!.validate();
+                }
+              }
+            },
           ),
         ],
       ),

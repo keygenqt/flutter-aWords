@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/pages/login/model.dart';
 import 'package:website/pages/login/widgets/form.dart';
 import 'package:website/theme/radius.dart';
+import 'package:website/widgets/blocks/box_alert.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
 class LoginPage extends StatefulWidget {
@@ -33,42 +35,26 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   Text(
-                    'Sign In',
+                    AppLocalizations.of(context)!.login_title,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 30),
-                  Visibility(
-                    visible: model.error['form'] != null,
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent,
-                        borderRadius: AppRadius.medium,
-                      ),
-                      child: Text(
-                        '${model.error['form']}',
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  Visibility(
+                  BoxAlert(visible: model.errorCommon != null, text: model.errorCommon),
+                  BoxAlert(
                     visible: model.success,
-                    child: Container(
-                      width: double.infinity,
-                      padding: const EdgeInsets.all(15),
-                      decoration: BoxDecoration(
-                        color: Colors.green,
-                        borderRadius: AppRadius.medium,
-                      ),
-                      child: Text(
-                        'Authorization passed successfully!',
-                        style: Theme.of(context).textTheme.labelLarge!.copyWith(color: Colors.white),
-                      ),
-                    ),
+                    color: Colors.green,
+                    text: AppLocalizations.of(context)!.login_successfully,
                   ),
                   const SizedBox(height: 20),
                   LoginFormWidget(model: model),
+                  const SizedBox(height: 20),
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: OutlinedButton(
+                      onPressed: () => Navigator.of(context).pushNamed('/registration'),
+                      child: Text(AppLocalizations.of(context)!.login_field_btn_reg),
+                    ),
+                  ),
                 ],
               ),
             ),
