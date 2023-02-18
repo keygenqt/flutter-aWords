@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:website/model.dart';
 import 'package:website/pages/sign_up/model.dart';
 import 'package:website/widgets/buttons/button_form_loading.dart';
 
@@ -19,41 +18,35 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
   final _emailKey = GlobalKey<FormFieldState>();
   final _passwordKey = GlobalKey<FormFieldState>();
 
-  final name = TextEditingController();
-  final email = TextEditingController();
-  final password = TextEditingController();
+  final _fieldName = TextEditingController();
+  final _fieldEmail = TextEditingController();
+  final _fieldPassword = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    // validate if change app model
-    Future.delayed(Duration.zero, () {
-      AppModel.of(context).addListener(() {
-        Future.delayed(const Duration(milliseconds: 10), () {
-          if (_nameKey.currentState?.hasError ?? false) {
-            _nameKey.currentState!.validate();
-          }
-          if (_emailKey.currentState?.hasError ?? false) {
-            _emailKey.currentState!.validate();
-          }
-          if (_passwordKey.currentState?.hasError ?? false) {
-            _passwordKey.currentState!.validate();
-          }
-        });
-      });
-    });
   }
 
   @override
   void dispose() {
-    name.dispose();
-    email.dispose();
-    password.dispose();
+    _fieldName.dispose();
+    _fieldEmail.dispose();
+    _fieldPassword.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    // validate if change localization
+    if (_nameKey.currentState?.hasError ?? false) {
+      _nameKey.currentState!.validate();
+    }
+    if (_emailKey.currentState?.hasError ?? false) {
+      _emailKey.currentState!.validate();
+    }
+    if (_passwordKey.currentState?.hasError ?? false) {
+      _passwordKey.currentState!.validate();
+    }
     return Form(
       key: _formKey,
       child: Column(
@@ -61,7 +54,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
           TextFormField(
             enabled: !widget.model.loading,
             key: _nameKey,
-            controller: name,
+            controller: _fieldName,
             style: Theme.of(context).textTheme.bodyMedium,
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
@@ -75,7 +68,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
           TextFormField(
             enabled: !widget.model.loading,
             key: _emailKey,
-            controller: email,
+            controller: _fieldEmail,
             style: Theme.of(context).textTheme.bodyMedium,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
@@ -89,7 +82,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
           TextFormField(
             enabled: !widget.model.loading,
             key: _passwordKey,
-            controller: password,
+            controller: _fieldPassword,
             obscureText: true,
             style: Theme.of(context).textTheme.bodyMedium,
             keyboardType: TextInputType.visiblePassword,
@@ -114,9 +107,9 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 );
                 // check result
                 if (success) {
-                  name.text = '';
-                  email.text = '';
-                  password.text = '';
+                  _fieldName.text = '';
+                  _fieldEmail.text = '';
+                  _fieldPassword.text = '';
                 } else {
                   _nameKey.currentState!.validate();
                   _emailKey.currentState!.validate();
