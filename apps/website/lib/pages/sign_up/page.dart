@@ -53,7 +53,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     alignment: Alignment.centerRight,
                     child: OutlinedButton(
                       onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
-                      child: Text(AppLocalizations.of(context)!.signUp_field_btn_reg),
+                      child: Text(AppLocalizations.of(context)!.signUp_field_btn_signIn),
                     ),
                   ),
                 ],
