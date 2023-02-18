@@ -78,9 +78,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                     onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.stats
                         ? null
                         : () => Navigator.of(context).pushNamedAndRemoveUntil(
-                      AppRoutes.stats,
-                      ModalRoute.withName(AppRoutes.cards),
-                    ),
+                              AppRoutes.stats,
+                              ModalRoute.withName(AppRoutes.home),
+                            ),
                   ),
                 ),
               ),
@@ -94,9 +94,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                     onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.friends
                         ? null
                         : () => Navigator.of(context).pushNamedAndRemoveUntil(
-                      AppRoutes.friends,
-                      ModalRoute.withName(AppRoutes.home),
-                    ),
+                              AppRoutes.friends,
+                              ModalRoute.withName(AppRoutes.home),
+                            ),
                   ),
                 ),
               ),
