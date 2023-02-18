@@ -37,7 +37,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // validate if change localization
+    // validate for change localization
     if (_nameKey.currentState?.hasError ?? false) {
       _nameKey.currentState!.validate();
     }

@@ -34,6 +34,7 @@ class _SignInFormWidgetState extends State<SignInFormWidget> {
 
   @override
   Widget build(BuildContext context) {
+    // validate for change localization
     if (_emailKey.currentState?.hasError ?? false) {
       _emailKey.currentState!.validate();
     }
