@@ -6,9 +6,15 @@ import 'package:website/layouts/app_layout.dart';
 import 'package:website/model.dart';
 import 'package:website/pages/errors/page.dart';
 import 'package:website/pages/home/page.dart';
-import 'package:website/pages/login/page.dart';
-import 'package:website/pages/registration/page.dart';
+import 'package:website/pages/sign_in/page.dart';
+import 'package:website/pages/sign_up/page.dart';
 import 'package:website/theme/theme.dart';
+
+class AppRoutes {
+  static const String home = '/';
+  static const String signIn = '/sign-in';
+  static const String signUp = '/sign-up';
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -25,25 +31,25 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         onGenerateRoute: (settings) {
           switch (settings.name) {
-            case '/':
+            case AppRoutes.home:
               return _routeWithAnimation(
                   settings,
                   const AppLayout(
                     page: HomePage(),
                   ));
-            case '/login':
+            case AppRoutes.signIn:
               return _routeWithAnimation(
                   settings,
                   const AppLayout(
                     type: AppLayoutType.gray,
-                    page: LoginPage(),
+                    page: SignInPage(),
                   ));
-            case '/registration':
+            case AppRoutes.signUp:
               return _routeWithAnimation(
                   settings,
                   const AppLayout(
                     type: AppLayoutType.gray,
-                    page: RegistrationPage(),
+                    page: SignUpPage(),
                   ));
             default:
               return _routeWithAnimation(

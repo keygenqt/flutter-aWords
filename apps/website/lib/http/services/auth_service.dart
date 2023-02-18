@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
-import 'package:website/http/request/auth_request.dart';
+import 'package:website/http/request/sign_in_request.dart';
+import 'package:website/http/request/sign_up_request.dart';
 import 'package:website/http/response/auth_response.dart';
 
 /// Http service API
@@ -11,10 +12,18 @@ class AuthService {
 
   final Dio dio;
 
-  /// Get users
-  Future<AuthResponse> login(AuthRequest request) async {
+  /// Login user
+  Future<AuthResponse> login(SignInRequest request) async {
     // query
     final response = await dio.post('/api/login', data: request.toJson());
+    // mapper
+    return AuthResponse.fromJson(response.data);
+  }
+
+  /// Registration user
+  Future<AuthResponse> registration(SignUpRequest request) async {
+    // query
+    final response = await dio.post('/api/registration', data: request.toJson());
     // mapper
     return AuthResponse.fromJson(response.data);
   }

@@ -1,28 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
+import 'package:website/app.dart';
 import 'package:website/base/app_di.dart';
-import 'package:website/pages/login/model.dart';
-import 'package:website/pages/login/widgets/form.dart';
+import 'package:website/pages/sign_up/model.dart';
+import 'package:website/pages/sign_up/widgets/form.dart';
 import 'package:website/theme/radius.dart';
 import 'package:website/widgets/blocks/box_alert.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({
+class SignUpPage extends StatefulWidget {
+  const SignUpPage({
     super.key,
   });
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<SignUpPage> createState() => _SignUpPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
-    return ScopedModel<LoginModel>(
-      model: getIt<LoginModel>(),
-      child: ScopedModelDescendant<LoginModel>(builder: (context, child, model) {
+    return ScopedModel<SignUpModel>(
+      model: getIt<SignUpModel>(),
+      child: ScopedModelDescendant<SignUpModel>(builder: (context, child, model) {
         return PageItemWidget(
           maxWidth: 400,
           child: Container(
@@ -35,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Column(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.login_title,
+                    AppLocalizations.of(context)!.signUp_title,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 30),
@@ -43,16 +44,16 @@ class _LoginPageState extends State<LoginPage> {
                   BoxAlert(
                     visible: model.success,
                     color: Colors.green,
-                    text: AppLocalizations.of(context)!.login_successfully,
+                    text: AppLocalizations.of(context)!.signUp_successfully,
                   ),
                   const SizedBox(height: 20),
-                  LoginFormWidget(model: model),
+                  SignUpFormWidget(model: model),
                   const SizedBox(height: 20),
                   Container(
                     alignment: Alignment.centerRight,
                     child: OutlinedButton(
-                      onPressed: () => Navigator.of(context).pushNamed('/registration'),
-                      child: Text(AppLocalizations.of(context)!.login_field_btn_reg),
+                      onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
+                      child: Text(AppLocalizations.of(context)!.signUp_field_btn_reg),
                     ),
                   ),
                 ],

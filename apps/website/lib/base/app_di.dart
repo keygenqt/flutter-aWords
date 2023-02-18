@@ -4,15 +4,14 @@ import 'package:website/http/services/auth_service.dart';
 import 'package:website/http/services/users_service.dart';
 import 'package:website/model.dart';
 import 'package:website/pages/home/model.dart';
-import 'package:website/pages/login/model.dart';
+import 'package:website/pages/sign_in/model.dart';
+import 'package:website/pages/sign_up/model.dart';
 
 final getIt = GetIt.instance;
 
 /// Initialization application DI
 void setupDI(bool isRelease) {
-  final dio = configureDio(
-    url: isRelease ? 'https://awords.keygenqt.com/' : 'https://awords-api.keygenqt.com/'
-  );
+  final dio = configureDio(url: isRelease ? 'https://awords.keygenqt.com/' : 'https://awords-api.keygenqt.com/');
   getIt
     // other
     ..registerSingleton<AppModel>(AppModel())
@@ -21,5 +20,6 @@ void setupDI(bool isRelease) {
     ..registerSingleton<UsersService>(UsersService(dio))
     // pages models
     ..registerFactory<HomeModel>(() => HomeModel())
-    ..registerFactory<LoginModel>(() => LoginModel());
+    ..registerFactory<SignInModel>(() => SignInModel())
+    ..registerFactory<SignUpModel>(() => SignUpModel());
 }

@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:website/extensions/map_ext.dart';
 
-part 'auth_request.g.dart';
+part 'sign_in_request.g.dart';
 
 /// Data class model
 @JsonSerializable()
-class AuthRequest {
-  AuthRequest({
+class SignInRequest {
+  SignInRequest({
     required this.email,
     required this.password,
     required this.uniqueKey,
@@ -19,10 +19,10 @@ class AuthRequest {
   final String uniqueKey;
 
   /// Get model from map
-  factory AuthRequest.fromJson(Map<String, dynamic> json) => _$AuthRequestFromJson(json);
+  factory SignInRequest.fromJson(Map<String, dynamic> json) => _$SignInRequestFromJson(json);
 
   /// Get map from model
-  Map<String, dynamic> toJson() => _$AuthRequestToJson(this);
+  Map<String, dynamic> toJson() => _$SignInRequestToJson(this);
 
   /// Get string json
   @override

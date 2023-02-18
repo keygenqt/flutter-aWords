@@ -3,14 +3,14 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:validated/validated.dart' as validated;
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
-import 'package:website/http/request/auth_request.dart';
+import 'package:website/http/request/sign_in_request.dart';
 import 'package:website/http/response/auth_response.dart';
 import 'package:website/http/services/auth_service.dart';
 
-/// [LoginPage] ViewModel
-class LoginModel extends Model {
+/// [SignInPage] ViewModel
+class SignInModel extends Model {
   /// Get [ScopedModel]
-  static LoginModel of(BuildContext context) => ScopedModel.of<LoginModel>(context);
+  static SignInModel of(BuildContext context) => ScopedModel.of<SignInModel>(context);
 
   /// Get service users
   final AuthService service = getIt<AuthService>();
@@ -36,7 +36,7 @@ class LoginModel extends Model {
   AuthResponse? get auth => _auth;
 
   /// Get users
-  Future<bool> login({
+  Future<bool> signIn({
     required String email,
     required String password,
   }) async {
@@ -48,7 +48,7 @@ class LoginModel extends Model {
       // for animation
       await Future.delayed(const Duration(seconds: 1));
       // execute request
-      _auth = await service.login(AuthRequest(
+      _auth = await service.login(SignInRequest(
         email: email,
         password: password,
         uniqueKey: 'uniqueKey',

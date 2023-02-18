@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:website/app.dart';
 import 'package:website/model.dart';
 import 'package:website/theme/colors.dart';
-import 'package:website/utils/locale.dart';
 import 'package:website/theme/radius.dart';
+import 'package:website/utils/locale.dart';
 
 class HeaderWidget extends StatefulWidget {
   const HeaderWidget({
@@ -57,7 +58,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: IconButton(
                     icon: const Icon(Icons.style),
                     color: Colors.blueGrey,
-                    onPressed: () => Navigator.of(context).pushNamed('/login'),
+                    onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
                   ),
                 ),
               ),
@@ -67,7 +68,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: IconButton(
                     icon: const Icon(Icons.bar_chart),
                     color: Colors.blueGrey,
-                    onPressed: () => Navigator.of(context).pushNamed('/login'),
+                    onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
                   ),
                 ),
               ),
@@ -77,7 +78,7 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: IconButton(
                     icon: const Icon(Icons.face_retouching_natural),
                     color: Colors.blueGrey,
-                    onPressed: () => Navigator.of(context).pushNamed('/login'),
+                    onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
                   ),
                 ),
               ),
