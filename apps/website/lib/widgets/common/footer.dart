@@ -111,7 +111,10 @@ class _FooterWidgetState extends State<FooterWidget> {
                               icon: Icons.style,
                               title: AppLocalizations.of(context)!.common_footer_title_create_card,
                               text: AppLocalizations.of(context)!.common_footer_create_card,
-                              onTap: () => Navigator.of(context).popAndPushNamed(AppRoutes.cards),
+                              onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                                AppRoutes.cards,
+                                ModalRoute.withName(AppRoutes.home),
+                              ),
                             ),
                             const SizedBox(height: 10),
                             featureItem(
@@ -119,7 +122,10 @@ class _FooterWidgetState extends State<FooterWidget> {
                               icon: Icons.bar_chart,
                               title: AppLocalizations.of(context)!.common_footer_title_stats_card,
                               text: AppLocalizations.of(context)!.common_footer_stats_card,
-                              onTap: () => Navigator.of(context).popAndPushNamed(AppRoutes.stats),
+                              onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                                AppRoutes.stats,
+                                ModalRoute.withName(AppRoutes.home),
+                              ),
                             ),
                             const SizedBox(height: 10),
                             featureItem(
@@ -127,7 +133,10 @@ class _FooterWidgetState extends State<FooterWidget> {
                               icon: Icons.face_retouching_natural,
                               title: AppLocalizations.of(context)!.common_footer_title_friends,
                               text: AppLocalizations.of(context)!.common_footer_friends,
-                              onTap: () => Navigator.of(context).popAndPushNamed(AppRoutes.friends),
+                              onTap: () => Navigator.of(context).pushNamedAndRemoveUntil(
+                                AppRoutes.friends,
+                                ModalRoute.withName(AppRoutes.home),
+                              ),
                             ),
                           ],
                         ),
