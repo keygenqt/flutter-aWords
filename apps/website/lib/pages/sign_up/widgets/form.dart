@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:website/model.dart';
 import 'package:website/pages/sign_up/model.dart';
 import 'package:website/widgets/buttons/button_form_loading.dart';
 
@@ -25,6 +26,22 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
   @override
   void initState() {
     super.initState();
+    // validate if change app model
+    Future.delayed(Duration.zero, () {
+      AppModel.of(context).addListener(() {
+        Future.delayed(const Duration(milliseconds: 10), () {
+          if (_nameKey.currentState?.hasError ?? false) {
+            _nameKey.currentState!.validate();
+          }
+          if (_emailKey.currentState?.hasError ?? false) {
+            _emailKey.currentState!.validate();
+          }
+          if (_passwordKey.currentState?.hasError ?? false) {
+            _passwordKey.currentState!.validate();
+          }
+        });
+      });
+    });
   }
 
   @override
@@ -52,7 +69,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               hintText: AppLocalizations.of(context)!.signUp_field_name,
             ),
             onChanged: (_) => _nameKey.currentState!.validate(),
-            validator: widget.model.validateName,
+            validator: (value) => widget.model.validateName(context, value),
           ),
           const SizedBox(height: 20),
           TextFormField(
@@ -66,7 +83,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               hintText: AppLocalizations.of(context)!.signUp_field_email,
             ),
             onChanged: (_) => _emailKey.currentState!.validate(),
-            validator: widget.model.validateEmail,
+            validator: (value) => widget.model.validateEmail(context, value),
           ),
           const SizedBox(height: 20),
           TextFormField(
@@ -81,7 +98,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
               hintText: AppLocalizations.of(context)!.signUp_field_passw,
             ),
             onChanged: (_) => _passwordKey.currentState!.validate(),
-            validator: widget.model.validatePassword,
+            validator: (value) => widget.model.validatePassword(context, value),
           ),
           const SizedBox(height: 30),
           ButtonFormLoadingWidget(

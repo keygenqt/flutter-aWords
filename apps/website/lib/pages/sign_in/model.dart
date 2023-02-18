@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:validated/validated.dart' as validated;
 import 'package:website/base/app_di.dart';
@@ -63,12 +64,12 @@ class SignInModel extends Model {
   }
 
   /// Validate email change
-  String? validateEmail(value) {
+  String? validateEmail(BuildContext context, String? value) {
     // validate client
     if (value == null || value.isEmpty) {
-      return 'Please enter email';
+      return AppLocalizations.of(context)!.signIn_validate_email_empty;
     } else if (!validated.isEmail(value)) {
-      return 'Email is not match';
+      return AppLocalizations.of(context)!.signIn_validate_email_not_match;
     }
     // validate from server
     final server = _error['email'];
@@ -77,10 +78,10 @@ class SignInModel extends Model {
   }
 
   /// Validate password change
-  String? validatePassword(value) {
+  String? validatePassword(BuildContext context, String? value) {
     // validate client
     if (value == null || value.isEmpty) {
-      return 'Please enter password';
+      return AppLocalizations.of(context)!.signIn_validate_password_empty;
     }
     // validate from server
     final server = _error['password'];
