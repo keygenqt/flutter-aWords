@@ -58,7 +58,13 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: IconButton(
                     icon: const Icon(Icons.style),
                     color: Colors.blueGrey,
-                    onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
+                    disabledColor: AppColors.secondary,
+                    onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.cards
+                        ? null
+                        : () => Navigator.of(context).pushNamedAndRemoveUntil(
+                              AppRoutes.cards,
+                              ModalRoute.withName(AppRoutes.home),
+                            ),
                   ),
                 ),
               ),
@@ -68,7 +74,13 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: IconButton(
                     icon: const Icon(Icons.bar_chart),
                     color: Colors.blueGrey,
-                    onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
+                    disabledColor: AppColors.secondary,
+                    onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.stats
+                        ? null
+                        : () => Navigator.of(context).pushNamedAndRemoveUntil(
+                      AppRoutes.stats,
+                      ModalRoute.withName(AppRoutes.cards),
+                    ),
                   ),
                 ),
               ),
@@ -78,7 +90,13 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                   child: IconButton(
                     icon: const Icon(Icons.face_retouching_natural),
                     color: Colors.blueGrey,
-                    onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
+                    disabledColor: AppColors.secondary,
+                    onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.friends
+                        ? null
+                        : () => Navigator.of(context).pushNamedAndRemoveUntil(
+                      AppRoutes.friends,
+                      ModalRoute.withName(AppRoutes.home),
+                    ),
                   ),
                 ),
               ),

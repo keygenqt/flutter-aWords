@@ -4,8 +4,9 @@ import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
 import 'package:website/http/services/users_service.dart';
 import 'package:website/models/user.dart';
+import 'package:website/pages/home/page.dart';
 
-/// Demo ViewModel
+/// Model for [HomePage]
 class HomeModel extends Model {
   /// Get [ScopedModel]
   static HomeModel of(BuildContext context) => ScopedModel.of<HomeModel>(context);

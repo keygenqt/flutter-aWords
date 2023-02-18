@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:website/app.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
@@ -106,25 +107,28 @@ class _FooterWidgetState extends State<FooterWidget> {
                             ),
                             const SizedBox(height: 20),
                             featureItem(
+                              route: AppRoutes.cards,
                               icon: Icons.style,
                               title: AppLocalizations.of(context)!.common_footer_title_create_card,
                               text: AppLocalizations.of(context)!.common_footer_create_card,
-                              onTap: () => Navigator.of(context).pushNamed('/add/card')
+                              onTap: () => Navigator.of(context).popAndPushNamed(AppRoutes.cards),
                             ),
                             const SizedBox(height: 10),
                             featureItem(
+                              route: AppRoutes.stats,
                               icon: Icons.bar_chart,
                               title: AppLocalizations.of(context)!.common_footer_title_stats_card,
                               text: AppLocalizations.of(context)!.common_footer_stats_card,
-                              onTap: () => Navigator.of(context).pushNamed('/stats')
+                              onTap: () => Navigator.of(context).popAndPushNamed(AppRoutes.stats),
                             ),
                             const SizedBox(height: 10),
                             featureItem(
+                              route: AppRoutes.friends,
                               icon: Icons.face_retouching_natural,
                               title: AppLocalizations.of(context)!.common_footer_title_friends,
                               text: AppLocalizations.of(context)!.common_footer_friends,
-                              onTap: () => Navigator.of(context).pushNamed('/friends')
-                            )
+                              onTap: () => Navigator.of(context).popAndPushNamed(AppRoutes.friends),
+                            ),
                           ],
                         ),
                       ),
@@ -154,10 +158,11 @@ class _FooterWidgetState extends State<FooterWidget> {
   }
 
   Widget featureItem({
+    required String route,
     required IconData icon,
     required String title,
     required String text,
-    required GestureTapCallback onTap
+    required GestureTapCallback onTap,
   }) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +171,7 @@ class _FooterWidgetState extends State<FooterWidget> {
           padding: const EdgeInsets.only(top: 7),
           child: Icon(
             icon,
-            color: Colors.blueGrey,
+            color: ModalRoute.of(context)?.settings.name == route ? AppColors.secondary : Colors.blueGrey,
           ),
         ),
         const SizedBox(width: 15),
@@ -178,7 +183,7 @@ class _FooterWidgetState extends State<FooterWidget> {
               color: Colors.white,
               child: InkWell(
                 borderRadius: AppRadius.small,
-                onTap: onTap,
+                onTap: ModalRoute.of(context)?.settings.name == route ? null : onTap,
                 child: ClipRRect(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(

@@ -8,7 +8,7 @@ import 'package:website/http/request/sign_up_request.dart';
 import 'package:website/http/response/auth_response.dart';
 import 'package:website/http/services/auth_service.dart';
 
-/// [SignUpPage] ViewModel
+/// Model for [SignUpPage]
 class SignUpModel extends Model {
   /// Get [ScopedModel]
   static SignUpModel of(BuildContext context) => ScopedModel.of<SignUpModel>(context);
