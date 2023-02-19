@@ -21,6 +21,10 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
+    final navigator = Navigator.of(context);
+
     return ScopedModel<SignInModel>(
       model: getIt<SignInModel>(),
       child: ScopedModelDescendant<SignInModel>(builder: (context, child, model) {
@@ -36,14 +40,14 @@ class _SignInPageState extends State<SignInPage> {
               child: Column(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.signIn_title,
-                    style: Theme.of(context).textTheme.titleMedium,
+                    localizations.signIn_title,
+                    style: theme.textTheme.titleMedium,
                   ),
                   BoxAlert(visible: model.errorCommon != null, text: model.errorCommon),
                   BoxAlert(
                     visible: model.success,
                     color: Colors.green,
-                    text: AppLocalizations.of(context)!.signIn_successfully,
+                    text: localizations.signIn_successfully,
                   ),
                   const SizedBox(height: 20),
                   SignInFormWidget(model: model),
@@ -51,8 +55,8 @@ class _SignInPageState extends State<SignInPage> {
                   Container(
                     alignment: Alignment.centerRight,
                     child: OutlinedButton(
-                      onPressed: model.loading ? null : () => Navigator.of(context).pushNamed(AppRoutes.signUp),
-                      child: Text(AppLocalizations.of(context)!.signIn_field_btn_signUp),
+                      onPressed: model.loading ? null : () => navigator.pushReplacementNamed(AppRoutes.signUp),
+                      child: Text(localizations.signIn_field_btn_signUp),
                     ),
                   ),
                 ],

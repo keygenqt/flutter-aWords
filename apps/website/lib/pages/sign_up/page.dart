@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:website/routes/routes.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/pages/sign_up/model.dart';
 import 'package:website/pages/sign_up/widgets/form.dart';
+import 'package:website/routes/routes.dart';
 import 'package:website/theme/radius.dart';
 import 'package:website/widgets/blocks/box_alert.dart';
 import 'package:website/widgets/containers/page_item.dart';
@@ -21,6 +21,10 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context)!;
+    final navigator = Navigator.of(context);
+
     return ScopedModel<SignUpModel>(
       model: getIt<SignUpModel>(),
       child: ScopedModelDescendant<SignUpModel>(builder: (context, child, model) {
@@ -36,14 +40,14 @@ class _SignUpPageState extends State<SignUpPage> {
               child: Column(
                 children: [
                   Text(
-                    AppLocalizations.of(context)!.signUp_title,
-                    style: Theme.of(context).textTheme.titleMedium,
+                    localizations.signUp_title,
+                    style: theme.textTheme.titleMedium,
                   ),
                   BoxAlert(visible: model.errorCommon != null, text: model.errorCommon),
                   BoxAlert(
                     visible: model.success,
                     color: Colors.green,
-                    text: AppLocalizations.of(context)!.signUp_successfully,
+                    text: localizations.signUp_successfully,
                   ),
                   const SizedBox(height: 20),
                   SignUpFormWidget(model: model),
@@ -51,8 +55,8 @@ class _SignUpPageState extends State<SignUpPage> {
                   Container(
                     alignment: Alignment.centerRight,
                     child: OutlinedButton(
-                      onPressed: model.loading ? null : () => Navigator.of(context).pushNamed(AppRoutes.signIn),
-                      child: Text(AppLocalizations.of(context)!.signUp_field_btn_signIn),
+                      onPressed: model.loading ? null : () => navigator.pushReplacementNamed(AppRoutes.signIn),
+                      child: Text(localizations.signUp_field_btn_signIn),
                     ),
                   ),
                 ],
