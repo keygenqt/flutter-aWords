@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:website/base/app_dio.dart';
+import 'package:website/build/build.config.dart';
 import 'package:website/http/services/auth_service.dart';
 import 'package:website/http/services/users_service.dart';
 import 'package:website/model.dart';
@@ -13,11 +14,12 @@ import 'package:website/pages/stats/model.dart';
 final getIt = GetIt.instance;
 
 /// Initialization application DI
-void setupDI(bool isRelease) {
-  final dio = configureDio(url: isRelease ? 'https://awords.keygenqt.com/' : 'https://awords-api.keygenqt.com/');
+void setupDI(BuildConfig config) {
+  final dio = configureDio(url: config.baseUrl);
   getIt
     // other
     ..registerSingleton<AppModel>(AppModel())
+    ..registerSingleton<BuildConfig>(config)
     //
     ..registerSingleton<AuthService>(AuthService(dio))
     ..registerSingleton<UsersService>(UsersService(dio))
