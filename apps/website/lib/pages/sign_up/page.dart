@@ -52,7 +52,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   Container(
                     alignment: Alignment.centerRight,
                     child: OutlinedButton(
-                      onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signIn),
+                      onPressed: model.loading ? null : () => Navigator.of(context).pushNamed(AppRoutes.signIn),
                       child: Text(AppLocalizations.of(context)!.signUp_field_btn_signIn),
                     ),
                   ),

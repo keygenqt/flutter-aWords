@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:website/app.dart';
+import 'package:website/model.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
+import 'package:website/utils/locale.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
 class FooterWidget extends StatefulWidget {
@@ -156,12 +158,36 @@ class _FooterWidgetState extends State<FooterWidget> {
           padding: const EdgeInsets.all(30),
           child: PageItemWidget(
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Flexible(
                   child: Text(
                     AppLocalizations.of(context)!.common_copyright(DateTime.now().year),
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
+                ),
+                Row(
+                  children: [
+                    ClipOval(
+                      child: Material(
+                        color: AppColors.backgroundLightSecondary,
+                        child: IconButton(
+                          splashRadius: 16,
+                          icon: const Icon(
+                            Icons.translate,
+                            size: 18,
+                          ),
+                          color: AppModel.of(context).locale == AppLocale.ru ? AppColors.secondary : Colors.blueGrey,
+                          onPressed: () => AppModel.of(context).toggleLocale(),
+                        ),
+                      ),
+                    ),
+                    _getLine(),
+                    Text(
+                      AppModel.of(context).locale.name.toUpperCase(),
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -223,6 +249,15 @@ class _FooterWidgetState extends State<FooterWidget> {
           ],
         )),
       ],
+    );
+  }
+
+  Widget _getLine() {
+    return Container(
+      margin: const EdgeInsets.only(top: 7, bottom: 7, left: 2, right: 12),
+      color: Colors.blueGrey[100],
+      height: 20,
+      width: 1,
     );
   }
 }

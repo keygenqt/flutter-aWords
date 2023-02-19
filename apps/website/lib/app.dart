@@ -31,64 +31,88 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScopedModel<AppModel>(
       model: getIt<AppModel>(),
-      child: MaterialApp(
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        title: 'aWords',
-        theme: appTheme,
-        initialRoute: "/",
-        onGenerateRoute: (settings) {
-          switch (settings.name) {
-            case AppRoutes.home:
-              return _routeWithAnimation(
-                  settings,
-                  const AppLayout(
-                    page: HomePage(),
-                  ));
-            case AppRoutes.signIn:
-              return _routeWithAnimation(
-                  settings,
-                  const AppLayout(
-                    type: AppLayoutType.gray,
-                    page: SignInPage(),
-                  ));
-            case AppRoutes.signUp:
-              return _routeWithAnimation(
-                  settings,
-                  const AppLayout(
-                    type: AppLayoutType.gray,
-                    page: SignUpPage(),
-                  ));
-            case AppRoutes.cards:
-              return _routeWithAnimation(
-                  settings,
-                  const AppLayout(
-                    type: AppLayoutType.gray,
-                    page: CardsPage(),
-                  ));
-            case AppRoutes.stats:
-              return _routeWithAnimation(
-                  settings,
-                  const AppLayout(
-                    type: AppLayoutType.gray,
-                    page: StatsPage(),
-                  ));
-            case AppRoutes.friends:
-              return _routeWithAnimation(
-                  settings,
-                  const AppLayout(
-                    type: AppLayoutType.gray,
-                    page: FriendsPage(),
-                  ));
-            default:
-              return _routeWithAnimation(
-                  settings,
-                  const AppLayout(
-                    type: AppLayoutType.gray,
-                    page: Error404Page(),
-                  ));
-          }
-        },
+      child: ScopedModelDescendant<AppModel>(
+        builder: (context, child, model) => MaterialApp(
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          title: 'aWords',
+          theme: appTheme,
+          initialRoute: AppRoutes.home,
+          onGenerateRoute: (settings) {
+            // @todo Not the best solution. Add redirect to page.
+            if (model.isLogin) {
+              switch (settings.name) {
+                case AppRoutes.home:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        page: HomePage(),
+                      ));
+                case AppRoutes.cards:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        type: AppLayoutType.gray,
+                        page: CardsPage(),
+                      ));
+                case AppRoutes.stats:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        type: AppLayoutType.gray,
+                        page: StatsPage(),
+                      ));
+                case AppRoutes.friends:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        type: AppLayoutType.gray,
+                        page: FriendsPage(),
+                      ));
+                default:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        type: AppLayoutType.gray,
+                        page: Error404Page(),
+                      ));
+              }
+            } else {
+              switch (settings.name) {
+                case AppRoutes.home:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        page: HomePage(),
+                      ));
+                case AppRoutes.cards:
+                case AppRoutes.stats:
+                case AppRoutes.friends:
+                case AppRoutes.signIn:
+                  return _routeWithAnimation(
+                      const RouteSettings(name: AppRoutes.signIn),
+                      const AppLayout(
+                        type: AppLayoutType.gray,
+                        page: SignInPage(),
+                      ));
+                case AppRoutes.signUp:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        type: AppLayoutType.gray,
+                        page: SignUpPage(),
+                      ));
+                default:
+                  return _routeWithAnimation(
+                      settings,
+                      const AppLayout(
+                        type: AppLayoutType.gray,
+                        page: Error404Page(),
+                      ));
+              }
+            }
+          },
+        ),
       ),
     );
   }

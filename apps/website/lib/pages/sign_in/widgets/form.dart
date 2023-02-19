@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:website/app.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/build/build.config.dart';
+import 'package:website/model.dart';
 import 'package:website/pages/sign_in/model.dart';
 import 'package:website/widgets/buttons/button_form_loading.dart';
 
@@ -16,6 +18,7 @@ class SignInFormWidget extends StatefulWidget {
 
 class _SignInFormWidgetState extends State<SignInFormWidget> {
   final BuildConfig config = getIt<BuildConfig>();
+  final AppModel appModel = getIt<AppModel>();
 
   final _formKey = GlobalKey<FormState>();
   final _emailKey = GlobalKey<FormFieldState>();
@@ -94,8 +97,12 @@ class _SignInFormWidgetState extends State<SignInFormWidget> {
                 );
                 // check result
                 if (success) {
-                  _fieldEmail.text = '';
-                  _fieldPassword.text = '';
+                  Future.delayed(const Duration(seconds: 1), () {
+                    // toggle app login
+                    appModel.login();
+                    // open root page
+                    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (Route<dynamic> route) => false);
+                  });
                 } else {
                   _emailKey.currentState!.validate();
                   _passwordKey.currentState!.validate();

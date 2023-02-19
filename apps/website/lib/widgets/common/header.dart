@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:website/app.dart';
 import 'package:website/model.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
-import 'package:website/utils/locale.dart';
 
 class HeaderWidget extends StatefulWidget {
   const HeaderWidget({
@@ -20,6 +21,10 @@ class HeaderWidget extends StatefulWidget {
 class _HeaderWidgetState extends State<HeaderWidget> {
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final modalRoute = ModalRoute.of(context);
+    final navigator = Navigator.of(context);
+
     return Container(
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -34,15 +39,15 @@ class _HeaderWidgetState extends State<HeaderWidget> {
           Material(
             color: widget.color,
             child: InkWell(
-              borderRadius: MediaQuery.of(context).size.width < 400 ? AppRadius.extraLarge : AppRadius.small,
-              onTap: () => Navigator.of(context).pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false),
+              borderRadius: mediaQuery.size.width < 400 ? AppRadius.extraLarge : AppRadius.small,
+              onTap: () => navigator.pushNamedAndRemoveUntil(AppRoutes.home, (Route<dynamic> route) => false),
               child: ClipRRect(
                 child: Padding(
-                  padding: MediaQuery.of(context).size.width < 400
+                  padding: mediaQuery.size.width < 400
                       ? const EdgeInsets.all(8)
                       : const EdgeInsets.symmetric(vertical: 7, horizontal: 10),
                   child: Image.asset(
-                    MediaQuery.of(context).size.width < 400 ? 'images/icon_30.png' : 'images/logo_30.png',
+                    mediaQuery.size.width < 400 ? 'images/icon_30.png' : 'images/logo_30.png',
                     height: 24,
                   ),
                 ),
@@ -59,9 +64,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                     icon: const Icon(Icons.style),
                     color: Colors.blueGrey,
                     disabledColor: AppColors.secondary,
-                    onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.cards
+                    onPressed: modalRoute?.settings.name == AppRoutes.cards
                         ? null
-                        : () => Navigator.of(context).pushNamedAndRemoveUntil(
+                        : () => navigator.pushNamedAndRemoveUntil(
                               AppRoutes.cards,
                               ModalRoute.withName(AppRoutes.home),
                             ),
@@ -75,9 +80,9 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                     icon: const Icon(Icons.bar_chart),
                     color: Colors.blueGrey,
                     disabledColor: AppColors.secondary,
-                    onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.stats
+                    onPressed: modalRoute?.settings.name == AppRoutes.stats
                         ? null
-                        : () => Navigator.of(context).pushNamedAndRemoveUntil(
+                        : () => navigator.pushNamedAndRemoveUntil(
                               AppRoutes.stats,
                               ModalRoute.withName(AppRoutes.home),
                             ),
@@ -91,35 +96,76 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                     icon: const Icon(Icons.face_retouching_natural),
                     color: Colors.blueGrey,
                     disabledColor: AppColors.secondary,
-                    onPressed: ModalRoute.of(context)?.settings.name == AppRoutes.friends
+                    onPressed: modalRoute?.settings.name == AppRoutes.friends
                         ? null
-                        : () => Navigator.of(context).pushNamedAndRemoveUntil(
+                        : () => navigator.pushNamedAndRemoveUntil(
                               AppRoutes.friends,
                               ModalRoute.withName(AppRoutes.home),
                             ),
                   ),
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 7, bottom: 7, left: 8, right: 8),
-                color: Colors.blueGrey[100],
-                height: 25,
-                width: 1,
-              ),
-              ClipOval(
-                child: Material(
-                  color: widget.color,
-                  child: IconButton(
-                    icon: const Icon(Icons.translate),
-                    color: AppModel.of(context).locale == AppLocale.ru ? AppColors.secondary : Colors.blueGrey,
-                    onPressed: () => AppModel.of(context).toggleLocale(),
-                  ),
-                ),
+              _getLine(),
+              ScopedModelDescendant<AppModel>(
+                builder: (context, child, model) => model.isLogin
+                    ? ClipOval(
+                        child: Material(
+                          color: widget.color,
+                          child: IconButton(
+                            tooltip: AppLocalizations.of(context)!.common_header_sign_out,
+                            icon: const Icon(Icons.logout),
+                            color: Colors.blueGrey,
+                            disabledColor: AppColors.secondary,
+                            onPressed: () async {
+                              // call logout
+                              await AppModel.of(context).logout();
+                              // check route
+                              // @todo Not the best solution
+                              switch (modalRoute?.settings.name) {
+                                case AppRoutes.cards:
+                                case AppRoutes.stats:
+                                case AppRoutes.friends:
+                                  navigator.pushNamedAndRemoveUntil(
+                                    AppRoutes.signIn,
+                                    ModalRoute.withName(AppRoutes.home),
+                                  );
+                                  break;
+                              }
+                            },
+                          ),
+                        ),
+                      )
+                    : ClipOval(
+                        child: Material(
+                          color: widget.color,
+                          child: IconButton(
+                            tooltip: AppLocalizations.of(context)!.common_header_sign_in,
+                            icon: const Icon(Icons.login),
+                            color: Colors.blueGrey,
+                            disabledColor: AppColors.secondary,
+                            onPressed: modalRoute?.settings.name == AppRoutes.signIn
+                                ? null
+                                : () => navigator.pushNamedAndRemoveUntil(
+                                      AppRoutes.signIn,
+                                      ModalRoute.withName(AppRoutes.home),
+                                    ),
+                          ),
+                        ),
+                      ),
               ),
             ],
           ),
         ],
       ),
+    );
+  }
+
+  Widget _getLine() {
+    return Container(
+      margin: const EdgeInsets.only(top: 7, bottom: 7, left: 8, right: 8),
+      color: Colors.blueGrey[100],
+      height: 25,
+      width: 1,
     );
   }
 }

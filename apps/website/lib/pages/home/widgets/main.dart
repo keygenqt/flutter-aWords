@@ -1,14 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
+import 'package:scoped_model/scoped_model.dart';
 import 'package:website/app.dart';
+import 'package:website/model.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
-class HomeMainWidget extends StatelessWidget {
-  const HomeMainWidget({super.key});
+class HomeMainWidget extends StatefulWidget {
+  const HomeMainWidget({
+    super.key,
+  });
 
+  @override
+  State<HomeMainWidget> createState() => _HomeMainWidgetState();
+}
+
+class _HomeMainWidgetState extends State<HomeMainWidget> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -24,7 +33,6 @@ class HomeMainWidget extends StatelessWidget {
                   flex: 5,
                   child: Container(
                     alignment: Alignment.centerLeft,
-                    // color: Colors.red,
                     child: Lottie.asset(
                       'lottie/home_main_robot.json',
                       height: 500,
@@ -62,21 +70,26 @@ class HomeMainWidget extends StatelessWidget {
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                         const SizedBox(height: 30),
-                        Material(
-                          color: AppColors.secondary,
-                          borderRadius: AppRadius.small,
-                          child: InkWell(
-                            borderRadius: AppRadius.small,
-                            onTap: () => Navigator.of(context).pushNamed(AppRoutes.signUp),
-                            child: ClipRRect(
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  vertical: 10,
-                                  horizontal: 14,
-                                ),
-                                child: Text(
-                                  AppLocalizations.of(context)!.home_main_btn,
-                                  style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white),
+                        ScopedModelDescendant<AppModel>(
+                          builder: (context, child, model) => Visibility(
+                            visible: !model.isLogin,
+                            child: Material(
+                              color: AppColors.secondary,
+                              borderRadius: AppRadius.small,
+                              child: InkWell(
+                                borderRadius: AppRadius.small,
+                                onTap: () => Navigator.of(context).pushNamed(AppRoutes.signUp),
+                                child: ClipRRect(
+                                  child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 10,
+                                      horizontal: 14,
+                                    ),
+                                    child: Text(
+                                      AppLocalizations.of(context)!.home_main_btn,
+                                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(color: Colors.white),
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),

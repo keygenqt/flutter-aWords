@@ -6,7 +6,6 @@ import 'package:validated/validated.dart' as validated;
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
 import 'package:website/http/request/sign_in_request.dart';
-import 'package:website/http/response/auth_response.dart';
 import 'package:website/http/services/auth_service.dart';
 
 /// Model for [SignInPage]
@@ -14,7 +13,7 @@ class SignInModel extends Model {
   /// Get [ScopedModel]
   static SignInModel of(BuildContext context) => ScopedModel.of<SignInModel>(context);
 
-  /// Get service users
+  /// Get service auth
   final AuthService service = getIt<AuthService>();
 
   /// Error response
@@ -32,25 +31,6 @@ class SignInModel extends Model {
 
   bool get success => _success;
 
-  /// Users response
-  AuthResponse? _auth;
-
-  AuthResponse? get auth => _auth;
-
-  Future<void> logout() async {
-    _error = {};
-    _loading = true;
-    _success = false;
-    try {
-      await service.logout();
-      _success = true;
-    } catch (e) {
-      _error = e.getErrors();
-    }
-    _loading = false;
-    notifyListeners();
-  }
-
   /// Get users
   Future<bool> signIn({
     required String email,
@@ -64,7 +44,7 @@ class SignInModel extends Model {
       // for animation
       await Future.delayed(const Duration(seconds: 1));
       // execute request
-      _auth = await service.login(SignInRequest(
+      await service.login(SignInRequest(
         email: email,
         password: password,
         uniqueKey: await Ipify.ipv64(),
@@ -72,8 +52,8 @@ class SignInModel extends Model {
       _success = true;
     } catch (e) {
       _error = e.getErrors();
+      _loading = false;
     }
-    _loading = false;
     notifyListeners();
     return _success;
   }

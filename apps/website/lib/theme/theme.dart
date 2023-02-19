@@ -26,9 +26,31 @@ final appTheme = ThemeData(
   /// [OutlinedButton]
   outlinedButtonTheme: OutlinedButtonThemeData(
     style: ButtonStyle(
-      foregroundColor: MaterialStateProperty.all<Color>(AppColors.secondary),
-      side: MaterialStateProperty.all(const BorderSide(color: AppColors.secondary)),
+      foregroundColor: MaterialStateProperty.resolveWith<Color>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return AppColors.secondary.withOpacity(0.4);
+          } else {
+            return AppColors.secondary;
+          }
+        }
+      ),
+      side: MaterialStateProperty.resolveWith<BorderSide>(
+        (Set<MaterialState> states) {
+          if (states.contains(MaterialState.disabled)) {
+            return BorderSide(color: AppColors.secondary.withOpacity(0.4));
+          } else {
+            return const BorderSide(color: AppColors.secondary);
+          }
+        }
+      ),
     ),
+
+    // style: ButtonStyle(shape: MaterialStateProperty.all(RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0))),
+    //   side: MaterialStateProperty.all(BorderSide(
+    //     color: AppColors.blue,
+    //   )),
+    // ),)
   ),
 
   /// [Text]

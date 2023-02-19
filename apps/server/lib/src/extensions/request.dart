@@ -23,6 +23,12 @@ extension HttpRequestExt on HttpRequest {
   /// Add session cookie
   void setSessionCookie(UserModel user, TokenModel auth) {
     response.cookies.add(
+      Cookie(sessionLoginKey, 'true')
+        ..httpOnly = false
+        ..path = '/'
+        ..expires = Jiffy(auth.createAt).add(months: sessionExpires).dateTime,
+    );
+    response.cookies.add(
       Cookie(
           sessionKey,
           user.generateCookieSecret(
@@ -40,6 +46,12 @@ extension HttpRequestExt on HttpRequest {
     try {
       Cookie session = cookies.firstWhere((cookie) => cookie.name == sessionKey && cookie.httpOnly);
       final json = jsonDecode(Crypto.decrypt(session.value));
+      response.cookies.add(
+        Cookie(sessionLoginKey, 'false')
+          ..httpOnly = false
+          ..path = '/'
+          ..expires = DateTime.now(),
+      );
       response.cookies.add(
         Cookie(sessionKey, '-')
           ..path = '/'

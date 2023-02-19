@@ -17,17 +17,19 @@ final getIt = GetIt.instance;
 void setupDI(BuildConfig config) {
   final dio = configureDio(url: config.baseUrl);
   getIt
-    // other
-    ..registerSingleton<AppModel>(AppModel())
-    ..registerSingleton<BuildConfig>(config)
-    //
+  // services
     ..registerSingleton<AuthService>(AuthService(dio))
     ..registerSingleton<UsersService>(UsersService(dio))
-    // pages models
+  // pages models
     ..registerFactory<HomeModel>(() => HomeModel())
     ..registerFactory<SignInModel>(() => SignInModel())
     ..registerFactory<SignUpModel>(() => SignUpModel())
     ..registerFactory<CardsModel>(() => CardsModel())
     ..registerFactory<StatsModel>(() => StatsModel())
-    ..registerFactory<FriendsModel>(() => FriendsModel());
+    ..registerFactory<FriendsModel>(() => FriendsModel())
+    // other
+    ..registerSingleton<AppModel>(AppModel())
+    ..registerSingleton<BuildConfig>(config);
+
+
 }

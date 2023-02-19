@@ -5,7 +5,6 @@ import 'package:validated/validated.dart' as validated;
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
 import 'package:website/http/request/sign_up_request.dart';
-import 'package:website/http/response/auth_response.dart';
 import 'package:website/http/services/auth_service.dart';
 
 /// Model for [SignUpPage]
@@ -31,11 +30,6 @@ class SignUpModel extends Model {
 
   bool get success => _success;
 
-  /// Users response
-  AuthResponse? _auth;
-
-  AuthResponse? get auth => _auth;
-
   /// Get users
   Future<bool> signUp({
     required String name,
@@ -50,7 +44,7 @@ class SignUpModel extends Model {
       // for animation
       await Future.delayed(const Duration(seconds: 1));
       // execute request
-      _auth = await service.registration(SignUpRequest(
+      await service.registration(SignUpRequest(
         name: name,
         email: email,
         password: password,
@@ -59,8 +53,8 @@ class SignUpModel extends Model {
       _success = true;
     } catch (e) {
       _error = e.getErrors();
+      _loading = false;
     }
-    _loading = false;
     notifyListeners();
     return _success;
   }

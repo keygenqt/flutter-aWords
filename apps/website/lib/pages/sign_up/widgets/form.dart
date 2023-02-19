@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:website/app.dart';
+import 'package:website/base/app_di.dart';
+import 'package:website/model.dart';
 import 'package:website/pages/sign_up/model.dart';
 import 'package:website/widgets/buttons/button_form_loading.dart';
 
@@ -13,6 +16,8 @@ class SignUpFormWidget extends StatefulWidget {
 }
 
 class _SignUpFormWidgetState extends State<SignUpFormWidget> {
+  final AppModel appModel = getIt<AppModel>();
+
   final _formKey = GlobalKey<FormState>();
   final _nameKey = GlobalKey<FormFieldState>();
   final _emailKey = GlobalKey<FormFieldState>();
@@ -107,9 +112,12 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                 );
                 // check result
                 if (success) {
-                  _fieldName.text = '';
-                  _fieldEmail.text = '';
-                  _fieldPassword.text = '';
+                  Future.delayed(const Duration(seconds: 1), () {
+                    // toggle app login
+                    appModel.login();
+                    // open root page
+                    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (Route<dynamic> route) => false);
+                  });
                 } else {
                   _nameKey.currentState!.validate();
                   _emailKey.currentState!.validate();

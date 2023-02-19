@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:website/http/request/sign_in_request.dart';
 import 'package:website/http/request/sign_up_request.dart';
-import 'package:website/http/response/auth_response.dart';
 
 /// Http service API
 /// - '/api/login'
@@ -13,19 +12,13 @@ class AuthService {
   final Dio dio;
 
   /// Login user
-  Future<AuthResponse> login(SignInRequest request) async {
-    // query
-    final response = await dio.post('/api/login', data: request.toJson());
-    // mapper
-    return AuthResponse.fromJson(response.data);
+  Future<void> login(SignInRequest request) async {
+    await dio.post('/api/login', data: request.toJson());
   }
 
   /// Registration user
-  Future<AuthResponse> registration(SignUpRequest request) async {
-    // query
-    final response = await dio.post('/api/registration', data: request.toJson());
-    // mapper
-    return AuthResponse.fromJson(response.data);
+  Future<void> registration(SignUpRequest request) async {
+    await dio.post('/api/registration', data: request.toJson());
   }
 
   /// Logout user
