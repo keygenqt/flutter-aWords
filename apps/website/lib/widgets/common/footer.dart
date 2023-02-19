@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:website/app.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
@@ -56,7 +57,9 @@ class _FooterWidgetState extends State<FooterWidget> {
                                   Icons.telegram,
                                   color: Colors.white,
                                 ),
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await launchUrl(Uri.parse('https://t.me/keygenqt'));
+                                },
                               ),
                             ),
                           ),
@@ -69,7 +72,9 @@ class _FooterWidgetState extends State<FooterWidget> {
                                   Icons.email,
                                   color: Colors.white,
                                 ),
-                                onPressed: () {},
+                                onPressed: () async {
+                                  await launchUrl(Uri.parse('mailto:keygenqt@gmail.com'));
+                                },
                               ),
                             ),
                           ),

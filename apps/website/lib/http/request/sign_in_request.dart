@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
-import 'package:website/extensions/map_ext.dart';
 
 part 'sign_in_request.g.dart';
 
