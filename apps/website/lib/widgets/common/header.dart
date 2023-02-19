@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:website/app.dart';
 import 'package:website/model.dart';
+import 'package:website/routes/routes.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
 
@@ -116,21 +116,11 @@ class _HeaderWidgetState extends State<HeaderWidget> {
                             icon: const Icon(Icons.logout),
                             color: Colors.blueGrey,
                             disabledColor: AppColors.secondary,
-                            onPressed: () async {
+                            onPressed: () {
                               // call logout
-                              await AppModel.of(context).logout();
-                              // check route
-                              // @todo Not the best solution
-                              switch (modalRoute?.settings.name) {
-                                case AppRoutes.cards:
-                                case AppRoutes.stats:
-                                case AppRoutes.friends:
-                                  navigator.pushNamedAndRemoveUntil(
-                                    AppRoutes.signIn,
-                                    ModalRoute.withName(AppRoutes.home),
-                                  );
-                                  break;
-                              }
+                              model.logout();
+                              // open root page
+                              navigator.pushReplacementNamed(AppRoutes.current);
                             },
                           ),
                         ),

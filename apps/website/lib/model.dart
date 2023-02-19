@@ -39,14 +39,14 @@ class AppModel extends Model {
   }
 
   /// Login user
-  void login() async {
+  void login() {
     _isLogin = true;
     notifyListeners();
   }
 
   /// Logout user
-  Future<void> logout() async {
-    await service.logout();
+  void logout() {
+    service.logout();
     _isLogin = false;
     notifyListeners();
   }

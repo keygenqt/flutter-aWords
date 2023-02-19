@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
-import 'package:website/app.dart';
+import 'package:website/routes/routes.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/pages/sign_up/model.dart';
 import 'package:website/pages/sign_up/widgets/form.dart';

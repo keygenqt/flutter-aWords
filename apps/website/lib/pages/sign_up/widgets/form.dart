@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-import 'package:website/app.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/model.dart';
 import 'package:website/pages/sign_up/model.dart';
+import 'package:website/routes/routes.dart';
 import 'package:website/widgets/buttons/button_form_loading.dart';
 
 class SignUpFormWidget extends StatefulWidget {
@@ -42,6 +42,10 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final localizations = AppLocalizations.of(context);
+    final navigator = Navigator.of(context);
+
     // validate for change localization
     if (_nameKey.currentState?.hasError ?? false) {
       _nameKey.currentState!.validate();
@@ -60,11 +64,11 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
             enabled: !widget.model.loading,
             key: _nameKey,
             controller: _fieldName,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: theme.textTheme.bodyMedium,
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
               filled: true,
-              hintText: AppLocalizations.of(context)!.signUp_field_name,
+              hintText: localizations!.signUp_field_name,
             ),
             onChanged: (_) => _nameKey.currentState!.validate(),
             validator: (value) => widget.model.validateName(context, value),
@@ -74,11 +78,11 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
             enabled: !widget.model.loading,
             key: _emailKey,
             controller: _fieldEmail,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: theme.textTheme.bodyMedium,
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               filled: true,
-              hintText: AppLocalizations.of(context)!.signUp_field_email,
+              hintText: localizations!.signUp_field_email,
             ),
             onChanged: (_) => _emailKey.currentState!.validate(),
             validator: (value) => widget.model.validateEmail(context, value),
@@ -89,11 +93,11 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
             key: _passwordKey,
             controller: _fieldPassword,
             obscureText: true,
-            style: Theme.of(context).textTheme.bodyMedium,
+            style: theme.textTheme.bodyMedium,
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
               filled: true,
-              hintText: AppLocalizations.of(context)!.signUp_field_passw,
+              hintText: localizations!.signUp_field_passw,
             ),
             onChanged: (_) => _passwordKey.currentState!.validate(),
             validator: (value) => widget.model.validatePassword(context, value),
@@ -101,7 +105,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
           const SizedBox(height: 30),
           ButtonFormLoadingWidget(
             loading: widget.model.loading,
-            text: AppLocalizations.of(context)!.signUp_field_btn_submit,
+            text: localizations!.signUp_field_btn_submit,
             onTap: () async {
               if (_formKey.currentState!.validate()) {
                 // send
@@ -116,7 +120,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
                     // toggle app login
                     appModel.login();
                     // open root page
-                    Navigator.of(context).pushNamedAndRemoveUntil(AppRoutes.home, (Route<dynamic> route) => false);
+                    navigator.pushReplacementNamed(AppRoutes.redirect);
                   });
                 } else {
                   _nameKey.currentState!.validate();

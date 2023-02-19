@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:website/app.dart';
 import 'package:website/model.dart';
+import 'package:website/routes/routes.dart';
 import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
 import 'package:website/utils/locale.dart';

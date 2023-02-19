@@ -13,7 +13,7 @@ class AppLayout extends StatefulWidget {
   const AppLayout({
     super.key,
     required this.page,
-    this.type = AppLayoutType.white,
+    this.type = AppLayoutType.gray,
   });
 
   final AppLayoutType type;
