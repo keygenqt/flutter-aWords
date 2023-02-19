@@ -39,7 +39,6 @@ class _SignUpPageState extends State<SignUpPage> {
                     AppLocalizations.of(context)!.signUp_title,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
-                  const SizedBox(height: 30),
                   BoxAlert(visible: model.errorCommon != null, text: model.errorCommon),
                   BoxAlert(
                     visible: model.success,
