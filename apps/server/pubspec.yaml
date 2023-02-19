@@ -20,6 +20,10 @@ dependencies:
   # This is a simple Service Locator for Dart and Flutter projects with some additional goodies
   # highly inspired by Splat.
   get_it: ^7.2.0
+  # https://pub.dev/packages/jiffy
+  # Jiffy is a Flutter (Android, IOS and Web) date time package inspired by momentjs for parsing,
+  # manipulating, querying and formatting dates
+  jiffy: ^5.0.0
   # https://pub.dev/packages/json_annotation
   # Defines the annotations used by json_serializable to create code for JSON serialization
   # and deserialization.
@@ -44,6 +48,9 @@ dependencies:
   # https://pub.dev/packages/validated
   # The ultimate dart + flutter string validators.
   validated: ^2.0.0
+  # https://pub.dev/packages/uuid
+  # Simple, fast generation of RFC4122 UUIDs.
+  uuid: ^3.0.7
 
 dev_dependencies:
   # https://pub.dev/packages/build_runner

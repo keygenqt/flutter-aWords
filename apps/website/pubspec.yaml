@@ -25,6 +25,9 @@ dependencies:
   # https://pub.dev/packages/validated
   # The ultimate dart + flutter string validators.
   validated: ^2.0.0
+  # https://pub.dev/packages/validated
+  # The ultimate dart + flutter string validators.
+  dart_ipify: ^1.1.1
 
 dev_dependencies:
   build_runner: ^2.3.3

@@ -92,13 +92,24 @@ class UserModel {
         name: json['name']?.toString() ?? name,
         email: json['email']?.toString() ?? email,
         password: json['password']?.toString().asMD5() ?? password,
-        role: json['role'] == null ||
-                int.tryParse(json['role'].toString()) == null
+        role: json['role'] == null || int.tryParse(json['role'].toString()) == null
             ? role
             : UserRole.values[int.parse(json['role'].toString())],
       );
 
   String generateToken() {
     return Crypto.encrypt(const JsonEncoder().convert(this));
+  }
+
+  String generateCookieSecret(
+    String token,
+    String uniqueKey,
+    DateTime createAt,
+  ) {
+    return Crypto.encrypt(const JsonEncoder().convert({
+      'basic': 'Basic ${token}',
+      'uniqueKey': uniqueKey,
+      'createAt': createAt.toIso8601String(),
+    }));
   }
 }

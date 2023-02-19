@@ -41,8 +41,7 @@ class RegistrationRoute implements Route {
             ]);
           }
           // create model
-          final model =
-              (await _serviceUsers.insert([UserModel.fromJson(body)])).first;
+          final model = (await _serviceUsers.insert([UserModel.fromJson(body)])).first;
           // clear token by uniqueKey
           await _serviceTokens.deleteByKey(
             key: body['uniqueKey'].toString(),
@@ -56,6 +55,13 @@ class RegistrationRoute implements Route {
               createAt: DateTime.now(),
             ),
           ]);
+
+          // set auth cookie
+          request.setSessionCookie(
+            model,
+            auth.first,
+          );
+
           // write data
           request.writeJson(auth.first);
         },

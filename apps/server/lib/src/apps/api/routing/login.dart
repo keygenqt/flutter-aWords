@@ -45,7 +45,9 @@ class LoginRoute implements Route {
           await _serviceTokens.deleteByKey(
             key: body['uniqueKey'].toString(),
           );
-          // create new token
+          // clear session
+          request.removeSessionCookie();
+          // set auth cookie
           final auth = await _serviceTokens.insert([
             TokenModel.create(
               userId: user.id!,
@@ -54,11 +56,11 @@ class LoginRoute implements Route {
               createAt: DateTime.now(),
             ),
           ]);
-
-          // test cookies
-          request.cookies.add(Cookie('session1', auth.first.token));
-          request.response.cookies.add(Cookie('session2', auth.first.token));
-
+          // set auth cookie
+          request.setSessionCookie(
+            user,
+            auth.first,
+          );
           // write data
           request.writeJson(auth.first);
         },

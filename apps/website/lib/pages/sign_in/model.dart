@@ -1,3 +1,4 @@
+import 'package:dart_ipify/dart_ipify.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:scoped_model/scoped_model.dart';
@@ -36,6 +37,20 @@ class SignInModel extends Model {
 
   AuthResponse? get auth => _auth;
 
+  Future<void> logout() async {
+    _error = {};
+    _loading = true;
+    _success = false;
+    try {
+      await service.logout();
+      _success = true;
+    } catch (e) {
+      _error = e.getErrors();
+    }
+    _loading = false;
+    notifyListeners();
+  }
+
   /// Get users
   Future<bool> signIn({
     required String email,
@@ -52,7 +67,7 @@ class SignInModel extends Model {
       _auth = await service.login(SignInRequest(
         email: email,
         password: password,
-        uniqueKey: 'uniqueKey',
+        uniqueKey: await Ipify.ipv64(),
       ));
       _success = true;
     } catch (e) {

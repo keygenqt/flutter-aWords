@@ -27,4 +27,9 @@ class AuthService {
     // mapper
     return AuthResponse.fromJson(response.data);
   }
+
+  /// Logout user
+  Future<void> logout() async {
+    await dio.delete('/api/logout');
+  }
 }

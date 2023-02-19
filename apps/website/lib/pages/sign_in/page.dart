@@ -51,9 +51,19 @@ class _SignInPageState extends State<SignInPage> {
                   const SizedBox(height: 20),
                   Container(
                     alignment: Alignment.centerRight,
-                    child: OutlinedButton(
-                      onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signUp),
-                      child: Text(AppLocalizations.of(context)!.signIn_field_btn_signUp),
+                    // @todo
+                    child: Row(
+                      children: [
+                        OutlinedButton(
+                          onPressed: () => model.logout(),
+                          child: const Text('Logout'),
+                        ),
+                        Expanded(child: Container()),
+                        OutlinedButton(
+                          onPressed: () => Navigator.of(context).pushNamed(AppRoutes.signUp),
+                          child: Text(AppLocalizations.of(context)!.signIn_field_btn_signUp),
+                        )
+                      ],
                     ),
                   ),
                 ],

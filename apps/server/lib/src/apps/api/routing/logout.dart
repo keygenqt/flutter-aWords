@@ -21,8 +21,8 @@ class LogoutRoute implements Route {
         method: Methods.delete,
         path: path,
         func: (request) async {
-          // get auth
-          final basic = request.headers.value('authorization').toString();
+          // clear session
+          final basic = request.removeSessionCookie() ?? request.headers.value('authorization').toString();
           // get hash
           final hash = basic.substring(6, basic.length);
           // invoke delete
@@ -33,6 +33,7 @@ class LogoutRoute implements Route {
           if (count == 0) {
             throw AppException.notFound();
           } else {
+            // response success
             request.writeJson(SuccessResponse('Token deleted successfully'));
           }
         },
