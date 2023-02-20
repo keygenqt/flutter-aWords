@@ -43,7 +43,7 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final localizations = AppLocalizations.of(context);
+    final localizations = AppLocalizations.of(context)!;
     final navigator = Navigator.of(context);
 
     // validate for change localization
@@ -68,9 +68,12 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
             keyboardType: TextInputType.name,
             decoration: InputDecoration(
               filled: true,
-              hintText: localizations!.signUp_field_name,
+              hintText: localizations.signUp_field_name,
             ),
-            onChanged: (_) => _nameKey.currentState!.validate(),
+            onChanged: (_) {
+              widget.model.clearError();
+              _nameKey.currentState!.validate();
+            },
             validator: (value) => widget.model.validateName(context, value),
           ),
           const SizedBox(height: 20),
@@ -82,9 +85,12 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
             keyboardType: TextInputType.emailAddress,
             decoration: InputDecoration(
               filled: true,
-              hintText: localizations!.signUp_field_email,
+              hintText: localizations.signUp_field_email,
             ),
-            onChanged: (_) => _emailKey.currentState!.validate(),
+            onChanged: (_) {
+              widget.model.clearError();
+              _emailKey.currentState!.validate();
+            },
             validator: (value) => widget.model.validateEmail(context, value),
           ),
           const SizedBox(height: 20),
@@ -97,15 +103,18 @@ class _SignUpFormWidgetState extends State<SignUpFormWidget> {
             keyboardType: TextInputType.visiblePassword,
             decoration: InputDecoration(
               filled: true,
-              hintText: localizations!.signUp_field_passw,
+              hintText: localizations.signUp_field_passw,
             ),
-            onChanged: (_) => _passwordKey.currentState!.validate(),
+            onChanged: (_) {
+              widget.model.clearError();
+              _passwordKey.currentState!.validate();
+            },
             validator: (value) => widget.model.validatePassword(context, value),
           ),
           const SizedBox(height: 30),
           ButtonFormLoadingWidget(
             loading: widget.model.loading,
-            text: localizations!.signUp_field_btn_submit,
+            text: localizations.signUp_field_btn_submit,
             onTap: () async {
               if (_formKey.currentState!.validate()) {
                 // send

@@ -53,6 +53,7 @@ class SignUpModel extends Model {
       _success = true;
     } catch (e) {
       _error = e.getErrors();
+      print(_error);
       _loading = false;
     }
     notifyListeners();
@@ -66,9 +67,7 @@ class SignUpModel extends Model {
       return AppLocalizations.of(context)!.signUp_validate_name_empty;
     }
     // validate from server
-    final server = _error['name'];
-    _error.remove('name');
-    return server;
+    return _error['name'];
   }
 
   /// Validate email change
@@ -80,9 +79,7 @@ class SignUpModel extends Model {
       return AppLocalizations.of(context)!.signUp_validate_email_not_match;
     }
     // validate from server
-    final server = _error['email'];
-    _error.remove('email');
-    return server;
+    return _error['email'];
   }
 
   /// Validate password change
@@ -92,8 +89,11 @@ class SignUpModel extends Model {
       return AppLocalizations.of(context)!.signUp_validate_password_empty;
     }
     // validate from server
-    final server = _error['password'];
-    _error.remove('password');
-    return server;
+    return _error['password'];
+  }
+
+  /// Clear server error
+  void clearError() {
+    _error.clear();
   }
 }

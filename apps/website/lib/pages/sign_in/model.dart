@@ -67,9 +67,7 @@ class SignInModel extends Model {
       return AppLocalizations.of(context)!.signIn_validate_email_not_match;
     }
     // validate from server
-    final server = _error['email'];
-    _error.remove('email');
-    return server;
+    return _error['email'];
   }
 
   /// Validate password change
@@ -79,8 +77,11 @@ class SignInModel extends Model {
       return AppLocalizations.of(context)!.signIn_validate_password_empty;
     }
     // validate from server
-    final server = _error['password'];
-    _error.remove('password');
-    return server;
+    return _error['password'];
+  }
+
+  /// Clear server error
+  void clearError() {
+    _error.clear();
   }
 }

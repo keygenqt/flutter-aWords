@@ -70,7 +70,10 @@ class _SignInFormWidgetState extends State<SignInFormWidget> {
               filled: true,
               hintText: localizations!.signIn_field_email,
             ),
-            onChanged: (_) => _emailKey.currentState!.validate(),
+            onChanged: (_) {
+              widget.model.clearError();
+              _emailKey.currentState!.validate();
+            },
             validator: (value) => widget.model.validateEmail(context, value),
           ),
           const SizedBox(height: 20),
@@ -85,7 +88,10 @@ class _SignInFormWidgetState extends State<SignInFormWidget> {
               filled: true,
               hintText: localizations!.signIn_field_passw,
             ),
-            onChanged: (_) => _passwordKey.currentState!.validate(),
+            onChanged: (_) {
+              widget.model.clearError();
+              _passwordKey.currentState!.validate();
+            },
             validator: (value) => widget.model.validatePassword(context, value),
           ),
           const SizedBox(height: 30),
