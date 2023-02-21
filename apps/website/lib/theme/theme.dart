@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:website/theme/colors.dart';
+import 'package:website/theme/radius.dart';
 
 final appTheme = ThemeData(
+  cardTheme: CardTheme(
+      clipBehavior: Clip.antiAlias,
+      margin: const EdgeInsets.all(0),
+      elevation: 0,
+      shape: RoundedRectangleBorder(
+        borderRadius: AppRadius.large,
+      )
+  ),
   /// Cursor color
   textSelectionTheme: const TextSelectionThemeData(
     cursorColor: AppColors.primary, //thereby
   ),
   /// [TextFormField]
   inputDecorationTheme: const InputDecorationTheme(
-    fillColor: AppColors.backgroundLightSecondary,
+    fillColor: AppColors.backgroundLightGray,
     focusedBorder: UnderlineInputBorder(
       borderSide: BorderSide(color: AppColors.primary),
     ),

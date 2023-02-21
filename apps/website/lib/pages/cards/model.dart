@@ -34,7 +34,7 @@ class CardsModel extends Model {
     _loading = true;
     notifyListeners();
     try {
-      await Future.delayed(const Duration(seconds: 3));
+      await Future.delayed(const Duration(seconds: 2));
       _models = await service.getList();
     } catch (e) {
       _error = e.getMessage();

@@ -25,7 +25,7 @@ class _AppLayoutState extends State<EmptyLayout> {
       child: Builder(
         builder: (context) {
           return PageWidget(
-            color: AppColors.backgroundLightSecondary,
+            color: AppColors.backgroundLightGray,
             spacing: 20,
             body: widget.page,
           );

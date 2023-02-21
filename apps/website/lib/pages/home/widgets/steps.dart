@@ -9,7 +9,7 @@ class HomeStepsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: AppColors.backgroundLightSecondary,
+      color: AppColors.backgroundLightGray,
       child: Padding(
         padding: const EdgeInsets.only(top: 80, bottom: 80, left: 30, right: 30),
         child: PageItemWidget(

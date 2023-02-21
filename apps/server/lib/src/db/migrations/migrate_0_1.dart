@@ -50,6 +50,13 @@ INSERT INTO "$table" ($columns) VALUES
   $timestamp),
   
   (1, 
+  "https://api.keygenqt.com/api/ps/file/85668291-bab8-4970-81b7-90aa8151a201.png", 
+  "Emotions", 
+  "Various emotions", 
+  $timestamp, 
+  $timestamp),
+  
+  (1, 
   "https://api.keygenqt.com/api/ps/file/e2a1e83f-3159-4c42-891b-73a8f8fb8f35.png", 
   "Technique", 
   "Home appliances", 

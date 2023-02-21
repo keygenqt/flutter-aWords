@@ -35,13 +35,13 @@ class _AppLayoutState extends State<AppLayout> {
             return PageWidget(
               color: widget.type == AppLayoutType.white
                   ? AppColors.backgroundLight
-                  : AppColors.backgroundLightSecondary,
+                  : AppColors.backgroundLightGray,
               spacing: 20,
               body: widget.page,
               header: PageItemWidget(
                 child: HeaderWidget(
                     color: widget.type == AppLayoutType.white
-                        ? AppColors.backgroundLightSecondary
+                        ? AppColors.backgroundLightGray
                         : AppColors.backgroundLight),
               ),
               footer: const FooterWidget(),

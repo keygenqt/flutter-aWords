@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/pages/stats/model.dart';
@@ -23,10 +24,10 @@ class _StatsPageState extends State<StatsPage> {
           child: Center(
             child: Column(
               children: [
-                Text(
-                  'List stats',
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleLarge,
+                Lottie.asset(
+                  'lottie/empty.json',
+                  width: 260,
+                  fit: BoxFit.contain,
                 ),
               ],
             ),

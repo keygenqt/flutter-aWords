@@ -30,36 +30,34 @@ class _SignUpPageState extends State<SignUpPage> {
       child: ScopedModelDescendant<SignUpModel>(builder: (context, child, model) {
         return PageItemWidget(
           maxWidth: 400,
-          child: Container(
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: AppRadius.large,
-            ),
-            padding: const EdgeInsets.all(30),
-            child: Center(
-              child: Column(
-                children: [
-                  Text(
-                    localizations.signUp_title,
-                    style: theme.textTheme.titleMedium,
-                  ),
-                  BoxAlert(visible: model.errorCommon != null, text: model.errorCommon),
-                  BoxAlert(
-                    visible: model.success,
-                    color: Colors.green,
-                    text: localizations.signUp_successfully,
-                  ),
-                  const SizedBox(height: 20),
-                  SignUpFormWidget(model: model),
-                  const SizedBox(height: 20),
-                  Container(
-                    alignment: Alignment.centerRight,
-                    child: OutlinedButton(
-                      onPressed: model.loading ? null : () => navigator.pushReplacementNamed(AppRoutes.signIn),
-                      child: Text(localizations.signUp_field_btn_signIn),
+          child: Card(
+            child: Container(
+              padding: const EdgeInsets.all(30),
+              child: Center(
+                child: Column(
+                  children: [
+                    Text(
+                      localizations.signUp_title,
+                      style: theme.textTheme.titleMedium,
                     ),
-                  ),
-                ],
+                    BoxAlert(visible: model.errorCommon != null, text: model.errorCommon),
+                    BoxAlert(
+                      visible: model.success,
+                      color: Colors.green,
+                      text: localizations.signUp_successfully,
+                    ),
+                    const SizedBox(height: 20),
+                    SignUpFormWidget(model: model),
+                    const SizedBox(height: 20),
+                    Container(
+                      alignment: Alignment.centerRight,
+                      child: OutlinedButton(
+                        onPressed: model.loading ? null : () => navigator.pushReplacementNamed(AppRoutes.signIn),
+                        child: Text(localizations.signUp_field_btn_signIn),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),

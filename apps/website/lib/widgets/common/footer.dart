@@ -154,7 +154,7 @@ class _FooterWidgetState extends State<FooterWidget> {
           ),
         ),
         Container(
-          color: AppColors.backgroundLightSecondary,
+          color: AppColors.backgroundLightGray,
           padding: const EdgeInsets.all(30),
           child: PageItemWidget(
             child: Row(
@@ -170,7 +170,7 @@ class _FooterWidgetState extends State<FooterWidget> {
                   children: [
                     ClipOval(
                       child: Material(
-                        color: AppColors.backgroundLightSecondary,
+                        color: AppColors.backgroundLightGray,
                         child: IconButton(
                           splashRadius: 16,
                           icon: const Icon(
