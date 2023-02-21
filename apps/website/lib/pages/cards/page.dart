@@ -14,17 +14,26 @@ class CardsPage extends StatefulWidget {
 }
 
 class _CardsPageState extends State<CardsPage> {
+
+  final model = getIt<CardsModel>();
+
+  @override
+  void initState() {
+    super.initState();
+    model.getList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return ScopedModel<CardsModel>(
-      model: getIt<CardsModel>(),
+      model: model,
       child: ScopedModelDescendant<CardsModel>(builder: (context, child, model) {
         return PageItemWidget(
           child: Center(
             child: Column(
               children: [
                 Text(
-                  'List cards',
+                  model.loading ? 'Loading...' : 'List cards, count: ${model.models?.length}',
                   textAlign: TextAlign.center,
                   style: Theme.of(context).textTheme.titleLarge,
                 ),

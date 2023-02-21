@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:website/base/app_dio.dart';
 import 'package:website/build/build.config.dart';
 import 'package:website/http/services/auth_service.dart';
+import 'package:website/http/services/cards_service.dart';
 import 'package:website/http/services/users_service.dart';
 import 'package:website/model.dart';
 import 'package:website/pages/cards/model.dart';
@@ -17,10 +18,11 @@ final getIt = GetIt.instance;
 void setupDI(BuildConfig config) {
   final dio = configureDio(url: config.baseUrl);
   getIt
-  // services
+    // services
     ..registerSingleton<AuthService>(AuthService(dio))
     ..registerSingleton<UsersService>(UsersService(dio))
-  // pages models
+    ..registerSingleton<CardsService>(CardsService(dio))
+    // pages models
     ..registerFactory<HomeModel>(() => HomeModel())
     ..registerFactory<SignInModel>(() => SignInModel())
     ..registerFactory<SignUpModel>(() => SignUpModel())
@@ -30,6 +32,4 @@ void setupDI(BuildConfig config) {
     // other
     ..registerSingleton<AppModel>(AppModel())
     ..registerSingleton<BuildConfig>(config);
-
-
 }

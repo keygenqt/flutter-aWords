@@ -19,6 +19,7 @@ class UsersRoute implements Route {
     for (final method in [
       // get all items
       Method(
+        role: [UserRole.user, UserRole.admin],
         path: path,
         func: (request) async {
           request.writeJson(await _service.getAll());

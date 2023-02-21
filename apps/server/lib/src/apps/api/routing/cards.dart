@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:server_awords/exports/apps/api/app.dart';
+import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
@@ -17,7 +18,7 @@ class CardsRoute implements Route {
     for (final method in [
       // get all items
       Method(
-        // role: [UserRole.user, UserRole.admin],
+        role: [UserRole.user, UserRole.admin],
         path: path,
         func: (request) async {
           request.writeJson(await _service.getAll());
