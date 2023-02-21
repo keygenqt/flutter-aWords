@@ -11,7 +11,7 @@ class LogoutRoute implements Route {
   @override
   String path = Routes.logout.path;
 
-  TokensService get _serviceTokens => getIt<TokensService>();
+  TokensService get _service => getIt<TokensService>();
 
   @override
   Future<void> run(HttpRequest request) async {
@@ -26,7 +26,7 @@ class LogoutRoute implements Route {
           // get hash
           final hash = basic.substring(6, basic.length);
           // invoke delete
-          final count = await _serviceTokens.deleteByToken(
+          final count = await _service.deleteByToken(
             token: hash,
           );
           // write data

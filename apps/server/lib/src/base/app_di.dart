@@ -20,6 +20,7 @@ void setupDI() {
     // configuration
     ..registerSingleton<Configuration>(Configuration())
     // init service db
+    ..registerSingleton<CardsService>(CardsService(db))
     ..registerSingleton<TokensService>(TokensService(db))
     ..registerSingleton<UsersService>(UsersService(db));
 }

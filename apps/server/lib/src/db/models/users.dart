@@ -87,14 +87,12 @@ class UserModel {
     }
   }
 
-  UserModel clone(Map<String, dynamic> json) => UserModel(
-        id: id ?? 0,
-        name: json['name']?.toString() ?? name,
-        email: json['email']?.toString() ?? email,
-        password: json['password']?.toString().asMD5() ?? password,
-        role: json['role'] == null || int.tryParse(json['role'].toString()) == null
-            ? role
-            : UserRole.values[int.parse(json['role'].toString())],
+  UserModel copy([Map<String, dynamic>? json]) => UserModel(
+        id: json.asOrNull<int>('id') ?? id,
+        name: json.asOrNull<String>('name') ?? name,
+        email: json.asOrNull<String>('email') ?? email,
+        password: json.asOrNull<String>('password')?.asMD5() ?? password,
+        role: json.asOrNull<UserRole>('role') ?? role,
       );
 
   String generateToken() {

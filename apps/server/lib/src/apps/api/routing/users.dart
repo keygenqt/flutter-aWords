@@ -12,7 +12,7 @@ class UsersRoute implements Route {
   @override
   String path = Routes.users.path;
 
-  UsersService get _serviceUsers => getIt<UsersService>();
+  UsersService get _service => getIt<UsersService>();
 
   @override
   Future<void> run(HttpRequest request) async {
@@ -21,7 +21,7 @@ class UsersRoute implements Route {
       Method(
         path: path,
         func: (request) async {
-          request.writeJson(await _serviceUsers.getAll());
+          request.writeJson(await _service.getAll());
         },
       ),
       // get one item
@@ -30,7 +30,7 @@ class UsersRoute implements Route {
         path: '$path/{id}',
         func: (request) async {
           // find model
-          final model = await _serviceUsers.findById(
+          final model = await _service.findById(
             id: request.getInt(),
           );
           // exception if user not found
@@ -52,7 +52,7 @@ class UsersRoute implements Route {
           // create model
           final model = UserModel.fromJson(body);
           // write data
-          request.writeJson((await _serviceUsers.insert([model])).first);
+          request.writeJson((await _service.insert([model])).first);
         },
       ),
       // update item
@@ -66,15 +66,15 @@ class UsersRoute implements Route {
           // validate
           validateUser(body);
           // find model
-          final model = await _serviceUsers.findById(
+          final model = await _service.findById(
             id: request.getInt(),
           );
           // exception if user not found
           if (model == null) throw AppException.notFound();
           // clone model with update params
-          final update = model.clone(await body);
+          final update = model.copy(await body);
           // write data
-          request.writeJson((await _serviceUsers.update([update])).first);
+          request.writeJson((await _service.update([update])).first);
         },
       ),
       // update item
@@ -84,7 +84,7 @@ class UsersRoute implements Route {
         path: '$path/{id}',
         func: (request) async {
           // invoke delete
-          final count = await _serviceUsers.deleteItem(
+          final count = await _service.deleteItem(
             id: request.getInt(),
           );
           // write data

@@ -2,6 +2,7 @@ import 'package:drift/drift.dart';
 import 'package:json_annotation/json_annotation.dart' as json_annotation;
 import 'package:server_awords/exports/db/database.dart';
 import 'package:server_awords/exports/db/models.dart';
+import 'package:server_awords/exports/other/extensions.dart';
 
 part 'tokens.g.dart';
 
@@ -74,18 +75,11 @@ class TokenModel {
     }
   }
 
-  TokenModel clone(Map<String, dynamic> json) {
-    // create new class
-    return TokenModel(
-      id: id ?? 0,
-      token: json['token']?.toString() ?? token,
-      uniqueKey: json['uniqueKey']?.toString() ?? uniqueKey,
-      userId: int.tryParse(json['userId'].toString()) != null
-          ? int.parse(json['userId'].toString())
-          : userId,
-      createAt: json['createAt'] != null
-          ? DateTime.parse(json['createAt'].toString())
-          : createAt,
-    );
-  }
+  TokenModel copy([Map<String, dynamic>? json]) => TokenModel(
+        id: json.asOrNull<int>('id') ?? id,
+        userId: json.asOrNull<int>('userId') ?? userId,
+        token: json.asOrNull<String>('token') ?? token,
+        uniqueKey: json.asOrNull<String>('uniqueKey') ?? uniqueKey,
+        createAt: json.asOrNull<DateTime>('createAt') ?? createAt,
+      );
 }
