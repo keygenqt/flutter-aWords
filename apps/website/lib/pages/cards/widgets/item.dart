@@ -15,10 +15,21 @@ class CardItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      constraints: const BoxConstraints(
-        maxWidth: 285,
-      ),
+    final width = MediaQuery.of(context).size.width;
+    double itemWidth = 285.0;
+
+    if (width < 1260) {
+      itemWidth = (width - 30 * 2) / 3 - (20 - 20 / 3) - 1;
+    }
+    if (width < 800) {
+      itemWidth = (width - 30 * 2) / 2 - (20 - 20 / 2) - 1;
+    }
+    if (width < 400) {
+      itemWidth = width - 30 * 2;
+    }
+
+    return SizedBox(
+      width: itemWidth,
       child: Card(
         child: Stack(
           children: [

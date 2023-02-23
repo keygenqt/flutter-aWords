@@ -4,6 +4,10 @@ import 'package:website/theme/colors.dart';
 import 'package:website/theme/radius.dart';
 
 final appTheme = ThemeData(
+  colorScheme: ThemeData().colorScheme.copyWith(
+    primary: AppColors.primary,
+    secondary: AppColors.secondary,
+  ),
   cardTheme: CardTheme(
       clipBehavior: Clip.antiAlias,
       margin: const EdgeInsets.all(0),
