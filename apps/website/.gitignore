@@ -55,3 +55,6 @@ app.*.map.json
 # npm install -g @pushcorn/hocon-parser
 # parse-hocon package.conf > package.json
 *.arb
+
+# Folder with files
+/data/
