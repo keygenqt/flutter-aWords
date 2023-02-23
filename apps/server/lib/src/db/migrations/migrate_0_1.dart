@@ -59,7 +59,7 @@ INSERT INTO "$table" ($columns) VALUES
   (1, 
   "https://api.keygenqt.com/api/ps/file/2b021f17-b875-4d90-81a3-80725b5241a7.jpeg", 
   "Appliances", 
-  "Home appliances", 
+  "Various appliances", 
   $timestamp, 
   $timestamp);
 ''');
