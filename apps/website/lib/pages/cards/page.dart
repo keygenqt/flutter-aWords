@@ -227,6 +227,7 @@ class _CardsPageState extends State<CardsPage> {
                               ))
                           .toList(),
                 ),
+                const SizedBox(height: 20),
               ],
             ),
           );
