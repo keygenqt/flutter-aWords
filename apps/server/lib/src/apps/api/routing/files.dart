@@ -2,14 +2,12 @@ import 'dart:io';
 
 import 'package:server_awords/exports/apps/api/app.dart';
 import 'package:server_awords/exports/db/models.dart';
-import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
-import 'package:server_awords/src/base/app_di.dart';
 
 /// Route API REST for Files
 class FilesRoute implements Route {
   @override
-  String path = Routes.images.path;
+  String path = Routes.files.path;
 
   @override
   Future<void> run(HttpRequest request) async {

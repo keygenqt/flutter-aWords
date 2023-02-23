@@ -12,7 +12,7 @@ mixin Route {
 
 /// Enum links api path's
 enum Routes {
-  images('$apiPath/images/{file}'),
+  files('$apiPath/files/{file}'),
   login('$apiPath/login'),
   logout('$apiPath/logout'),
   registration('$apiPath/registration'),
