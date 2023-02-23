@@ -25,6 +25,7 @@ class AppServer {
     LogoutRoute(),
     RegistrationRoute(),
     UsersRoute(),
+    FilesRoute(),
   ];
 
   Future<void> run() async {
@@ -42,7 +43,8 @@ class AppServer {
           request.response.statusCode = HttpStatus.badRequest;
           // run routes method
           await _routes
-              .where((element) => request.uri.path.startsWith(element.path))
+              .where((element) => request.uri.path.startsWith(
+                  element.path.contains('{') ? element.path.substring(0, element.path.indexOf('{')) : element.path))
               .first
               .run(request);
           // check if method not found

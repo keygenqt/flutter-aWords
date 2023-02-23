@@ -3,6 +3,7 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:lottie/lottie.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
+import 'package:website/extensions/string_ext.dart';
 import 'package:website/pages/cards/model.dart';
 import 'package:website/pages/cards/widgets/item.dart';
 import 'package:website/theme/colors.dart';
@@ -49,7 +50,7 @@ class _CardsPageState extends State<CardsPage> {
       child: TextField(
         style: theme.textTheme.bodyMedium,
         keyboardType: TextInputType.none,
-        decoration:  InputDecoration(
+        decoration: InputDecoration(
           suffixIcon: const Icon(Icons.search),
           enabledBorder: const OutlineInputBorder(
             borderSide: BorderSide(color: AppColors.fontPrimary, width: 1),
@@ -220,7 +221,7 @@ class _CardsPageState extends State<CardsPage> {
                         ]
                       : model.models!
                           .map((model) => CardItemWidget(
-                                image: model.image,
+                                image: model.image.getFileUrl(),
                                 name: model.name,
                                 desc: model.desc,
                               ))

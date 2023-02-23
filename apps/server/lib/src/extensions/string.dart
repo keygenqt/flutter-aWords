@@ -29,30 +29,46 @@ extension ExtString on String {
 
   /// Convert string to [ContentType]
   ContentType getContentType() {
-    if (contains('.html')) {
+    if (toLowerCase().contains('.html')) {
       return ContentType.parse('text/html');
     }
-    if (contains('.js')) {
+    if (toLowerCase().contains('.js')) {
       return ContentType.parse('text/javascript');
     }
-    if (contains('.json')) {
+    if (toLowerCase().contains('.json')) {
       return ContentType.parse('application/json');
     }
-    if (contains('.png')) {
+    if (toLowerCase().contains('.png')) {
       return ContentType.parse('image/png');
     }
-    if (contains('.css')) {
-      return ContentType.parse('text/css');
+    if (toLowerCase().contains('.jpeg') || toLowerCase().contains('.jpg')) {
+      return ContentType.parse('image/jpeg');
     }
-    if (contains('.ico')) {
+    if (toLowerCase().contains('.ico')) {
       return ContentType.parse('image/vnd.microsoft.icon');
     }
-    if (contains('.otf')) {
+    if (toLowerCase().contains('.css')) {
+      return ContentType.parse('text/css');
+    }
+    if (toLowerCase().contains('.otf')) {
       return ContentType.parse('font/otf');
     }
-    if (contains('.ttf')) {
+    if (toLowerCase().contains('.ttf')) {
       return ContentType.parse('font/ttf');
     }
     return ContentType.parse('application/unknown');
+  }
+
+  bool isImage() {
+    switch (toLowerCase()) {
+      case 'image/png':
+        return true;
+      case 'image/jpeg':
+        return true;
+      case 'image/vnd.microsoft.icon':
+        return true;
+      default:
+        return false;
+    }
   }
 }

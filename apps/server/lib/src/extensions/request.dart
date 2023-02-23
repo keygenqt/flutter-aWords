@@ -83,7 +83,7 @@ extension HttpRequestExt on HttpRequest {
   int getInt() => int.tryParse(uri.pathSegments.last) == null ? 0 : int.parse(uri.pathSegments.last);
 
   /// Get request string value
-  String getString() => RegExp(r'^[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+$').hasMatch(uri.pathSegments.last)
+  String getString() => RegExp(r'^[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+(\.[a-zA-Z]+)?$').hasMatch(uri.pathSegments.last)
       ? uri.pathSegments.last
       : throw AppException.notFound();
 
@@ -94,8 +94,8 @@ extension HttpRequestExt on HttpRequest {
         .split('/')
         .map(
           (e) => e.replaceFirst(
-            // 2b03f6be-c963-4493-8203-7928e195cc12 || 12
-            RegExp(r'()([a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+)|(\d+)'),
+            // 2b03f6be-c963-4493-8203-7928e195cc12.ext || 2b03f6be-c963-4493-8203-7928e195cc12 || 12
+            RegExp(r'([a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\.[a-zA-Z]+)|([a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+\-[a-z\d]+)|(\d+)'),
             '___',
           ),
         )

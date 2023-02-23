@@ -18,6 +18,8 @@ final getIt = GetIt.instance;
 void setupDI(BuildConfig config) {
   final dio = configureDio(url: config.baseUrl);
   getIt
+    // build info
+    ..registerSingleton<BuildConfig>(config)
     // services
     ..registerSingleton<AuthService>(AuthService(dio))
     ..registerSingleton<UsersService>(UsersService(dio))
@@ -30,6 +32,5 @@ void setupDI(BuildConfig config) {
     ..registerFactory<StatsModel>(() => StatsModel())
     ..registerFactory<FriendsModel>(() => FriendsModel())
     // other
-    ..registerSingleton<AppModel>(AppModel())
-    ..registerSingleton<BuildConfig>(config);
+    ..registerSingleton<AppModel>(AppModel());
 }
