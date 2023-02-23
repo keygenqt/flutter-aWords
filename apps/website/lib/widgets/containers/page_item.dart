@@ -7,18 +7,21 @@ class PageItemWidget extends StatelessWidget {
     this.color,
     this.maxWidth = 1200,
     this.padding = 30,
+    this.alignment = Alignment.center,
   });
 
   final Color? color;
   final Widget child;
   final double maxWidth;
   final int padding;
+  final Alignment alignment;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.transparent,
-      child: Center(
+      child: Container(
+        alignment: alignment,
         child: Container(
           color: color,
           width: MediaQuery.of(context).size.width >

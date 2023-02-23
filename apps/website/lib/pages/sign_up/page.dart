@@ -5,7 +5,6 @@ import 'package:website/base/app_di.dart';
 import 'package:website/pages/sign_up/model.dart';
 import 'package:website/pages/sign_up/widgets/form.dart';
 import 'package:website/routes/routes.dart';
-import 'package:website/theme/radius.dart';
 import 'package:website/widgets/blocks/box_alert.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
