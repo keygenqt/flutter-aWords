@@ -38,7 +38,7 @@ class CardItemWidget extends StatelessWidget {
                 Image.network(
                   image,
                   fit: BoxFit.cover,
-                  height: 140,
+                  height: 160,
                   width: double.infinity,
                 ),
                 Padding(

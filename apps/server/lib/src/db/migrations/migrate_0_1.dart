@@ -29,36 +29,36 @@ class Migrate_0_1 {
     await d.customInsert('''
 INSERT INTO "$table" ($columns) VALUES
   (1, 
-  "https://api.keygenqt.com/api/ps/file/bc838bad-848f-4c33-ad24-b9a288ba7408.png", 
+  "https://api.keygenqt.com/api/ps/file/ef1fb05f-22ff-4908-acda-abf281c13987.jpeg", 
   "Animals", 
   "Various animals", 
   $timestamp, 
   $timestamp),
   
   (1, 
-  "https://api.keygenqt.com/api/ps/file/bc838bad-848f-4c33-ad24-b9a288ba7408.png", 
+  "https://api.keygenqt.com/api/ps/file/b9ceb8b9-1923-42bb-96c6-5de8e5bc2495.jpeg", 
   "Flowers", 
   "Various flowers", 
   $timestamp, 
   $timestamp),
   
   (1, 
-  "https://api.keygenqt.com/api/ps/file/e2a1e83f-3159-4c42-891b-73a8f8fb8f35.png", 
+  "https://api.keygenqt.com/api/ps/file/c415fce1-57bc-4024-a034-fb021a9b5552.jpeg", 
   "Plants", 
   "Various plants", 
   $timestamp, 
   $timestamp),
   
   (1, 
-  "https://api.keygenqt.com/api/ps/file/85668291-bab8-4970-81b7-90aa8151a201.png", 
+  "https://api.keygenqt.com/api/ps/file/50b5600a-6792-4f2d-8355-b3e0176d56da.jpeg", 
   "Emotions", 
   "Various emotions", 
   $timestamp, 
   $timestamp),
   
   (1, 
-  "https://api.keygenqt.com/api/ps/file/e2a1e83f-3159-4c42-891b-73a8f8fb8f35.png", 
-  "Technique", 
+  "https://api.keygenqt.com/api/ps/file/2b021f17-b875-4d90-81a3-80725b5241a7.jpeg", 
+  "Appliances", 
   "Home appliances", 
   $timestamp, 
   $timestamp);
