@@ -1,0 +1,6 @@
+/cmake_install.cmake
+/CMakeCache.txt
+/Makefile
+/*.so*
+/CMakeFiles/
+/.vscode/

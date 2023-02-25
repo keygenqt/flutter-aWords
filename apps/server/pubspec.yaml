@@ -80,4 +80,17 @@ dev_dependencies:
   # https://pub.dev/packages/very_good_analysis
   # This package provides lint rules for Dart and Flutter which are used at Very Good Ventures.
   very_good_analysis: ^4.0.0+1
+  ffigen: ^7.2.6
 
+ffigen:
+  output: 'lib/src/generated_odbc.dart'
+  headers:
+    entry-points:
+      - 'releaseShared/libnative_api.h'
+
+
+#ffigen:
+#  output: 'lib/src/generated_odbc.dart'
+#  headers:
+#    entry-points:
+#      - 'odbc/hello.h'
