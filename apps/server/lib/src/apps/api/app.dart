@@ -4,6 +4,7 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/exports/apps/api/app.dart';
 import 'package:server_awords/exports/apps/api/routing.dart';
 import 'package:server_awords/exports/other/extensions.dart';
+import 'package:server_awords/src/apps/api/routing/hello.dart';
 import 'package:server_awords/src/base/app_di.dart';
 import 'package:server_awords/src/exports/other/constants.dart';
 
@@ -26,6 +27,7 @@ class AppServer {
     RegistrationRoute(),
     UsersRoute(),
     FilesRoute(),
+    HelloRoute(),
   ];
 
   Future<void> run() async {

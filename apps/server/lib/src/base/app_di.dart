@@ -3,6 +3,7 @@ import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/exports/db/database.dart';
 import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/src/clickhouse/ClickDatabase.dart';
+import 'package:server_awords/src/clickhouse/services/hello_service.dart';
 
 final getIt = GetIt.instance;
 
@@ -22,7 +23,9 @@ void setupDI() {
     ..registerSingleton<Logger>(Logger())
     // odbc
     ..registerSingleton<ClickDatabase>(clickhouse)
-    // init service db
+    // init service clickhouse db
+    ..registerSingleton<HelloService>(HelloService(clickhouse))
+    // init service sqlite db
     ..registerSingleton<CardsService>(CardsService(db))
     ..registerSingleton<TokensService>(TokensService(db))
     ..registerSingleton<UsersService>(UsersService(db));
