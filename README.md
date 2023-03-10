@@ -27,7 +27,7 @@ Leave notes and paper cards at home and learn a foreign language anywhere with a
 ### License
 
 ```
-Copyright 2022-2023 Vitaliy Zarubin
+Copyright 2023 Vitaliy Zarubin
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
