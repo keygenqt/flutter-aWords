@@ -17,8 +17,6 @@ void setupDI() {
   getIt
     // logger app level insert in runner.dart
     ..registerSingleton<Logger>(Logger())
-    // configuration
-    ..registerSingleton<Configuration>(Configuration())
     // init service db
     ..registerSingleton<CardsService>(CardsService(db))
     ..registerSingleton<TokensService>(TokensService(db))

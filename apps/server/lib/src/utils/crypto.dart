@@ -2,11 +2,9 @@ import 'package:encrypt/encrypt.dart';
 import 'package:server_awords/exports/other/utils.dart';
 import 'package:server_awords/src/base/app_di.dart';
 
-Configuration? get _configuration => getIt<Configuration>();
-
 /// AES encrypt/decrypt data with secret key
 class Crypto {
-  static String secret = _configuration!.data['secret']!.toString();
+  static String secret = Configuration.secret;
 
   static String encrypt(String value) {
     final key = Key.fromUtf8(secret);

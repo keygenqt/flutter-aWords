@@ -51,6 +51,12 @@ dependencies:
   # https://pub.dev/packages/uuid
   # Simple, fast generation of RFC4122 UUIDs.
   uuid: ^3.0.7
+  # https://github.com/keygenqt/dart-odbc
+  # ODBC connect
+  dart_odbc:
+    git:
+      url: git@github.com:keygenqt/dart-odbc.git
+      ref: 60216933483a8b2989b4974b56daa2c449e0c595
 
 dev_dependencies:
   # https://pub.dev/packages/build_runner
@@ -80,17 +86,3 @@ dev_dependencies:
   # https://pub.dev/packages/very_good_analysis
   # This package provides lint rules for Dart and Flutter which are used at Very Good Ventures.
   very_good_analysis: ^4.0.0+1
-  ffigen: ^7.2.6
-
-ffigen:
-  output: 'lib/src/generated_odbc.dart'
-  headers:
-    entry-points:
-      - 'releaseShared/libnative_api.h'
-
-
-#ffigen:
-#  output: 'lib/src/generated_odbc.dart'
-#  headers:
-#    entry-points:
-#      - 'odbc/hello.h'

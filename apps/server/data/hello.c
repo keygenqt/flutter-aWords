@@ -144,8 +144,8 @@ char *db_fetch()
             size_t size = sizeof(char) * (sizeA + sizeB + 1);
                                                             
             char* c = malloc(size);                          
-            memcpy(c, result, sizeA);                             
-            memcpy(c + sizeA, str, sizeB);                      
+            memcpy(c, result, sizeA);
+            memcpy(c + sizeA, str, sizeB);
             c[sizeA + sizeB] = '\0';       
             result = c;   
         }
