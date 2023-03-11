@@ -56,7 +56,7 @@ dependencies:
   dart_odbc:
     git:
       url: git@github.com:keygenqt/dart-odbc.git
-      ref: 3e7047cdd836f937c9fa1412a752e81b5354bd3e
+      ref: 599718feacfe17530d921b474b74428f52e31bb2
 
 dev_dependencies:
   # https://pub.dev/packages/build_runner

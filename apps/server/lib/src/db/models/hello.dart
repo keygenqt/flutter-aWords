@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:dart_odbc/dart_odbc.dart';
 import 'package:json_annotation/json_annotation.dart' as json_annotation;
 
 part 'hello.g.dart';
@@ -26,4 +27,11 @@ class HelloModel {
 
   @override
   String toString() => const JsonEncoder.withIndent('  ').convert(toJson());
+
+  static Map<String, SqlValue> tableMap() => {
+    'userId': SqlValueInt('user_id'),
+    'message': SqlValueString('message', 255),
+    'timestamp': SqlValueString('timestamp', 255),
+    'metric': SqlValueDouble('metric'),
+  };
 }
