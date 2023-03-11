@@ -12,6 +12,7 @@ mixin Route {
 
 /// Enum links api path's
 enum Routes {
+  state('$apiPath/state'),
   hello('$apiPath/hello'),
   files('$apiPath/files/{file}'),
   login('$apiPath/login'),
