@@ -20,9 +20,9 @@ class HelloRoute implements Route {
       Method(
         path: path,
         func: (request) async {
-
+          // clear table
           _service.clear();
-
+          // insert data
           _service.insert([
             HelloModel(
               userId: 100,
@@ -37,7 +37,7 @@ class HelloRoute implements Route {
               metric: -1.0,
             ),
           ]);
-
+          // get data
           request.writeJson(await _service.getAll());
         },
       ),
