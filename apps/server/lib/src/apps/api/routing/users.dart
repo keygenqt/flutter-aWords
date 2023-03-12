@@ -78,7 +78,7 @@ class UsersRoute implements Route {
           request.writeJson((await _service.update([update])).first);
         },
       ),
-      // update item
+      // delete item
       Method(
         role: [UserRole.admin],
         method: Methods.delete,

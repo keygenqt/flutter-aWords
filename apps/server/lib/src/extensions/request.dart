@@ -117,12 +117,9 @@ extension HttpRequestExt on HttpRequest {
     }
   }
 
-  /// Auth check
-  Future<void> _checkMethodAuth(Method method) async {
-    UserModel? model;
+  Future<TokenModel?> findToken() async {
     String? basic;
     String? uniqueKey;
-
     try {
       // check cookie session
       Cookie session = cookies.firstWhere((cookie) => cookie.name == sessionKey && cookie.httpOnly);
@@ -134,13 +131,6 @@ extension HttpRequestExt on HttpRequest {
       basic = headers.value('authorization')?.toString();
       uniqueKey = headers.value('uniquekey')?.toString();
     }
-
-    // auth log
-    _logger.detail({
-      'basic': basic,
-      'uniqueKey': uniqueKey,
-    }.toString());
-
     // check value
     if (uniqueKey == null || basic == null || basic.substring(0, 5) != 'Basic') {
       throw AppException.unauthorized();
@@ -148,17 +138,24 @@ extension HttpRequestExt on HttpRequest {
     // get hash
     final hash = basic.substring(6, basic.length);
     // check db
-    final token = await _serviceTokens.findByKeyAndHash(
+    return await _serviceTokens.findByKeyAndHash(
       key: uniqueKey,
       hash: hash,
     );
+  }
+
+  /// Auth check
+  Future<void> _checkMethodAuth(Method method) async {
+    UserModel? model;
+    TokenModel? token = await findToken();
+
     // if not found, there may be an expired check here
     if (token == null) {
       throw AppException.unauthorized();
     }
     try {
       // decrypt
-      final json = jsonDecode(Crypto.decrypt(hash));
+      final json = jsonDecode(Crypto.decrypt(token.token));
       // get model from json
       final obj = UserModel.fromJson(json as Map<String, dynamic>);
       // get model user from db
