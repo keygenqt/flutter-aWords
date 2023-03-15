@@ -24,6 +24,16 @@ class CardsRoute implements Route {
           request.writeJson(await _service.getAll());
         },
       ),
+      // get one item
+      Method(
+        role: [UserRole.user, UserRole.admin],
+        path: '$path/{id}',
+        func: (request) async {
+          request.writeJson(await _service.findByUserId(
+            userId: request.getInt(),
+          ));
+        },
+      ),
     ]) {
       if (await request.route(method)) {
         return;

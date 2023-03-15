@@ -9,12 +9,14 @@ part 'state.g.dart';
 class StateModel {
   StateModel({
     required this.word,
+    required this.language,
     required this.state,
     required this.userId,
     required this.timestamp,
   });
 
   final String word;
+  final String language;
   final bool state;
   final int userId;
   final int timestamp;
@@ -30,6 +32,7 @@ class StateModel {
 
   static Map<String, SqlValue> tableMap() => {
     'word': SqlValueString('word', 255),
+    'language': SqlValueString('language', 5),
     'state': SqlValueBool('state'),
     'userId': SqlValueInt('user_id'),
     'timestamp': SqlValueInt64('timestamp'),

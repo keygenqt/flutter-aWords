@@ -11,4 +11,12 @@ class CardsService {
   Future<List<CardModel>> getAll() async {
     return _db.select(_db.cards).get();
   }
+
+  /// Get all cards
+  Future<List<CardModel>> findByUserId({
+    required int userId,
+  }) async {
+    // todo find user cards
+    return _db.select(_db.cards).get();
+  }
 }
