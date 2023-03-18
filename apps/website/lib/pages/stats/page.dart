@@ -5,7 +5,9 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/string_ext.dart';
 import 'package:website/pages/stats/model.dart';
+import 'package:website/pages/stats/widgets/chart1.dart';
 import 'package:website/pages/stats/widgets/item.dart';
+import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
 class StatsPage extends StatefulWidget {
@@ -91,11 +93,62 @@ class _StatsPageState extends State<StatsPage> {
                               .toList(),
                     ),
                     const SizedBox(width: 20),
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(10),
-                      child: Image.asset(
-                        'images/charts.png',
-                        width: 1200 - 300 - 20,
+
+                    SizedBox(
+                      width: 1200 - 300 - 20,
+                      child: Wrap(
+                        runSpacing: 20,
+                        children: [
+                          Row(
+                            children: const [
+                              // Всего выученных слов
+                              SizedBox(
+                                width: (1200 - 300 - 20) / 3 - 20,
+                                child: Chart1Widget(),
+                              ),
+                              Spacer(),
+                              // Всего не выученных слов
+                              SizedBox(
+                                width: (1200 - 300 - 20) / 3 - 20,
+                                child: Chart1Widget(),
+                              ),
+                              Spacer(),
+                              // Всего слов
+                              SizedBox(
+                                width: (1200 - 300 - 20) / 3 - 20,
+                                child: Chart1Widget(),
+                              ),
+                            ],
+                          ),
+
+                          // Активность по месяцам
+                          const SizedBox(
+                            width: 1200 - 300 - 20,
+                            child: Chart1Widget(),
+                          ),
+
+                          Row(
+                            children: const [
+                              // Активность по дням недели
+                              SizedBox(
+                                width: (1200 - 300 - 20) / 3 - 20,
+                                child: Chart1Widget(),
+                              ),
+                              Spacer(),
+                              // Удача/не удача
+                              SizedBox(
+                                width: (1200 - 300 - 20) / 3 - 20,
+                                child: Chart1Widget(),
+                              ),
+                              Spacer(),
+                              // Языки?
+                              SizedBox(
+                                width: (1200 - 300 - 20) / 3 - 20,
+                                child: Chart1Widget(),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
                   ],

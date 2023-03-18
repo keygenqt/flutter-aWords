@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-/// Alert form
 class CardItemWidget extends StatelessWidget {
   const CardItemWidget({
     super.key,
