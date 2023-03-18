@@ -12,12 +12,9 @@ class Chart1Widget extends StatelessWidget {
         color: Colors.white,
         borderRadius: AppRadius.medium,
       ),
-      child: SizedBox(
-        width: (1200 - 300 - 20) / 3 - 20,
-        child: Image.asset(
-          'images/charts.png',
-          fit: BoxFit.cover,
-        ),
+      child: Image.asset(
+        'images/fl_chart.gif',
+        fit: BoxFit.cover,
       ),
     );
   }
