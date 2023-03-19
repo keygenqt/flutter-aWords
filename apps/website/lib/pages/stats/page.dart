@@ -6,9 +6,8 @@ import 'package:website/base/app_di.dart';
 import 'package:website/extensions/string_ext.dart';
 import 'package:website/pages/stats/model.dart';
 import 'package:website/pages/stats/widgets/chart1.dart';
-import 'package:website/pages/stats/widgets/chart2.dart';
+import 'package:website/pages/stats/widgets/chartActivity.dart';
 import 'package:website/pages/stats/widgets/item.dart';
-import 'package:website/theme/radius.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
 class StatsPage extends StatefulWidget {
@@ -94,7 +93,6 @@ class _StatsPageState extends State<StatsPage> {
                               .toList(),
                     ),
                     const SizedBox(width: 20),
-
                     SizedBox(
                       width: 1200 - 300 - 20,
                       child: Wrap(
@@ -124,9 +122,9 @@ class _StatsPageState extends State<StatsPage> {
 
                           // Активность по месяцам
                           const SizedBox(
-                            height: 500,
+                            // height: 450,
                             width: 1200 - 300 - 20,
-                            child: MyLineChart(isShowingMainData: true),
+                            child: ChartActivity(),
                           ),
                         ],
                       ),
