@@ -107,7 +107,7 @@ class _ChartActivityState extends State<ChartActivity> {
                   Text(
                     "Activity on the passage of the card by month this year. The number of responses is displayed",
                     style: Theme.of(context).textTheme.labelMedium,
-                  )
+                  ),
                 ],
               ),
             ),

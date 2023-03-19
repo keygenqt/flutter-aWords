@@ -5,8 +5,8 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/string_ext.dart';
 import 'package:website/pages/stats/model.dart';
-import 'package:website/pages/stats/widgets/chart1.dart';
 import 'package:website/pages/stats/widgets/chartActivity.dart';
+import 'package:website/pages/stats/widgets/chartCounter.dart';
 import 'package:website/pages/stats/widgets/item.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
@@ -100,22 +100,34 @@ class _StatsPageState extends State<StatsPage> {
                         children: [
                           Row(
                             children: const [
-                              // Всего выученных слов
                               SizedBox(
                                 width: (1200 - 300 - 20) / 3 - 20,
-                                child: Chart1Widget(),
+                                child: ChartCounterWidget(
+                                  icon: Icons.motion_photos_auto,
+                                  count: 100,
+                                  color: Color(0xff1047c0),
+                                  text: "Всего доступных слов для изучения",
+                                ),
                               ),
                               Spacer(),
-                              // Всего не выученных слов
                               SizedBox(
                                 width: (1200 - 300 - 20) / 3 - 20,
-                                child: Chart1Widget(),
+                                child: ChartCounterWidget(
+                                  icon: Icons.av_timer,
+                                  count: 12,
+                                  color: Color(0xff64aee7),
+                                  text: "Всего не выученных слов в карточке",
+                                ),
                               ),
                               Spacer(),
-                              // Всего слов
                               SizedBox(
                                 width: (1200 - 300 - 20) / 3 - 20,
-                                child: Chart1Widget(),
+                                child: ChartCounterWidget(
+                                  icon: Icons.check_circle_outline,
+                                  count: 99,
+                                  color: Color(0xff00b3ad),
+                                  text: "Всего выученных слов в карточке",
+                                ),
                               ),
                             ],
                           ),
