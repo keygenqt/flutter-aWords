@@ -14,27 +14,28 @@ class CardItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 300,
-      child: Card(
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(15),
-              child: Container(
-                alignment: Alignment.centerLeft,
-                child: Wrap(
-                  children: [
-                    ClipOval(
-                      child: Image.network(
-                        image,
-                        fit: BoxFit.cover,
-                        height: 50,
-                        width: 50,
-                      ),
+    return Card(
+      child: Stack(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(15),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 0),
+                  child: ClipOval(
+                    child: Image.network(
+                      image,
+                      fit: BoxFit.cover,
+                      height: 50,
+                      width: 50,
                     ),
-                    const SizedBox(width: 15),
-                    Column(
+                  ),
+                ),
+                const SizedBox(width: 15),
+                Flexible(
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
@@ -53,24 +54,22 @@ class CardItemWidget extends StatelessWidget {
                               .bodySmall,
                         ),
                       ],
-                    ),
-                  ],
-                ),
+                    )),
+              ],
+            ),
+          ),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                hoverColor: Colors.transparent,
+                onTap: () {
+                  debugPrint('Card tapped.');
+                },
               ),
             ),
-            Positioned.fill(
-              child: Material(
-                color: Colors.transparent,
-                child: InkWell(
-                  hoverColor: Colors.transparent,
-                  onTap: () {
-                    debugPrint('Card tapped.');
-                  },
-                ),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

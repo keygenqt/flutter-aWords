@@ -8,6 +8,7 @@ import 'package:website/pages/stats/model.dart';
 import 'package:website/pages/stats/widgets/chartActivity.dart';
 import 'package:website/pages/stats/widgets/chartCounter.dart';
 import 'package:website/pages/stats/widgets/item.dart';
+import 'package:website/theme/colors.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
 class StatsPage extends StatefulWidget {
@@ -32,8 +33,18 @@ class _StatsPageState extends State<StatsPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context)!;
-    final navigator = Navigator.of(context);
     final width = MediaQuery.of(context).size.width;
+
+    double cardBlockWidth = 300;
+    double chartsBlockWidth = width - 60;
+
+    if (width > 1260) {
+      chartsBlockWidth = 1200 - 300 - 20;
+    } else if (width > 1000) {
+      chartsBlockWidth = width - 60 - 300 - 20;
+    } else {
+      cardBlockWidth = chartsBlockWidth;
+    }
 
     return ScopedModel<StatsModel>(
       model: model,
@@ -67,76 +78,87 @@ class _StatsPageState extends State<StatsPage> {
                   style: theme.textTheme.bodyLarge,
                 ),
                 const SizedBox(height: 40),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                Wrap(
+                  runSpacing: 10,
                   children: [
-                    Wrap(
-                      spacing: 20,
-                      runSpacing: 20,
-                      direction: Axis.vertical,
-                      children: model.models!.isEmpty
-                          ? [
-                              Lottie.asset(
-                                'lottie/empty.json',
-                                width: 260,
-                                fit: BoxFit.contain,
-                              )
-                            ]
-                          : model.models!
-                              .map(
-                                (model) => CardItemWidget(
-                                  image: model.image.getFileUrl(),
-                                  name: model.name,
-                                  desc: model.desc,
-                                ),
-                              )
-                              .toList(),
-                    ),
-                    const SizedBox(width: 20),
                     SizedBox(
-                      width: 1200 - 300 - 20,
+                      height: width < 1000
+                          ? (94 * (model.models?.take(3).length ?? 0).toDouble()) - (model.models!.isEmpty ? 0 : 10)
+                          : 615,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.vertical,
+                        child: Wrap(
+                          spacing: 15,
+                          runSpacing: 20,
+                          direction: Axis.vertical,
+                          children: model.models!.isEmpty
+                              ? [
+                                  Lottie.asset(
+                                    'lottie/empty.json',
+                                    width: 260,
+                                    fit: BoxFit.contain,
+                                  )
+                                ]
+                              : model.models!
+                                  .map(
+                                    (model) => SizedBox(
+                                      width: cardBlockWidth,
+                                      child: Padding(
+                                        padding: EdgeInsets.only(right: width < 1000 ? 0 : 16),
+                                        child: CardItemWidget(
+                                          image: model.image.getFileUrl(),
+                                          name: model.name,
+                                          desc: model.desc,
+                                        ),
+                                      ),
+                                    ),
+                                  )
+                                  .toList(),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 4),
+                    SizedBox(
+                      width: chartsBlockWidth,
                       child: Wrap(
                         runSpacing: 20,
                         children: [
-                          Row(
-                            children: const [
+                          Wrap(
+                            spacing: 20,
+                            runSpacing: 20,
+                            children: [
                               SizedBox(
-                                width: (1200 - 300 - 20) / 3 - 20,
+                                width: width > 1135 ? chartsBlockWidth / 3 - 20 : chartsBlockWidth,
                                 child: ChartCounterWidget(
                                   icon: Icons.motion_photos_auto,
                                   count: 100,
-                                  color: Color(0xff1047c0),
-                                  text: "Всего доступных слов для изучения",
+                                  color: AppColors.primary,
+                                  text: localizations.stats_chart_count_1,
                                 ),
                               ),
-                              Spacer(),
                               SizedBox(
-                                width: (1200 - 300 - 20) / 3 - 20,
+                                width: width > 1135 ? chartsBlockWidth / 3 - 20 : chartsBlockWidth,
                                 child: ChartCounterWidget(
                                   icon: Icons.av_timer,
                                   count: 12,
-                                  color: Color(0xff64aee7),
-                                  text: "Всего не выученных слов в карточке",
+                                  color: AppColors.primaryLight,
+                                  text: localizations.stats_chart_count_2,
                                 ),
                               ),
-                              Spacer(),
                               SizedBox(
-                                width: (1200 - 300 - 20) / 3 - 20,
+                                width: width > 1135 ? chartsBlockWidth / 3 : chartsBlockWidth,
                                 child: ChartCounterWidget(
                                   icon: Icons.check_circle_outline,
                                   count: 99,
-                                  color: Color(0xff00b3ad),
-                                  text: "Всего выученных слов в карточке",
+                                  color: AppColors.secondary,
+                                  text: localizations.stats_chart_count_3,
                                 ),
                               ),
                             ],
                           ),
-
-                          // Активность по месяцам
-                          const SizedBox(
-                            // height: 450,
-                            width: 1200 - 300 - 20,
-                            child: ChartActivity(),
+                          SizedBox(
+                            width: chartsBlockWidth,
+                            child: const ChartActivity(),
                           ),
                         ],
                       ),

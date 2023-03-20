@@ -1,8 +1,8 @@
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:website/theme/colors.dart';
-
-import '../../../theme/radius.dart';
+import 'package:website/theme/radius.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class ChartActivity extends StatefulWidget {
   const ChartActivity({
@@ -37,6 +37,8 @@ class _ChartActivityState extends State<ChartActivity> {
       ];
 
   Widget getMonth(String name, int index) {
+    final width = MediaQuery.of(context).size.width;
+
     return MouseRegion(
       onEnter: (_) => setState(() {
         showIndexes.add(index);
@@ -46,13 +48,17 @@ class _ChartActivityState extends State<ChartActivity> {
       }),
       child: Text(
         name,
-        style: TextStyle(color: showIndexes.contains(index) ? AppColors.primary : AppColors.fontPrimary),
+        style: TextStyle(
+            color: showIndexes.contains(index) ? AppColors.primary : AppColors.fontPrimary,
+            fontSize: width < 500 ? 10 : 16),
       ),
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context)!;
+
     final lineBarsData = [
       LineChartBarData(
         showingIndicators: showIndexes,
@@ -100,12 +106,12 @@ class _ChartActivityState extends State<ChartActivity> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Activity in 2023",
+                    localizations.stats_chart_activity_title(DateTime.now().year),
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox(height: 5),
                   Text(
-                    "Activity on the passage of the card by month this year. The number of responses is displayed",
+                    localizations.stats_chart_activity_subtitle,
                     style: Theme.of(context).textTheme.labelMedium,
                   ),
                 ],
@@ -199,27 +205,27 @@ class _ChartActivityState extends State<ChartActivity> {
               child: Row(
                 children: [
                   getMonth('Jun', 0),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Feb', 1),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Mar', 2),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Apr', 3),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('May', 4),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Jun', 5),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Jul', 6),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Aug', 7),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Sep', 8),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Oct', 9),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Nov', 10),
-                  Spacer(),
+                  const Spacer(),
                   getMonth('Dec', 11),
                 ],
               ),
