@@ -13,7 +13,7 @@ final appTheme = ThemeData(
       margin: const EdgeInsets.all(0),
       elevation: 0,
       shape: RoundedRectangleBorder(
-        borderRadius: AppRadius.large,
+        borderRadius: AppRadius.medium,
       )
   ),
   /// Cursor color

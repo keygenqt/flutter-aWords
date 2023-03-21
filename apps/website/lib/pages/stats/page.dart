@@ -5,10 +5,11 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/string_ext.dart';
 import 'package:website/pages/stats/model.dart';
-import 'package:website/pages/stats/widgets/chartActivity.dart';
-import 'package:website/pages/stats/widgets/chartCounter.dart';
 import 'package:website/pages/stats/widgets/item.dart';
 import 'package:website/theme/colors.dart';
+import 'package:website/theme/radius.dart';
+import 'package:website/widgets/common/chartActivity.dart';
+import 'package:website/widgets/common/chartCounter.dart';
 import 'package:website/widgets/containers/page_item.dart';
 
 class StatsPage extends StatefulWidget {
@@ -39,12 +40,37 @@ class _StatsPageState extends State<StatsPage> {
     double chartsBlockWidth = width - 60;
 
     if (width > 1260) {
-      chartsBlockWidth = 1200 - 300 - 20;
+      chartsBlockWidth = 1200 - 300 - 5;
     } else if (width > 1000) {
-      chartsBlockWidth = width - 60 - 300 - 20;
+      chartsBlockWidth = width - 60 - 300 - 5;
     } else {
       cardBlockWidth = chartsBlockWidth;
     }
+
+    final textField = Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: AppRadius.small,
+      ),
+      constraints: BoxConstraints(
+        maxWidth: cardBlockWidth - (width < 1000 ? 0 : 15),
+      ),
+      child: TextField(
+        style: theme.textTheme.bodyMedium,
+        keyboardType: TextInputType.none,
+        decoration: InputDecoration(
+          suffixIcon: const Icon(Icons.search),
+          enabledBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.fontPrimary, width: 1),
+          ),
+          focusedBorder: const OutlineInputBorder(
+            borderSide: BorderSide(color: AppColors.primary, width: 1),
+          ),
+          labelText: localizations.cards_label_search,
+        ),
+        onChanged: (_) {},
+      ),
+    );
 
     return ScopedModel<StatsModel>(
       model: model,
@@ -81,41 +107,48 @@ class _StatsPageState extends State<StatsPage> {
                 Wrap(
                   runSpacing: 10,
                   children: [
-                    SizedBox(
-                      height: width < 1000
-                          ? (94 * (model.models?.take(3).length ?? 0).toDouble()) - (model.models!.isEmpty ? 0 : 10)
-                          : 615,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.vertical,
-                        child: Wrap(
-                          spacing: 15,
-                          runSpacing: 20,
-                          direction: Axis.vertical,
-                          children: model.models!.isEmpty
-                              ? [
+                    Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          textField,
+                          const SizedBox(height: 15),
+                          SizedBox(
+                            height: width < 1000
+                                ? (94 * (model.models?.take(3).length ?? 0).toDouble()) - (model.models!.isEmpty ? 0 : 10)
+                                : 560,
+                            child: SingleChildScrollView(
+                              scrollDirection: Axis.vertical,
+                              child: Wrap(
+                                spacing: 15.5,
+                                runSpacing: 20,
+                                direction: Axis.vertical,
+                                children: model.models!.isEmpty
+                                    ? [
                                   Lottie.asset(
                                     'lottie/empty.json',
                                     width: 260,
                                     fit: BoxFit.contain,
                                   )
                                 ]
-                              : model.models!
-                                  .map(
-                                    (model) => SizedBox(
-                                      width: cardBlockWidth,
-                                      child: Padding(
-                                        padding: EdgeInsets.only(right: width < 1000 ? 0 : 16),
-                                        child: CardItemWidget(
-                                          image: model.image.getFileUrl(),
-                                          name: model.name,
-                                          desc: model.desc,
-                                        ),
+                                    : model.models!
+                                    .map(
+                                      (model) => SizedBox(
+                                    width: cardBlockWidth,
+                                    child: Padding(
+                                      padding: EdgeInsets.only(right: width < 1000 ? 0 : 16),
+                                      child: CardItemWidget(
+                                        image: model.image.getFileUrl(),
+                                        name: model.name,
+                                        desc: model.desc,
                                       ),
                                     ),
-                                  )
-                                  .toList(),
-                        ),
-                      ),
+                                  ),
+                                )
+                                    .toList(),
+                              ),
+                            ),
+                          ),
+                        ],
                     ),
                     const SizedBox(width: 4),
                     SizedBox(
