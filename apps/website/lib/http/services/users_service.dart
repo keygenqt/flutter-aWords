@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:website/models/user.dart';
+import 'package:website/entities/user.dart';
 
 /// Http service API '/api/users'
 class UsersService {
@@ -8,10 +8,10 @@ class UsersService {
   final Dio dio;
 
   /// Get users
-  Future<List<UserModel>> getList() async {
+  Future<List<UserEntity>> getList() async {
     // query
     final response = await dio.request('/api/users');
     // mapper
-    return List<UserModel>.from(response.data.map((x) => UserModel.fromJson(x)));
+    return List<UserEntity>.from(response.data.map((x) => UserEntity.fromJson(x)));
   }
 }

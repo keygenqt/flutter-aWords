@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
 import 'package:website/http/services/cards_service.dart';
-import 'package:website/models/card.dart';
+import 'package:website/entities/card.dart';
 import 'package:website/pages/cards/page.dart';
 
 /// Model for [CardsPage]
@@ -25,9 +25,9 @@ class CardsModel extends Model {
   String? get error => _error;
 
   /// Users response
-  List<CardModel>? _models;
+  List<CardEntity>? _models;
 
-  List<CardModel>? get models => _models;
+  List<CardEntity>? get models => _models;
 
   /// Get users
   Future<void> getList() async {

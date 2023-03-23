@@ -5,13 +5,13 @@ import 'package:website/extensions/map_ext.dart';
 
 part 'user.g.dart';
 
-/// Roles for [UserModel]. Allows you to share the availability of features
+/// Roles for [UserEntity]. Allows you to share the availability of features
 enum UserRole { guest, user, admin }
 
 /// Data class model
 @JsonSerializable()
-class UserModel {
-  UserModel({
+class UserEntity {
+  UserEntity({
     required this.id,
     required this.name,
     required this.email,
@@ -24,17 +24,17 @@ class UserModel {
   final UserRole role;
 
   /// Get model from map
-  factory UserModel.fromJson(Map<String, dynamic> json) => _$UserModelFromJson(json);
+  factory UserEntity.fromJson(Map<String, dynamic> json) => _$UserEntityFromJson(json);
 
   /// Get map from model
-  Map<String, dynamic> toJson() => _$UserModelToJson(this);
+  Map<String, dynamic> toJson() => _$UserEntityToJson(this);
 
   /// Get string json
   @override
   String toString() => const JsonEncoder().convert(toJson());
 
   /// copy
-  UserModel copy([Map<String, dynamic>? json]) => UserModel(
+  UserEntity copy([Map<String, dynamic>? json]) => UserEntity(
         id: json.asOrNull<int>('id') ?? id,
         name: json.asOrNull<String>('name') ?? name,
         email: json.asOrNull<String>('email') ?? email,

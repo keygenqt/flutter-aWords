@@ -1,4 +1,4 @@
-import 'package:website/models/user.dart';
+import 'package:website/entities/user.dart';
 
 /// Extensions for [Map<String, dynamic>?]
 extension ExtParse on Map<String, dynamic>? {

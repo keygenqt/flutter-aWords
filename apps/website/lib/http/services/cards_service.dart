@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:website/models/card.dart';
+import 'package:website/entities/card.dart';
 
 /// Http service API '/api/cards'
 class CardsService {
@@ -8,20 +8,20 @@ class CardsService {
   final Dio dio;
 
   /// Get all cards
-  Future<List<CardModel>> getList() async {
+  Future<List<CardEntity>> getList() async {
     // query
     final response = await dio.request('/api/cards');
     // mapper
-    return List<CardModel>.from(response.data.map((x) => CardModel.fromJson(x)));
+    return List<CardEntity>.from(response.data.map((x) => CardEntity.fromJson(x)));
   }
 
   /// Get user cards
-  Future<List<CardModel>> getUserList({
+  Future<List<CardEntity>> getUserList({
     required userId,
   }) async {
     // query
     final response = await dio.request('/api/cards/$userId');
     // mapper
-    return List<CardModel>.from(response.data.map((x) => CardModel.fromJson(x)));
+    return List<CardEntity>.from(response.data.map((x) => CardEntity.fromJson(x)));
   }
 }

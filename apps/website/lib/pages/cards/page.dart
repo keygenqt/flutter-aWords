@@ -36,7 +36,6 @@ class _CardsPageState extends State<CardsPage> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final localizations = AppLocalizations.of(context)!;
-    final navigator = Navigator.of(context);
     final width = MediaQuery.of(context).size.width;
 
     final textField = Container(
@@ -220,10 +219,11 @@ class _CardsPageState extends State<CardsPage> {
                           )
                         ]
                       : model.models!
-                          .map((model) => CardItemWidget(
-                                image: model.image.getFileUrl(),
-                                name: model.name,
-                                desc: model.desc,
+                          .map((entity) => CardItemWidget(
+                                id: entity.id ?? 0,
+                                image: entity.image.getFileUrl(),
+                                name: entity.name,
+                                desc: entity.desc,
                               ))
                           .toList(),
                 ),

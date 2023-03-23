@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:website/layouts/app_layout.dart';
+import 'package:website/pages/card/page.dart';
 import 'package:website/pages/cards/page.dart';
 import 'package:website/pages/errors/page.dart';
 import 'package:website/pages/friends/page.dart';
@@ -14,56 +15,66 @@ class AppRoutes {
   static const String home = '/';
   static const String signIn = '/sign-in';
   static const String signUp = '/sign-up';
+  static const String card = '/card';
   static const String cards = '/cards';
   static const String stats = '/stats';
   static const String friends = '/friends';
 
   /// Route after login
   static String? _redirect;
+
   static String get redirect => _redirect ?? home;
 
   /// Route after login
   static String? _current;
+
   static String get current => _current ?? home;
 
   /// Pages routing
   static List<AppRoute> routes = [
     AppRoute(
         route: home,
-        widget: const AppLayout(
-          type: AppLayoutType.white,
-          page: HomePage(),
-        )),
+        widget: (arguments) => const AppLayout(
+              type: AppLayoutType.white,
+              page: HomePage(),
+            )),
     AppRoute(
         user: false,
         route: signIn,
-        widget: const AppLayout(
-          page: SignInPage(),
-        )),
+        widget: (arguments) => const AppLayout(
+              page: SignInPage(),
+            )),
     AppRoute(
         user: false,
         route: signUp,
-        widget: const AppLayout(
-          page: SignUpPage(),
-        )),
+        widget: (arguments) => const AppLayout(
+              page: SignUpPage(),
+            )),
+    AppRoute(
+        user: true,
+        route: card,
+        // @todo path argument route for web
+        widget: (arguments) => AppLayout(
+              page: CardPage(id: 12),
+            )),
     AppRoute(
         user: true,
         route: cards,
-        widget: const AppLayout(
-          page: CardsPage(),
-        )),
+        widget: (arguments) => const AppLayout(
+              page: CardsPage(),
+            )),
     AppRoute(
         user: true,
         route: stats,
-        widget: const AppLayout(
-          page: StatsPage(),
-        )),
+        widget: (arguments) => const AppLayout(
+              page: StatsPage(),
+            )),
     AppRoute(
         user: true,
         route: friends,
-        widget: const AppLayout(
-          page: FriendsPage(),
-        )),
+        widget: (arguments) => const AppLayout(
+              page: FriendsPage(),
+            )),
   ];
 
   /// Generate [PageRouteBuilder]
@@ -77,14 +88,14 @@ class AppRoutes {
           // set current page
           _current = settings.name;
           // show page
-          return _routeWithAnimation(settings, route.widget);
+          return _routeWithAnimation(settings, route.widget(settings.arguments));
         } else if (route.user == true) {
           // set redirect after login
           _redirect = settings.name;
           // show page Sing In
           return _routeWithAnimation(
             const RouteSettings(name: AppRoutes.signIn),
-            routes.firstWhere((element) => element.route == AppRoutes.signIn).widget,
+            routes.firstWhere((element) => element.route == AppRoutes.signIn).widget(settings.arguments),
           );
         }
         break;

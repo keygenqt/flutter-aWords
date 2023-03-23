@@ -3,7 +3,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:website/base/app_di.dart';
 import 'package:website/extensions/error_ext.dart';
 import 'package:website/http/services/users_service.dart';
-import 'package:website/models/user.dart';
+import 'package:website/entities/user.dart';
 import 'package:website/pages/home/page.dart';
 
 /// Model for [HomePage]
@@ -25,9 +25,9 @@ class HomeModel extends Model {
   String? get error => _error;
 
   /// Users response
-  List<UserModel>? _users;
+  List<UserEntity>? _users;
 
-  List<UserModel>? get users => _users;
+  List<UserEntity>? get users => _users;
 
   /// Get users
   Future<void> getList() async {

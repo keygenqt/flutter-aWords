@@ -5,6 +5,7 @@ import 'package:website/http/services/auth_service.dart';
 import 'package:website/http/services/cards_service.dart';
 import 'package:website/http/services/users_service.dart';
 import 'package:website/model.dart';
+import 'package:website/pages/card/model.dart';
 import 'package:website/pages/cards/model.dart';
 import 'package:website/pages/friends/model.dart';
 import 'package:website/pages/home/model.dart';
@@ -28,6 +29,7 @@ void setupDI(BuildConfig config) {
     ..registerFactory<HomeModel>(() => HomeModel())
     ..registerFactory<SignInModel>(() => SignInModel())
     ..registerFactory<SignUpModel>(() => SignUpModel())
+    ..registerFactory<CardModel>(() => CardModel())
     ..registerFactory<CardsModel>(() => CardsModel())
     ..registerFactory<StatsModel>(() => StatsModel())
     ..registerFactory<FriendsModel>(() => FriendsModel())

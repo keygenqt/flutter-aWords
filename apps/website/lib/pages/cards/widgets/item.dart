@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:website/routes/routes.dart';
 
 class CardItemWidget extends StatelessWidget {
   const CardItemWidget({
     super.key,
+    required this.id,
     required this.image,
     required this.name,
     required this.desc,
   });
 
+  final int id;
   final String image;
   final String name;
   final String desc;
@@ -15,6 +18,8 @@ class CardItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
+    final navigator = Navigator.of(context);
+
     double itemWidth = 285.0;
 
     if (width < 1260) {
@@ -67,9 +72,8 @@ class CardItemWidget extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   hoverColor: Colors.transparent,
-                  onTap: () {
-                    debugPrint('Card tapped.');
-                  },
+                  onTap: () => navigator.pushNamed(AppRoutes.card, arguments: {'id': id}),
+                  // onTap: () => navigator.pushNamed(AppRoutes.card, arguments: {'id': id}),
                 ),
               ),
             ),

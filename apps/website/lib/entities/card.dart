@@ -7,8 +7,8 @@ part 'card.g.dart';
 
 /// Data class model
 @JsonSerializable()
-class CardModel {
-  CardModel({
+class CardEntity {
+  CardEntity({
     required this.id,
     required this.userId,
     required this.image,
@@ -27,17 +27,17 @@ class CardModel {
   final DateTime createAt;
 
   /// Get model from map
-  factory CardModel.fromJson(Map<String, dynamic> json) => _$CardModelFromJson(json);
+  factory CardEntity.fromJson(Map<String, dynamic> json) => _$CardEntityFromJson(json);
 
   /// Get map from model
-  Map<String, dynamic> toJson() => _$CardModelToJson(this);
+  Map<String, dynamic> toJson() => _$CardEntityToJson(this);
 
   /// Get string json
   @override
   String toString() => const JsonEncoder().convert(toJson());
 
   /// copy
-  CardModel copy([Map<String, dynamic>? json]) => CardModel(
+  CardEntity copy([Map<String, dynamic>? json]) => CardEntity(
     id: json.asOrNull<int>('id') ?? id,
     userId: json.asOrNull<int>('userId') ?? userId,
     image: json.asOrNull<String>('image') ?? image,
