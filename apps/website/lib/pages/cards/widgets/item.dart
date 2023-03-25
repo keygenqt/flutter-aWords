@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:website/extensions/string_ext.dart';
 import 'package:website/routes/routes.dart';
 
 class CardItemWidget extends StatelessWidget {
@@ -72,8 +73,7 @@ class CardItemWidget extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   hoverColor: Colors.transparent,
-                  onTap: () => navigator.pushNamed(AppRoutes.card, arguments: {'id': id}),
-                  // onTap: () => navigator.pushNamed(AppRoutes.card, arguments: {'id': id}),
+                  onTap: () => navigator.pushNamed(AppRoutes.card.pushArguments({'id': id})),
                 ),
               ),
             ),

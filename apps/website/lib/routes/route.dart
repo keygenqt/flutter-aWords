@@ -10,5 +10,5 @@ class AppRoute {
 
   final bool? user;
   final String route;
-  final Widget Function(Object? argiments) widget;
+  final Widget Function(Map<String, dynamic> parameters) widget;
 }
