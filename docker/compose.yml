@@ -16,7 +16,7 @@ services:
         cd /var/www/src/apps/server
         dart pub cache clean
         dart pub get
-        dart run build_runner build
+        dart run build_runner build --delete-conflicting-outputs
         dart compile exe bin/main.dart -o bin/aWords
         dart doc .
 
@@ -82,7 +82,7 @@ services:
       - |
         # Add phpLiteAdmin to root folder
         rm -rf /var/www/src/phpLiteAdmin
-        mv /phpLiteAdmin /var/www/src/phpLiteAdmin
+        cp -R /phpLiteAdmin /var/www/src/phpLiteAdmin
         
         # Run API application
         bin/aWords api
