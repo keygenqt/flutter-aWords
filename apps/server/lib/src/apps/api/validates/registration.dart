@@ -10,9 +10,8 @@ void validateRegistration(Map<String, dynamic> json) {
   const fieldName = 'name';
   const fieldEmail = 'email';
   const fieldPwd = 'password';
-  const fieldUniqueKey = 'uniqueKey';
 
-  // validate uniqueKey
+  // validate fieldName
   if (json[fieldName] == null || json[fieldName].toString().isEmpty) {
     errors.add(
       Validate(
@@ -52,16 +51,6 @@ void validateRegistration(Map<String, dynamic> json) {
       Validate(
         field: fieldPwd,
         message: '${fieldPwd.capitalize()} min 8 max 16.',
-      ),
-    );
-  }
-
-  // validate uniqueKey
-  if (json[fieldUniqueKey] == null || json[fieldUniqueKey].toString().isEmpty) {
-    errors.add(
-      Validate(
-        field: fieldUniqueKey,
-        message: '${fieldUniqueKey.capitalize()} is required',
       ),
     );
   }

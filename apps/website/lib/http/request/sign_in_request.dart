@@ -10,12 +10,10 @@ class SignInRequest {
   SignInRequest({
     required this.email,
     required this.password,
-    required this.uniqueKey,
   });
 
   final String email;
   final String password;
-  final String uniqueKey;
 
   /// Get model from map
   factory SignInRequest.fromJson(Map<String, dynamic> json) => _$SignInRequestFromJson(json);

@@ -6,7 +6,4 @@ import 'build.config.dart';
 class BuildDebugConfig implements BuildConfig {
   @override
   bool get isDebug => true;
-
-  @override
-  String get baseUrl => 'http://localhost:3000/';
 }

@@ -48,7 +48,6 @@ class SignUpModel extends Model {
         name: name,
         email: email,
         password: password,
-        uniqueKey: 'uniqueKey',
       ));
       _success = true;
     } catch (e) {

@@ -14,8 +14,6 @@ class RegistrationRoute implements Route {
 
   UsersService get _serviceUsers => getIt<UsersService>();
 
-  TokensService get _serviceTokens => getIt<TokensService>();
-
   @override
   Future<void> run(HttpRequest request) async {
     for (final method in [
@@ -42,28 +40,10 @@ class RegistrationRoute implements Route {
           }
           // create model
           final model = (await _serviceUsers.insert([UserModel.fromJson(body)])).first;
-          // clear token by uniqueKey
-          await _serviceTokens.deleteByKey(
-            key: body['uniqueKey'].toString(),
-          );
-          // create new token
-          final auth = await _serviceTokens.insert([
-            TokenModel.create(
-              userId: model.id!,
-              token: model.generateToken(),
-              uniqueKey: body['uniqueKey'].toString(),
-              createAt: DateTime.now(),
-            ),
-          ]);
-
           // set auth cookie
-          request.setSessionCookie(
-            model,
-            auth.first,
-          );
-
+          request.setSessionCookie(model);
           // write data
-          request.writeJson(auth.first);
+          request.writeJson(SuccessResponse('Auth successfully'));
         },
       ),
     ]) {

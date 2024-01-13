@@ -3,8 +3,7 @@ site_name: aWords
 # Repository
 repo_name: 'keygenqt/flutter-aWords'
 repo_url: 'https://github.com/keygenqt/flutter-aWords'
-site_dir: 'flutter-aWords'
-site_url: 'https://keygenqt.github.io/flutter-aWords/'
+site_dir: 'docs-static'
 
 # Navigation
 nav:
@@ -30,13 +29,13 @@ nav:
           - Common:
               - Errors: server/methods/common_errors.md
       - Libraries: server/libraries.md
-      - Dartdoc: /flutter-aWords/server_doc/api/
+      - Dartdoc: /doc-server/
       - Go to API: https://awords-api.keygenqt.com/
   - Web:
       - Overview:
           - web/index.md
       - Libraries: web/libraries.md
-      - Dartdoc: /flutter-aWords/web_doc/api/
+      - Dartdoc: /doc-website/
       - Go to API: https://awords.keygenqt.com/
   - Mobile:
       - Overview:
@@ -83,7 +82,7 @@ extra:
 
 # Custom CSS
 extra_css:
-  - /flutter-aWords/custom.css
+  - /custom.css
 
 # Configuration
 theme:

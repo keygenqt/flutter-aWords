@@ -6,11 +6,7 @@ final BuildConfig config = getIt<BuildConfig>();
 /// Extensions for [String]
 extension ExtString on String {
   String getFileUrl() {
-    if (config.isDebug) {
-      return config.baseUrl.substring(0, config.baseUrl.length - 1) + this;
-    } else {
-      return this;
-    }
+    return this;
   }
 
   String pushArguments(Map<String, dynamic> arguments) {

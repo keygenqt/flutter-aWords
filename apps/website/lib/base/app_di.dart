@@ -17,7 +17,7 @@ final getIt = GetIt.instance;
 
 /// Initialization application DI
 void setupDI(BuildConfig config) {
-  final dio = configureDio(url: config.baseUrl);
+  final dio = configureDio(url: 'http://localhost:4017/');
   getIt
     // build info
     ..registerSingleton<BuildConfig>(config)

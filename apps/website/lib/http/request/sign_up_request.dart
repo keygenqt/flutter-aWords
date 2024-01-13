@@ -11,13 +11,11 @@ class SignUpRequest {
     required this.name,
     required this.email,
     required this.password,
-    required this.uniqueKey,
   });
 
   final String name;
   final String email;
   final String password;
-  final String uniqueKey;
 
   /// Get model from map
   factory SignUpRequest.fromJson(Map<String, dynamic> json) => _$SignUpRequestFromJson(json);

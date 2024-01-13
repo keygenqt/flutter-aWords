@@ -1,0 +1,117 @@
+{
+    "@_CARDS": {},
+    "cards_title": "Cards",
+    "cards_subtitle": "Here you will find ready-made collections of words. You can also create your own collection.",
+    "cards_label_search": "Search",
+    "cards_tooltip_users_cards": "Users' Cards",
+    "cards_tooltip_my_cards": "My Cards",
+    "cards_tooltip_favorite_cards": "Favorite Cards",
+    "cards_tooltip_create_card": "Create Card",
+
+    "@_COMMON": {},
+    "common_copyright": "Copyright © {year} KeyGenQt, All rights reserved. Powered by Flutter.",
+    "@common_copyright": {
+        "description": "Footer copyright",
+        "placeholders": {
+        "year": {
+            "type": "int",
+            "example": "2023"
+        }
+        }
+    },
+    "common_header_sign_in": "Sign In",
+    "common_header_sign_out": "Sign Out",
+    "common_footer_title_features": "Features",
+    "common_footer_desc": "Leave notes and paper cards at home and learn a foreign language anywhere with aWords.",
+    "common_footer_create_card": "On the site you can create flashcards to study. The list of available words is huge. There are 50 FreeDict dictionaries available for every taste and preference.",
+    "common_footer_stats_card": "You can view your flashcard study statistics.",
+    "common_footer_friends": "Your statistics will be available to all your friends. You can administer access on the site.",
+    "common_footer_title_create_card": "Create cards",
+    "common_footer_title_stats_card": "Stats",
+    "common_footer_title_friends": "Friends",
+    "common_404_error": "Looks like we can't find the page you're looking for.",
+    "common_404_error_btn": "To Home",
+
+    "@_FRIENDS": {},
+    "friends_title": "Friends",
+    "friends_subtitle": "Here you can see the statistics of your friends",
+    "friends_chart_activity_title": "Activity in {year}",
+    "@friends_chart_activity_title": {
+        "description": "Year now",
+        "placeholders": {
+        "year": {
+            "type": "int",
+            "example": "2023"
+        }
+        }
+    },
+    "friends_chart_activity_subtitle": "Word learning activity by month this year. The number of responses is displayed.",
+    "friends_chart_count_1": "Number of available words",
+    "friends_chart_count_2": "The number of unlearned words",
+    "friends_chart_count_3": "Number of words marked as learned",
+
+    "@_HOME": {},
+    "home_main_welcome": "Welcome to aWords",
+    "home_main_title": "We will help you learn foreign words once and for all",
+    "home_main_text": "Let's learn words together. It's simple! You simply create a flashcard with words and learn them in one of several available modes.",
+    "home_main_btn": "Sign Up",
+    "home_steps_title": "How it works",
+    "home_steps_text": "Follow a few steps to start using the app and succeed in learning a foreign language.",
+    "home_steps_item1_title": "Registration",
+    "home_steps_item1_text": "In order to identify you in the system, you need to register. It's quite simple.",
+    "home_steps_item2_title": "Cards",
+    "home_steps_item2_text": "You can use already created cards or you can create your own set of words to study.",
+    "home_steps_item3_title": "Application",
+    "home_steps_item3_text": "Install the application. Apps for Android and Aurora OS are available.",
+    "home_steps_item4_title": "Enjoy",
+    "home_steps_item4_text": "Learn foreign words wherever you want. Share results with friends.",
+    "home_apps_title1": "Download & enjoy",
+    "home_apps_title2": "Download",
+    "home_apps_title3": "from your app store",
+    "home_apps_text": "The app is available for Android and Aurora OS.",
+    "home_help_title": "Need more help?",
+    "home_help_text": "If you have any questions, you can email them to me.",
+    "home_help_btn": "To write a message",
+
+    "@_SIGN_IN": {},
+    "signIn_title": "Sign In",
+    "signIn_field_email": "Email",
+    "signIn_field_passw": "Password",
+    "signIn_field_btn_submit": "Submit",
+    "signIn_field_btn_signUp": "Sign Up",
+    "signIn_successfully": "We are glad to see you again!",
+    "signIn_validate_email_empty": "Please enter email.",
+    "signIn_validate_email_not_match": "Email is not match.",
+    "signIn_validate_password_empty": "Please enter password.",
+
+    "@_SIGN_UP": {},
+    "signUp_title": "Sign Up",
+    "signUp_field_name": "Name",
+    "signUp_field_email": "Email",
+    "signUp_field_passw": "Password",
+    "signUp_field_btn_submit": "Submit",
+    "signUp_field_btn_signIn": "Sign In",
+    "signUp_successfully": "Welcome!",
+    "signUp_validate_name_empty": "Please enter name.",
+    "signUp_validate_email_empty": "Please enter email.",
+    "signUp_validate_email_not_match": "Email is not match.",
+    "signUp_validate_password_empty": "Please enter password.",
+
+    "@_STATS": {},
+    "stats_title": "Stats",
+    "stats_subtitle": "Here you can see your language learning statistics. Your every move is recorded!",
+    "stats_chart_activity_title": "Activity in {year}",
+    "@stats_chart_activity_title": {
+    "description": "Year now",
+    "placeholders": {
+        "year": {
+        "type": "int",
+        "example": "2023"
+        }
+    }
+    },
+    "stats_chart_activity_subtitle": "Word learning activity by month this year. The number of responses is displayed.",
+    "stats_chart_count_1": "Number of available words",
+    "stats_chart_count_2": "The number of unlearned words",
+    "stats_chart_count_3": "Number of words marked as learned"
+}

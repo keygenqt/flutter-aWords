@@ -1,6 +1,14 @@
 # IntelliJ related
 .idea/
+.env
 
 # Mkdocs/docs
-/flutter-aWords/
-/doc/
+/doc
+docs-static
+doc-*
+
+# Build
+apps/server/bin/aWords
+
+# https://www.phpliteadmin.org/
+/phpLiteAdmin

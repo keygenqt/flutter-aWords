@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:jiffy/jiffy.dart';
-import 'package:mason_logger/mason_logger.dart';
 import 'package:server_awords/exports/apps/api/app.dart';
 import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/db/services.dart';
@@ -12,40 +11,35 @@ import 'package:server_awords/src/exports/other/constants.dart';
 
 /// Extensions for [HttpRequest]
 extension HttpRequestExt on HttpRequest {
-  // logger for output
-  Logger get _logger => getIt<Logger>();
 
   // services
-  TokensService get _serviceTokens => getIt<TokensService>();
-
   UsersService get _serviceUsers => getIt<UsersService>();
 
   /// Add session cookie
-  void setSessionCookie(UserModel user, TokenModel auth) {
+  void setSessionCookie(UserModel user) {
+    final datetime = DateTime.now();
+
     response.cookies.add(
       Cookie(sessionLoginKey, 'true')
         ..httpOnly = false
         ..path = '/'
-        ..expires = Jiffy(auth.createAt).add(months: sessionExpires).dateTime,
+        ..expires = Jiffy(datetime).add(months: sessionExpires).dateTime,
     );
     response.cookies.add(
       Cookie(
           sessionKey,
           user.generateCookieSecret(
-            auth.token,
-            auth.uniqueKey,
-            auth.createAt,
+            user.generateToken(),
+            datetime,
           ))
         ..path = '/'
-        ..expires = Jiffy(auth.createAt).add(months: sessionExpires).dateTime,
+        ..expires = Jiffy(datetime).add(months: sessionExpires).dateTime,
     );
   }
 
   /// Remove session cookie
-  String? removeSessionCookie() {
+  void removeSessionCookie() {
     try {
-      Cookie session = cookies.firstWhere((cookie) => cookie.name == sessionKey && cookie.httpOnly);
-      final json = jsonDecode(Crypto.decrypt(session.value));
       response.cookies.add(
         Cookie(sessionLoginKey, 'false')
           ..httpOnly = false
@@ -57,9 +51,7 @@ extension HttpRequestExt on HttpRequest {
           ..path = '/'
           ..expires = DateTime.now(),
       );
-      return json['basic']?.toString();
     } catch (e) {
-      return null;
     }
   }
 
@@ -77,7 +69,7 @@ extension HttpRequestExt on HttpRequest {
   }
 
   /// Get body map from response
-  Future<Map<String, dynamic>> getBody() async => Uri.splitQueryString(await utf8.decodeStream(this));
+  Future<Map<String, dynamic>> getBody() async => json.decode((await utf8.decodeStream(this)).toString()) as Map<String, dynamic>;
 
   /// Get request int value
   int getInt() => int.tryParse(uri.pathSegments.last) == null ? 0 : int.parse(uri.pathSegments.last);
@@ -117,37 +109,24 @@ extension HttpRequestExt on HttpRequest {
     }
   }
 
-  Future<TokenModel?> findToken() async {
-    String? basic;
-    String? uniqueKey;
-    try {
-      // check cookie session
-      Cookie session = cookies.firstWhere((cookie) => cookie.name == sessionKey && cookie.httpOnly);
-      final json = jsonDecode(Crypto.decrypt(session.value));
-      basic = json['basic']?.toString();
-      uniqueKey = json['uniqueKey']?.toString();
-    } catch (e) {
-      // check headers session
-      basic = headers.value('authorization')?.toString();
-      uniqueKey = headers.value('uniquekey')?.toString();
-    }
+  Future<String?> findToken() async {
+    // check cookie session
+    Cookie session = cookies.firstWhere((cookie) => cookie.name == sessionKey && cookie.httpOnly);
+    final json = jsonDecode(Crypto.decrypt(session.value));
+    String? basic = json['basic']?.toString();
+
     // check value
-    if (uniqueKey == null || basic == null || basic.substring(0, 5) != 'Basic') {
+    if (basic == null || basic.substring(0, 5) != 'Basic') {
       throw AppException.unauthorized();
     }
-    // get hash
-    final hash = basic.substring(6, basic.length);
-    // check db
-    return await _serviceTokens.findByKeyAndHash(
-      key: uniqueKey,
-      hash: hash,
-    );
+
+    return basic.substring(6, basic.length);
   }
 
   /// Auth check
   Future<void> _checkMethodAuth(Method method) async {
     UserModel? model;
-    TokenModel? token = await findToken();
+    String? token = await findToken();
 
     // if not found, there may be an expired check here
     if (token == null) {
@@ -155,7 +134,12 @@ extension HttpRequestExt on HttpRequest {
     }
     try {
       // decrypt
-      final json = jsonDecode(Crypto.decrypt(token.token));
+      try {
+        print(Crypto.decrypt(token));
+      } catch (e, s) {
+        print(s);
+      }
+      final json = jsonDecode(Crypto.decrypt(token));
       // get model from json
       final obj = UserModel.fromJson(json as Map<String, dynamic>);
       // get model user from db

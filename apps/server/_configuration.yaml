@@ -1,8 +1,3 @@
 ## Secret key The key must be exactly 128-bits, 192-bits or 256-bits (i.e. 16, 24 or 32 bytes).
 ## This is what determines whether AES-128, AES-192 or AES-256 is being performed.
 secret: MqsdHAazZAfAYyq7zuscMmpgi1TU1PS5
-
-## ClickHouse connect ODBC
-server: ClickHouse_ANSI
-username: default
-password: password

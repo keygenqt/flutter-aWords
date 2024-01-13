@@ -47,7 +47,6 @@ class SignInModel extends Model {
       await service.login(SignInRequest(
         email: email,
         password: password,
-        uniqueKey: await Ipify.ipv64(),
       ));
       _success = true;
     } catch (e) {

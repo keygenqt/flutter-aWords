@@ -15,7 +15,10 @@ dependencies:
   drift: ^2.5.0
   # https://pub.dev/packages/encrypt
   # A set of high-level APIs over PointyCastle for two-way cryptography.
-  encrypt: ^5.0.1
+  encrypt: ^5.0.3
+  # https://pub.dev/packages/crypto
+  # A set of cryptographic hashing functions for Dart.
+  crypto: ^3.0.3
   # https://pub.dev/packages/get_it
   # This is a simple Service Locator for Dart and Flutter projects with some additional goodies
   # highly inspired by Splat.
@@ -51,18 +54,12 @@ dependencies:
   # https://pub.dev/packages/uuid
   # Simple, fast generation of RFC4122 UUIDs.
   uuid: ^3.0.7
-  # https://github.com/keygenqt/dart-odbc
-  # ODBC connect
-  dart_odbc:
-    git:
-      url: git@github.com:keygenqt/dart-odbc.git
-      ref: 68ffb88e42209e81842a4e206c898ca09a4ad6d2
 
 dev_dependencies:
   # https://pub.dev/packages/build_runner
   # The build_runner package provides a concrete way of generating files using Dart code,
   # outside of tools like pub.
-  build_runner: ^2.3.3
+  build_runner: ^2.4.8
   # https://pub.dev/packages/build_verify
   # Test utility to ensure generated Dart code within a package is up-to-date when
   # using package:build.

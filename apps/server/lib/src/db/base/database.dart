@@ -15,7 +15,7 @@ part 'database.g.dart';
 ///
 /// On Linux you need to install sqlite3
 /// Example on Ubuntu: `sudo apt install libsqlite3-dev`
-@DriftDatabase(tables: [Users, Tokens, Cards])
+@DriftDatabase(tables: [Users, Cards])
 class MyDatabase extends _$MyDatabase {
   MyDatabase()
       : super(
@@ -26,14 +26,12 @@ class MyDatabase extends _$MyDatabase {
         );
 
   // list migrations
-  final _migrations = <Migrate>[
-    Migrate_1_2(),
-  ];
+  final _migrations = <Migrate>[];
 
   Logger get _logger => getIt<Logger>();
 
   @override
-  int get schemaVersion => 2; // first version 1!
+  int get schemaVersion => 1; // first version 1!
 
   @override
   MigrationStrategy get migration {

@@ -1,0 +1,108 @@
+{
+    "@_CARDS": {},
+    "cards_title": "Карты",
+    "cards_subtitle": "Здесь вы найдете уже готовые подборки слов. Также вы можете создать свою подборку.",
+    "cards_label_search": "Поиск",
+    "cards_tooltip_users_cards": "Карты пользователей",
+    "cards_tooltip_my_cards": "Мои карты",
+    "cards_tooltip_favorite_cards": "Избранные карты",
+    "cards_tooltip_create_card": "Создать карту",
+
+    "@_COMMON": {},
+    "common_copyright": "Copyright © {year} KeyGenQt, Все права защищены. Работает на Flutter.",
+    "common_header_sign_in": "Вход",
+    "common_header_sign_out": "Выход",
+    "common_footer_title_features": "функции",
+    "common_footer_desc": "Оставте записки и бумажные карточки дома и изучайте иностранный язык где угодно с помощью aWords.",
+    "common_footer_create_card": "На сайте вы можете создавать карточки для изучения. Список доступных слов огромен. Доступно 50 словарей FreeDict на любой вкус и предпочтения.",
+    "common_footer_stats_card": "Вы можете просматривать свою статистику по изучению карточек.",
+    "common_footer_friends": "Ваша статистика будет доступна всем вашим друзьям. Администрировать доступы можно на сайте.",
+    "common_footer_title_create_card": "Создание карт",
+    "common_footer_title_stats_card": "Статистика",
+    "common_footer_title_friends": "Друзья",
+    "common_404_error": "Похоже, мы не можем найти страницу, которую вы ищете.",
+    "common_404_error_btn": "На главную",
+
+    "@_FRIENDS": {},
+    "friends_title": "Друзья",
+    "friends_subtitle": "Здесь вы можете посмотреть статистику своих друзей",
+    "friends_chart_activity_title": "Активность в {year}",
+    "@friends_chart_activity_title": {
+    "description": "Year now",
+    "placeholders": {
+        "year": {
+        "type": "int",
+        "example": "2023"
+        }
+    }
+    },
+    "friends_chart_activity_subtitle": "Активность по изучению слов по месяцам в этом году. Отображается количество ответов.",
+    "friends_chart_count_1": "Количество доступных слов для изучения",
+    "friends_chart_count_2": "Количество не выученных слов в карточке",
+    "friends_chart_count_3": "Количество слов отмеченных как выученные",
+
+    "@_HOME": {},
+    "home_main_welcome": "Добро пожаловать",
+    "home_main_title": "Мы поможем вам выучить слова раз и навсегда",
+    "home_main_text": "Давайте учить слова вместе. Это просто! Вы просто создаете карточку со словами и учите их в одном из нескольких доступных режимов.",
+    "home_main_btn": "Регистрация",
+    "home_steps_title": "Как это работает",
+    "home_steps_text": "Выполните несколько шагов, чтобы начать пользоваться приложением и преуспеть в изучении языка.",
+    "home_steps_item1_title": "Регистрация",
+    "home_steps_item1_text": "Для того, чтобы вас идентифицировать в системе, вам необходимо зарегистрироваться.",
+    "home_steps_item2_title": "Карточки",
+    "home_steps_item2_text": "Вы можете использовать уже созданные карточки или создать свой собственный набор слов для изучения.",
+    "home_steps_item3_title": "Приложение",
+    "home_steps_item3_text": "Установите приложение на ваш смартфон. Доступны приложения для Android и ОС Aurora.",
+    "home_steps_item4_title": "Наслаждайтесь",
+    "home_steps_item4_text": "Изучай иностранные слова где хочешь. Просматривайте статистику. Делитесь результатами с друзьями.",
+    "home_apps_title1": "Скачать и наслаждаться",
+    "home_apps_title2": "Скачать",
+    "home_apps_title3": "с магазина приложений",
+    "home_apps_text": "Приложение доступно для Android и Aurora OS.",
+    "home_help_title": "Есть вопросы?",
+    "home_help_text": "Если у вас остались вопросы вы можете написать их мне на почту.",
+    "home_help_btn": "Написать сообщение",
+
+    "@_SIGN_IN": {},
+    "signIn_title": "Авторизация",
+    "signIn_field_email": "Email",
+    "signIn_field_passw": "Пароль",
+    "signIn_field_btn_submit": "Отправить",
+    "signIn_field_btn_signUp": "Регистрация",
+    "signIn_successfully": "Рады вас видеть снова!",
+    "signIn_validate_email_empty": "Пожалуйста, введите email.",
+    "signIn_validate_email_not_match": "Электронная почта не соответствует.",
+    "signIn_validate_password_empty": "Пожалуйста, введите пароль.",
+
+    "@_SIGN_UP": {},
+    "signUp_title": "Регистрация",
+    "signUp_field_name": "Имя",
+    "signUp_field_email": "Email",
+    "signUp_field_passw": "Пароль",
+    "signUp_field_btn_submit": "Отправить",
+    "signUp_field_btn_signIn": "Авторизация",
+    "signUp_successfully": "Добро пожаловать!",
+    "signUp_validate_name_empty": "Пожалуйста, введите имя.",
+    "signUp_validate_email_empty": "Пожалуйста, введите email.",
+    "signUp_validate_email_not_match": "Электронная почта не соответствует.",
+    "signUp_validate_password_empty": "Пожалуйста, введите пароль.",
+
+    "@_STATS": {},
+    "stats_title": "Статистика",
+    "stats_subtitle": "Здесь вы можете посмотреть свою статистику изучения языка. Фиксируется каждое ваше движение!",
+    "stats_chart_activity_title": "Активность в {year}",
+    "@stats_chart_activity_title": {
+    "description": "Year now",
+    "placeholders": {
+        "year": {
+        "type": "int",
+        "example": "2023"
+        }
+    }
+    },
+    "stats_chart_activity_subtitle": "Активность по изучению слов по месяцам в этом году. Отображается количество ответов.",
+    "stats_chart_count_1": "Количество доступных слов для изучения",
+    "stats_chart_count_2": "Количество не выученных слов в карточке",
+    "stats_chart_count_3": "Количество слов отмеченных как выученные"
+}

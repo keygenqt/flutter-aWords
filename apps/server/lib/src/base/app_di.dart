@@ -14,18 +14,10 @@ final getIt = GetIt.instance;
 void setupDI() {
   // sqlite db
   final db = MyDatabase();
-  // clickhouse db
-  final clickhouse = ClickDatabase();
   getIt
     // logger app level insert in runner.dart
     ..registerSingleton<Logger>(Logger())
-    // odbc
-    ..registerSingleton<ClickDatabase>(clickhouse)
-    // init service clickhouse db
-    ..registerSingleton<HelloService>(HelloService(clickhouse))
-    ..registerSingleton<StateService>(StateService(clickhouse))
     // init service sqlite db
     ..registerSingleton<CardsService>(CardsService(db))
-    ..registerSingleton<TokensService>(TokensService(db))
     ..registerSingleton<UsersService>(UsersService(db));
 }

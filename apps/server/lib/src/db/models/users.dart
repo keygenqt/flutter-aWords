@@ -101,12 +101,10 @@ class UserModel {
 
   String generateCookieSecret(
     String token,
-    String uniqueKey,
     DateTime createAt,
   ) {
     return Crypto.encrypt(const JsonEncoder().convert({
       'basic': 'Basic ${token}',
-      'uniqueKey': uniqueKey,
       'createAt': createAt.toIso8601String(),
     }));
   }

@@ -1,0 +1,137 @@
+version: "3"
+
+services:
+  # https://ubuntu.com
+  builder:
+    container_name: faw-builder
+    restart: no
+    build:
+      context: .
+      dockerfile: builder/Dockerfile
+    command:
+      - /bin/bash
+      - -c
+      - |
+        # Build dart api
+        cd /var/www/src/apps/server
+        dart pub cache clean
+        dart pub get
+        dart run build_runner build
+        dart compile exe bin/main.dart -o bin/aWords
+        dart doc .
+
+        # Copy config
+        cp -n _configuration.yaml configuration.yaml
+
+        # Build flutter website
+        cd /var/www/src/apps/website
+        flutter clean
+        flutter pub get
+        flutter gen-l10n
+        flutter pub run build_runner build --delete-conflicting-outputs
+        flutter build web --release --web-renderer canvaskit -t lib/main.release.dart
+        mv build/web/assets/assets/* build/web/assets
+        flutter pub global activate dartdoc
+        flutter pub global run dartdoc:dartdoc
+
+        # Copy docs
+        rm -rf /var/www/src/docs/doc-server
+        rm -rf /var/www/src/docs/doc-website
+        mv /var/www/src/apps/server/doc/api /var/www/src/docs/doc-server
+        mv /var/www/src/apps/website/doc/api /var/www/src/docs/doc-website
+    working_dir: /var/www/src
+    volumes:
+      - ../:/var/www/src
+
+  # https://www.mkdocs.org
+  mkdocs:
+    container_name: faw-mkdocs
+    depends_on:
+      builder:
+        condition: service_completed_successfully
+    restart: no
+    build:
+      context: .
+      dockerfile: mkdocs/Dockerfile
+    command:
+      - /bin/bash
+      - -c
+      - |
+        rm -rf docs-static
+        mkdocs build
+    working_dir: /var/www/src
+    volumes:
+      - ../:/var/www/src
+
+  # https://www.alpinelinux.org/
+  runner:
+    container_name: faw-runner
+    depends_on:
+      builder:
+        condition: service_completed_successfully
+    build:
+      context: .
+      dockerfile: runner/Dockerfile
+    restart: always
+    tty: true
+    ports:
+      - ${PORT_API}:3000
+    command:
+      - /bin/bash
+      - -c
+      - |
+        # Add phpLiteAdmin to root folder
+        rm -rf /var/www/src/phpLiteAdmin
+        mv /phpLiteAdmin /var/www/src/phpLiteAdmin
+        
+        # Run API application
+        bin/aWords api
+    working_dir: /var/www/src/apps/server
+    volumes:
+      - ../:/var/www/src
+      - ../apps/server/phpliteadmin.config.php:/phpLiteAdmin/phpliteadmin.config.php
+    networks:
+      - internal
+
+  # https://www.php.net/
+  php:
+    container_name: faw-php
+    depends_on:
+      builder:
+        condition: service_completed_successfully
+    build:
+      context: .
+      dockerfile: php/Dockerfile
+    restart: always
+    tty: true
+    working_dir: /var/www/src
+    volumes:
+      - ../:/var/www/src
+      - ./php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - internal
+
+  # https://nginx.org/
+  nginx:
+    container_name: faw-nginx
+    depends_on:
+      builder:
+        condition: service_completed_successfully
+    build:
+      context: .
+      dockerfile: nginx/Dockerfile
+    restart: always
+    tty: true
+    ports:
+      - ${PORT_DB}:3001
+      - ${PORT_DOCS}:3002
+      - ${PORT_WEBSITE}:3003
+    volumes:
+      - ../:/var/www/src
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    networks:
+      - internal
+
+networks:
+  internal:
+    driver: bridge

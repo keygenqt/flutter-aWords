@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:server_awords/exports/apps/api/app.dart';
 import 'package:server_awords/exports/apps/api/validates.dart';
-import 'package:server_awords/exports/db/models.dart';
 import 'package:server_awords/exports/db/services.dart';
 import 'package:server_awords/exports/other/extensions.dart';
 import 'package:server_awords/src/base/app_di.dart';
@@ -13,8 +12,6 @@ class LoginRoute implements Route {
   String path = Routes.login.path;
 
   UsersService get _serviceUsers => getIt<UsersService>();
-
-  TokensService get _serviceTokens => getIt<TokensService>();
 
   @override
   Future<void> run(HttpRequest request) async {
@@ -41,28 +38,12 @@ class LoginRoute implements Route {
               )
             ]);
           }
-          // clear token by uniqueKey
-          await _serviceTokens.deleteByKey(
-            key: body['uniqueKey'].toString(),
-          );
           // clear session
           request.removeSessionCookie();
           // set auth cookie
-          final auth = await _serviceTokens.insert([
-            TokenModel.create(
-              userId: user.id!,
-              token: user.generateToken(),
-              uniqueKey: body['uniqueKey'].toString(),
-              createAt: DateTime.now(),
-            ),
-          ]);
-          // set auth cookie
-          request.setSessionCookie(
-            user,
-            auth.first,
-          );
+          request.setSessionCookie(user);
           // write data
-          request.writeJson(auth.first);
+          request.writeJson(SuccessResponse('Auth successfully'));
         },
       ),
     ]) {

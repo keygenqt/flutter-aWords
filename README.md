@@ -1,33 +1,25 @@
 aWords
----
+===================
 
-<p>
-    <img alt="icon" src="data/icon/icon_empty.png" width="100px"/>
-</p>
+An experimental project on Dart/Flutter that implements one entire application ecosystem. 
+The project is in development, I’m not sure it will be finished - it’s not a rewarding task to write websites and APIs in Dart/Flutter;
+there are more convenient tools.
 
-Leave notes and paper cards at home and learn a foreign language anywhere with aWords.
+**Used:** [Dart](https://dart.dev/) & [Flutter](https://flutter.dev/)
 
-### Plan
+### Feature
 
-1. Flutter - web, aurora (android, ios).
-2. Dictionaries - [FreeDict](https://freedict.org/).
-3. API - authorization, registration, statistics, share access to cards and statistics.
-4. The ability to create your own list with the words.
-5. Sharing your lists with others both privately and publicly.
-6. Modes: pictures, native-words, words to learn, by description.
-7. The user's progress can be share to users.
-8. Children's mode - cute text, etc...
+* [API](https://awords-api.keygenqt.com)
+* [Website](https://awords.keygenqt.com)
+* [Documentation](https://awords-docs.keygenqt.com)
 
-### Demo
+### Preview
+![alt text](data/preview-1000.png)
 
-![preview_1.gif](data%2Fgif%2Fpreview_1.gif)
-
-#### It's not native, it's web flutter + qml webview.
-
-### License
+# License
 
 ```
-Copyright 2023 Vitaliy Zarubin
+Copyright 2024 Vitaliy Zarubin
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -41,5 +33,3 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ```
-
-<div>Icons made by <a href="https://icon54.com/" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
