@@ -1,13 +1,13 @@
 version: "3"
+name: flutter-awords
 
 services:
-  # https://ubuntu.com
-  builder:
-    container_name: faw-builder
+  ubuntu-build:
+    container_name: flutter-awords-build
     restart: no
     build:
       context: .
-      dockerfile: builder/Dockerfile
+      dockerfile: ubuntu-build/Dockerfile
     command:
       - /bin/bash
       - -c
@@ -43,16 +43,15 @@ services:
     volumes:
       - ../:/var/www/src
 
-  # https://www.mkdocs.org
-  mkdocs:
-    container_name: faw-mkdocs
+  python:
+    container_name: flutter-awords-docs
     depends_on:
-      builder:
+      ubuntu-build:
         condition: service_completed_successfully
     restart: no
     build:
       context: .
-      dockerfile: mkdocs/Dockerfile
+      dockerfile: python/Dockerfile
     command:
       - /bin/bash
       - -c
@@ -63,15 +62,14 @@ services:
     volumes:
       - ../:/var/www/src
 
-  # https://www.alpinelinux.org/
-  runner:
-    container_name: faw-runner
+  ubuntu-run:
+    container_name: flutter-awords-server-run
     depends_on:
-      builder:
+      ubuntu-build:
         condition: service_completed_successfully
     build:
       context: .
-      dockerfile: runner/Dockerfile
+      dockerfile: ubuntu-run/Dockerfile
     restart: always
     tty: true
     ports:
@@ -89,15 +87,17 @@ services:
     working_dir: /var/www/src/apps/server
     volumes:
       - ../:/var/www/src
-      - ../apps/server/phpliteadmin.config.php:/phpLiteAdmin/phpliteadmin.config.php
+      # Phpliteadmin configuration files
+      - ./configurations/phpliteadmin/phpliteadmin.config.php:/phpLiteAdmin/phpliteadmin.config.php
+      # Server configuration files
+      - ./configurations/server/configuration.yaml:/configuration.yaml
     networks:
       - internal
 
-  # https://www.php.net/
   php:
-    container_name: faw-php
+    container_name: flutter-awords-php
     depends_on:
-      builder:
+      ubuntu-build:
         condition: service_completed_successfully
     build:
       context: .
@@ -111,11 +111,10 @@ services:
     networks:
       - internal
 
-  # https://nginx.org/
   nginx:
-    container_name: faw-nginx
+    container_name: flutter-awords-nginx
     depends_on:
-      builder:
+      ubuntu-build:
         condition: service_completed_successfully
     build:
       context: .

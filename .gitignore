@@ -1,14 +1,22 @@
-# IntelliJ related
+## IntelliJ related
 .idea/
 .env
 
-# Mkdocs/docs
+## Mkdocs/docs
 /doc
 docs-static
 doc-*
 
-# Build
+## Build
 apps/server/bin/aWords
 
-# https://www.phpliteadmin.org/
+## https://www.phpliteadmin.org/
 /phpLiteAdmin
+
+## Phpliteadmin configs
+docker/configurations/phpliteadmin/*
+!docker/configurations/phpliteadmin/_*
+
+## Server configs
+docker/configurations/server/*
+!docker/configurations/server/_*

@@ -17,7 +17,7 @@ final getIt = GetIt.instance;
 
 /// Initialization application DI
 void setupDI(BuildConfig config) {
-  final dio = configureDio(url: 'http://localhost:4016/');
+  final dio = configureDio(url: 'https://awords.keygenqt.com/');
   getIt
     // build info
     ..registerSingleton<BuildConfig>(config)
